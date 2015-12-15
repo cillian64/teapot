@@ -637,21 +637,21 @@ F 3 "" H 7350 2350 50  0000 C CNN
 $EndComp
 Text Notes 7800 2250 0    60   ~ 0
 RADIO
-Text Label 8050 4300 0    60   ~ 0
+Text Label 5350 4250 2    60   ~ 0
 I2C_SCK
-Text Label 8050 4400 0    60   ~ 0
+Text Label 5350 4150 2    60   ~ 0
 I2C_SDA
-Text Label 8050 4500 0    60   ~ 0
+Text Label 5350 4650 2    60   ~ 0
 LIGHT
-Text Label 8050 4600 0    60   ~ 0
+Text Label 5350 4550 2    60   ~ 0
 RFM_RESET
-Text Label 8050 4700 0    60   ~ 0
+Text Label 5350 4950 2    60   ~ 0
 RFM_NSS
-Text Label 8050 4800 0    60   ~ 0
+Text Label 6500 4950 0    60   ~ 0
 RFM_SCK
-Text Label 8050 4900 0    60   ~ 0
+Text Label 6500 4850 0    60   ~ 0
 RFM_MISO
-Text Label 8050 5000 0    60   ~ 0
+Text Label 6500 4750 0    60   ~ 0
 RFM_MOSI
 $Comp
 L LED D?
@@ -697,9 +697,9 @@ F 3 "" H 3450 1950 50  0000 C CNN
 	1    3450 1950
 	1    0    0    -1  
 $EndComp
-Text Label 8050 5100 0    60   ~ 0
+Text Label 6500 4250 0    60   ~ 0
 LED_YELLOW
-Text Label 8050 5200 0    60   ~ 0
+Text Label 6500 4350 0    60   ~ 0
 LED_GREEN
 Text Label 8200 2800 2    60   ~ 0
 LED_YELLOW
@@ -740,7 +740,7 @@ L R R?
 U 1 1 5670DB19
 P 8300 3500
 F 0 "R?" V 8380 3500 50  0000 C CNN
-F 1 "R" V 8300 3500 50  0000 C CNN
+F 1 "1k" V 8300 3500 50  0000 C CNN
 F 2 "" V 8230 3500 50  0000 C CNN
 F 3 "" H 8300 3500 50  0000 C CNN
 	1    8300 3500
@@ -751,7 +751,7 @@ L R R?
 U 1 1 5670DB64
 P 8600 3500
 F 0 "R?" V 8680 3500 50  0000 C CNN
-F 1 "R" V 8600 3500 50  0000 C CNN
+F 1 "1k" V 8600 3500 50  0000 C CNN
 F 2 "" V 8530 3500 50  0000 C CNN
 F 3 "" H 8600 3500 50  0000 C CNN
 	1    8600 3500
@@ -1025,4 +1025,7 @@ F 3 "" H 4750 5100 50  0000 C CNN
 $EndComp
 Text Notes 5500 5200 0    60   ~ 0
 MICROCONTROLLER
+NoConn ~ 6500 4650
+NoConn ~ 5350 4750
+NoConn ~ 5350 4850
 $EndSCHEMATC
