@@ -1,5 +1,7 @@
-# dwt_node
-ukhasnet node with temperature, light and humidity sensing
+# TEApot
+TEApot: Tiny (or Temperamental) Environment Analyser.  A
+[ukhasnet](https://www.ukhas.net) node with temperature, light, humidity, and
+maybe pressure sensing.
 
 #Parts
 * Micro: STM32F0 depending on peripherals
