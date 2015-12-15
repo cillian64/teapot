@@ -12,13 +12,10 @@ maybe pressure sensing.  ukhasnet node IDs `TEAnn` starting at `TEA01`.
 [DTG corridor](https://www.cl.cam.ac.uk/research/dtg/www/).
 
 #Parts
-* Micro: STM32F0 depending on peripherals
-    * 1x I2C for temp/RH and pressure
-    * ADCs for light and battery voltage
-    * RTC for wakeup timing
+* Micro: STM32F070F6P6
 * Power: 
-    * Battery: Single or double cell alkaline AA/AAA
-    * TLV61225 or similar boost switcher (5uA)
+    * Battery: 2x AAA in series in rear-mounted holder.
+    * TLV61225 boost switcher
 * Sensors:
     * TEPT4400 photo-transistor for light
     * HTU21D for temperature and relative humidity
