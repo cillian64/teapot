@@ -1,4 +1,4 @@
-update=Tue 15 Dec 2015 21:50:30 GMT
+update=Tue 15 Dec 2015 22:21:29 GMT
 version=1
 last_client=kicad
 [pcbnew]
@@ -62,3 +62,4 @@ LibName30=parts/tlv61225
 LibName31=parts/htu21d
 LibName32=parts/ms5637
 LibName33=parts/tept
+LibName34=parts/stm32f070f6p6

@@ -13,6 +13,9 @@ maybe pressure sensing.  ukhasnet node IDs `TEAnn` starting at `TEA01`.
 
 #Parts
 * Micro: STM32F0 depending on peripherals
+    * 1x I2C for temp/RH and pressure
+    * ADCs for light and battery voltage
+    * RTC for wakeup timing
 * Power: 
     * Battery: Single or double cell alkaline AA/AAA
     * TLV61225 or similar boost switcher (5uA)
