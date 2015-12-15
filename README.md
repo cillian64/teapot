@@ -1,7 +1,12 @@
 # TEApot
 TEApot: Tiny (or Temperamental) Environment Analyser.  A
 [ukhasnet](https://www.ukhas.net) node with temperature, light, humidity, and
-maybe pressure sensing.
+maybe pressure sensing.  ukhasnet node IDs `TEAnn` starting at `TEA01`.
+
+#TEApots
+* `TEA01`-`TEA10` planned for the
+[Computer Laboratory](https://www.cl.cam.ac.uk/)
+[DTG corridor](https://www.cl.cam.ac.uk/research/dtg/www/).
 
 #Parts
 * Micro: STM32F0 depending on peripherals
