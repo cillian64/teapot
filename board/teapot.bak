@@ -629,17 +629,17 @@ Text Label 6200 4250 0    60   ~ 0
 I2C_SCK
 Text Label 6200 4150 0    60   ~ 0
 I2C_SDA
-Text Label 8800 4800 0    60   ~ 0
+Text Label 7600 4750 0    60   ~ 0
 LIGHT
-Text Label 8800 5000 0    60   ~ 0
+Text Label 7600 4950 0    60   ~ 0
 RFM_RESET
-Text Label 8800 4900 0    60   ~ 0
+Text Label 7600 4850 0    60   ~ 0
 RFM_NSS
-Text Label 8800 5300 0    60   ~ 0
+Text Label 7600 5250 0    60   ~ 0
 RFM_SCK
-Text Label 8800 5200 0    60   ~ 0
+Text Label 7600 5150 0    60   ~ 0
 RFM_MISO
-Text Label 8800 5100 0    60   ~ 0
+Text Label 7600 5050 0    60   ~ 0
 RFM_MOSI
 $Comp
 L LED D?
@@ -685,9 +685,9 @@ F 3 "" H 3450 1950 50  0000 C CNN
 	1    3450 1950
 	1    0    0    -1  
 $EndComp
-Text Label 8800 4600 0    60   ~ 0
+Text Label 7600 4550 0    60   ~ 0
 LED_YELLOW
-Text Label 8800 4700 0    60   ~ 0
+Text Label 7600 4650 0    60   ~ 0
 LED_GREEN
 Text Label 8200 2800 2    60   ~ 0
 LED_YELLOW
