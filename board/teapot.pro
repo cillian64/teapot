@@ -1,4 +1,4 @@
-update=Sun 20 Dec 2015 00:06:15 GMT
+update=Sun 20 Dec 2015 01:46:54 GMT
 version=1
 last_client=kicad
 [pcbnew]
@@ -67,3 +67,4 @@ LibName35=parts/sma
 LibName36=parts/testpoint
 LibName37=parts/swd
 LibName38=parts/stm32l052k8
+LibName39=parts/microusb-b
