@@ -1,4 +1,4 @@
-update=Tue 15 Dec 2015 22:54:32 GMT
+update=Sun 20 Dec 2015 00:06:15 GMT
 version=1
 last_client=kicad
 [pcbnew]
@@ -62,8 +62,8 @@ LibName30=parts/tlv61225
 LibName31=parts/htu21d
 LibName32=parts/ms5637
 LibName33=parts/tept
-LibName34=parts/stm32f070f6p6
-LibName35=parts/rfm69w
-LibName36=parts/sma
-LibName37=parts/testpoint
-LibName38=parts/swd
+LibName34=parts/rfm69w
+LibName35=parts/sma
+LibName36=parts/testpoint
+LibName37=parts/swd
+LibName38=parts/stm32l052k8

@@ -17,6 +17,9 @@ maybe pressure sensing.  ukhasnet node IDs `TEAnn` starting at `TEA01`.
     * Battery: 2x AAA in series in rear-mounted holder.
     * TLV61225 boost switcher
 * Sensors:
+    * 1x I2C for temp/RH and pressure
+    * ADCs for light and battery voltage
+    * RTC for wakeup timing
     * TEPT4400 photo-transistor for light
     * HTU21D for temperature and relative humidity
         * 3v3 power, 0.02uA asleep, 450uA converting
