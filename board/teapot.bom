@@ -1,0 +1,73 @@
+Bill Of Materials
+=================
+
+Source file: teapot.xml
+Date: 2015-12-21T22:42:10.738084
+
+Parts Missing Footprints
+------------------------
+TP1    ANT            
+C16    10n            
+
+Parts Missing Order Codes
+-------------------------
+U3     RFM69W          footprints:RFM69
+TP1    ANT             None
+U7     SWD             footprints:SWD
+C16    10n             None
+
+Inconsistent Order Codes
+------------------------
+
+
+Vendor Specific BOMs
+--------------------
+  Farnell
+  ~~~~~~~
+2443111,1,1x microusb-b USB3065
+2492362,1,1x TLV61225 SC-70
+2290331,1,1x GREEN LED-0805
+2331796,3,3x 1k R_0805
+2470318,1,1x 4u7 Inductor_1212
+2393536,1,1x HTU21D HTU21D
+2362663,1,1x MS5637 MS563702
+SC12389,1,1x TEPT4400 LED-3MM
+1702629,1,1x BATT AA_holder
+2502786,3,3x 10k R_0805
+2407344,8,8x 100n C_0805
+1470478,1,1x TPS79333DBVR SOT-23-5
+2099241,1,1x RED LED-0805
+2101347,1,1x 32.768k XTAL_1206
+2368174,2,2x TVS_small R_0603
+2488335,1,1x STM32L052K8 UFQFPN32
+1735528,5,5x 10u C_0603
+2099242,1,1x YELLOW LED-0805
+1342651,1,1x SMA SMA-142-0701-801
+2496995,1,1x 1u C_0805
+1759193,2,2x 15p C_0805
+
+
+Assembly BOM
+------------
+2443111              1   microusb-b      USB3065         U2
+2492362              1   TLV61225        SC-70           U1
+2290331              1   GREEN           LED-0805        D2
+2331796              3   1k              R_0805          R1 R4 R5
+2470318              1   4u7             Inductor_1212   L1
+2393536              1   HTU21D          HTU21D          U5
+2362663              1   MS5637          MS563702        U6
+SC12389              1   TEPT4400        LED-3MM         Q1
+1702629              1   BATT            AA_holder       P1
+2502786              3   10k             R_0805          R2 R3 R6
+2407344              8   100n            C_0805          C10 C11 C12 C14 C15 C4 C7 C8
+1470478              1   TPS79333DBVR    SOT-23-5        U8
+2099241              1   RED             LED-0805        D1
+2101347              1   32.768k         XTAL_1206       Y1
+2368174              2   TVS_small       R_0603          D4 D5
+2488335              1   STM32L052K8     UFQFPN32        U4
+1735528              5   10u             C_0603          C1 C13 C17 C2 C3
+2099242              1   YELLOW          LED-0805        D3
+1342651              1   SMA             SMA-142-0701-801 P2
+2496995              1   1u              C_0805          C9
+1759193              2   15p             C_0805          C5 C6
+
