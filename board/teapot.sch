@@ -320,17 +320,6 @@ F 3 "" H 950 6350 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3V3 #PWR013
-U 1 1 56709B94
-P 10200 3300
-F 0 "#PWR013" H 10200 3150 50  0001 C CNN
-F 1 "+3V3" H 10200 3440 50  0000 C CNN
-F 2 "" H 10200 3300 50  0000 C CNN
-F 3 "" H 10200 3300 50  0000 C CNN
-	1    10200 3300
-	1    0    0    -1  
-$EndComp
-$Comp
 L R R6
 U 1 1 56709F9B
 P 10200 4150
@@ -393,7 +382,7 @@ I2C_SDA
 Text Label 2150 6150 0    60   ~ 0
 I2C_SCK
 Text Label 10450 4000 0    60   ~ 0
-LIGHT
+LIGHT_SENSE
 Text Label 8750 1000 2    60   ~ 0
 RFM_RESET
 Text Label 9850 1100 0    60   ~ 0
@@ -608,7 +597,7 @@ I2C_SCK
 Text Label 7350 3950 0    60   ~ 0
 I2C_SDA
 Text Label 8550 4550 0    60   ~ 0
-LIGHT
+LIGHT_SENSE
 Text Label 8550 4750 0    60   ~ 0
 RFM_RESET
 Text Label 8550 4650 0    60   ~ 0
@@ -665,9 +654,9 @@ F 3 "" H 3850 1700 50  0000 C CNN
 	1    3850 1700
 	1    0    0    -1  
 $EndComp
-Text Label 8550 4350 0    60   ~ 0
+Text Label 8550 4250 0    60   ~ 0
 LED_YELLOW
-Text Label 8550 4450 0    60   ~ 0
+Text Label 8550 4350 0    60   ~ 0
 LED_GREEN
 Text Label 1400 2850 2    60   ~ 0
 LED_YELLOW
@@ -1315,4 +1304,8 @@ $EndComp
 Wire Wire Line
 	10650 1800 10800 1800
 Connection ~ 10800 1800
+Text Label 8550 4450 0    60   ~ 0
+LIGHT_EN
+Text Label 10200 3300 2    60   ~ 0
+LIGHT_EN
 $EndSCHEMATC
