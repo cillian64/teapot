@@ -3,9 +3,9 @@
   (general
     (links 91)
     (no_connects 91)
-    (area 101.924999 87.924999 152.075001 138.075001)
+    (area 100.562048 83 218.291905 139.437952)
     (thickness 1.6)
-    (drawings 8)
+    (drawings 16)
     (tracks 0)
     (zones 0)
     (modules 41)
@@ -197,7 +197,7 @@
   )
 
   (module footprints:RFM69 (layer F.Cu) (tedit 56760DB3) (tstamp 567617C3)
-    (at 139 113 90)
+    (at 135.2 110.4 90)
     (path /5670B4E9)
     (fp_text reference U4 (at 0.5 0 90) (layer F.SilkS)
       (effects (font (size 1.5 1.5) (thickness 0.15)))
@@ -349,7 +349,7 @@
   )
 
   (module footprints:SWD (layer F.Cu) (tedit 56784E43) (tstamp 56761828)
-    (at 120 134.5)
+    (at 118.2 134)
     (path /5670E52D)
     (fp_text reference U8 (at 2.5 -2.9) (layer F.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)))
@@ -1390,6 +1390,14 @@
     )
   )
 
+  (gr_circle (center 146.4 113) (end 148.8 113) (layer F.CrtYd) (width 0.2))
+  (gr_circle (center 127 93.6) (end 129.4 93.6) (layer F.CrtYd) (width 0.2))
+  (gr_circle (center 107.6 113) (end 110 113) (layer F.CrtYd) (width 0.2))
+  (gr_circle (center 127 132.6) (end 129.4 132.6) (layer F.CrtYd) (width 0.2))
+  (gr_circle (center 127 132.6) (end 128.6 132.4) (layer Edge.Cuts) (width 0.15))
+  (gr_circle (center 146.4 113) (end 148 113) (layer Edge.Cuts) (width 0.15))
+  (gr_circle (center 127 93.6) (end 128.6 93.6) (layer Edge.Cuts) (width 0.15))
+  (gr_circle (center 107.6 113) (end 109.2 113) (layer Edge.Cuts) (width 0.15))
   (gr_line (start 102 128.5) (end 111.5 138) (angle 90) (layer Edge.Cuts) (width 0.15))
   (gr_line (start 102 97.5) (end 102 128.5) (angle 90) (layer Edge.Cuts) (width 0.15))
   (gr_line (start 111.5 138) (end 142.5 138) (angle 90) (layer Edge.Cuts) (width 0.15))
