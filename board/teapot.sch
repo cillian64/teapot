@@ -82,35 +82,35 @@ $EndComp
 $Comp
 L C C3
 U 1 1 56707DD4
-P 3100 1400
-F 0 "C3" H 3125 1500 50  0000 L CNN
-F 1 "10u" H 3125 1300 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0603" H 3138 1250 50  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/1747457.pdf" H 3100 1400 50  0001 C CNN
-F 4 "1735528" H 3100 1400 60  0001 C CNN "Farnell"
-	1    3100 1400
+P 3250 1250
+F 0 "C3" H 3275 1350 50  0000 L CNN
+F 1 "10u" H 3275 1150 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 3288 1100 50  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/1747457.pdf" H 3250 1250 50  0001 C CNN
+F 4 "1735528" H 3250 1250 60  0001 C CNN "Farnell"
+	1    3250 1250
 	1    0    0    -1  
 $EndComp
 $Comp
 L GND #PWR01
 U 1 1 56707EE4
-P 3100 1550
-F 0 "#PWR01" H 3100 1300 50  0001 C CNN
-F 1 "GND" H 3100 1400 50  0000 C CNN
-F 2 "" H 3100 1550 50  0000 C CNN
-F 3 "" H 3100 1550 50  0000 C CNN
-	1    3100 1550
+P 3250 1400
+F 0 "#PWR01" H 3250 1150 50  0001 C CNN
+F 1 "GND" H 3250 1250 50  0000 C CNN
+F 2 "" H 3250 1400 50  0000 C CNN
+F 3 "" H 3250 1400 50  0000 C CNN
+	1    3250 1400
 	1    0    0    -1  
 $EndComp
 $Comp
 L +3V3 #PWR02
 U 1 1 56707F42
-P 3100 1050
-F 0 "#PWR02" H 3100 900 50  0001 C CNN
-F 1 "+3V3" H 3100 1190 50  0000 C CNN
-F 2 "" H 3100 1050 50  0000 C CNN
-F 3 "" H 3100 1050 50  0000 C CNN
-	1    3100 1050
+P 3250 1050
+F 0 "#PWR02" H 3250 900 50  0001 C CNN
+F 1 "+3V3" H 3250 1190 50  0000 C CNN
+F 2 "" H 3250 1050 50  0000 C CNN
+F 3 "" H 3250 1050 50  0000 C CNN
+	1    3250 1050
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -480,13 +480,7 @@ F 4 "1735528" H 8500 1900 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3050 1200 3100 1200
-Wire Wire Line
-	3100 1200 3100 1250
-Wire Wire Line
-	3100 1050 3100 1100
-Wire Wire Line
-	3100 1100 3050 1100
+	3050 1100 3250 1100
 Wire Wire Line
 	1950 1000 1900 1000
 Wire Wire Line
@@ -596,17 +590,17 @@ Text Label 7350 4050 0    60   ~ 0
 I2C_SCK
 Text Label 7350 3950 0    60   ~ 0
 I2C_SDA
-Text Label 8550 4550 0    60   ~ 0
+Text Label 5850 4450 2    60   ~ 0
 LIGHT_SENSE
-Text Label 8550 4750 0    60   ~ 0
+Text Label 5850 4550 2    60   ~ 0
 RFM_RESET
-Text Label 8550 4650 0    60   ~ 0
+Text Label 5850 4650 2    60   ~ 0
 RFM_NSS
-Text Label 8550 5050 0    60   ~ 0
+Text Label 5850 4750 2    60   ~ 0
 RFM_SCK
-Text Label 8550 4950 0    60   ~ 0
+Text Label 5850 4850 2    60   ~ 0
 RFM_MISO
-Text Label 8550 4850 0    60   ~ 0
+Text Label 5850 4950 2    60   ~ 0
 RFM_MOSI
 $Comp
 L LED D2
@@ -654,9 +648,9 @@ F 3 "" H 3850 1700 50  0000 C CNN
 	1    3850 1700
 	1    0    0    -1  
 $EndComp
-Text Label 8550 4250 0    60   ~ 0
+Text Label 5850 5150 2    60   ~ 0
 LED_YELLOW
-Text Label 8550 4350 0    60   ~ 0
+Text Label 5850 5250 2    60   ~ 0
 LED_GREEN
 Text Label 1400 2850 2    60   ~ 0
 LED_YELLOW
@@ -795,7 +789,7 @@ Wire Wire Line
 Connection ~ 1000 7100
 NoConn ~ 2250 7100
 NoConn ~ 2250 7200
-Text Notes 6100 5500 0    60   ~ 0
+Text Notes 5550 5500 0    60   ~ 0
 MICROCONTROLLER
 $Comp
 L STM32L052K8 U5
@@ -987,7 +981,7 @@ Wire Wire Line
 Wire Wire Line
 	5150 4150 5850 4150
 Wire Wire Line
-	5150 4400 5150 4150
+	5150 3650 5150 4400
 Connection ~ 5350 4150
 $Comp
 L GND #PWR032
@@ -1304,7 +1298,7 @@ $EndComp
 Wire Wire Line
 	10650 1800 10800 1800
 Connection ~ 10800 1800
-Text Label 8550 4450 0    60   ~ 0
+Text Label 7150 4950 0    60   ~ 0
 LIGHT_EN
 Text Label 10200 3300 2    60   ~ 0
 LIGHT_EN
@@ -1325,6 +1319,37 @@ F 4 "2502786" H 1150 700 60  0001 C CNN "Farnell"
 $EndComp
 Text Label 1300 700  0    60   ~ 0
 BATT_MON
-Text Label 8550 5150 0    60   ~ 0
+Text Label 5850 5050 2    60   ~ 0
 BATT_MON
+Connection ~ 5150 4150
+$Comp
+L +3V3 #PWR043
+U 1 1 567C63AD
+P 5150 3650
+F 0 "#PWR043" H 5150 3500 50  0001 C CNN
+F 1 "+3V3" H 5150 3790 50  0000 C CNN
+F 2 "" H 5150 3650 50  0000 C CNN
+F 3 "" H 5150 3650 50  0000 C CNN
+	1    5150 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR044
+U 1 1 567C711D
+P 6500 5550
+F 0 "#PWR044" H 6500 5300 50  0001 C CNN
+F 1 "GND" H 6500 5400 50  0000 C CNN
+F 2 "" H 6500 5550 50  0000 C CNN
+F 3 "" H 6500 5550 50  0000 C CNN
+	1    6500 5550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 1100 3250 1050
+Connection ~ 3250 1100
+Wire Wire Line
+	3050 1200 3100 1200
+Wire Wire Line
+	3100 1200 3100 1100
+Connection ~ 3100 1100
 $EndSCHEMATC
