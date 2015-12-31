@@ -1,0 +1,16 @@
+(module footprints:Test_point (layer F.Cu) (tedit 5684A4EC)
+  (descr "Test Point")
+  (tags "test point")
+  (fp_text reference TP4 (at 0 2) (layer F.SilkS) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value SCK (at 0 -1.6) (layer F.SilkS)
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (pad 1 thru_hole circle (at 0 0) (size 0.75 0.75) (drill 0.5) (layers *.Cu *.Mask F.SilkS))
+  (model Pin_Headers.3dshapes/Pin_Header_Straight_1x01.wrl
+    (at (xyz 0 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 90))
+  )
+)
