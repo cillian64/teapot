@@ -1,4 +1,4 @@
-update=Mon 21 Dec 2015 19:11:01 GMT
+update=Thu 31 Dec 2015 02:10:23 GMT
 version=1
 last_client=kicad
 [pcbnew]
@@ -67,6 +67,6 @@ LibName35=parts/sma
 LibName36=parts/testpoint
 LibName37=parts/swd
 LibName38=parts/stm32l052k8
-LibName39=parts/microusb-b
-LibName40=parts/tps79333dbvr
-LibName41=parts/tvs_small
+LibName39=parts/tps79333dbvr
+LibName40=parts/tvs_small
+LibName41=agg-kicad/lib/connector/microusb
