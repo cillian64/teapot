@@ -565,9 +565,9 @@ F 3 "" H 4650 1950 50  0000 C CNN
 	1    4650 1950
 	1    0    0    -1  
 $EndComp
-Text Label 3400 4800 2    60   ~ 0
+Text Label 4700 4000 0    60   ~ 0
 LED_YELLOW
-Text Label 3400 4900 2    60   ~ 0
+Text Label 4700 4100 0    60   ~ 0
 LED_GREEN
 Text Label 3450 6300 2    60   ~ 0
 LED_YELLOW
@@ -1395,8 +1395,6 @@ NoConn ~ 3400 4000
 NoConn ~ 4700 3400
 NoConn ~ 4700 3800
 NoConn ~ 4700 3900
-NoConn ~ 4700 4000
-NoConn ~ 4700 4100
 NoConn ~ 4700 4700
 NoConn ~ 4700 4800
 $Comp
