@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/dwt27/git/teapot/board/teapot.sch</source>
-    <date>Mon 21 Dec 2015 22:41:35 GMT</date>
+    <date>Fri 01 Jan 2016 21:48:18 GMT</date>
     <tool>Eeschema 4.0.1-3.201512150931+6195~38~ubuntu14.04.1-stable</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -19,17 +19,17 @@
     </sheet>
   </design>
   <components>
-    <comp ref="C11">
+    <comp ref="C14">
       <value>100n</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="Farnell">2407344</field>
+        <field name="Farnell">432210</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56707B80</tstamp>
     </comp>
-    <comp ref="U1">
+    <comp ref="U2">
       <value>TLV61225</value>
       <footprint>footprints:SC-70</footprint>
       <datasheet>http://www.farnell.com/datasheets/1950593.pdf</datasheet>
@@ -40,12 +40,11 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56707CBF</tstamp>
     </comp>
-    <comp ref="C2">
+    <comp ref="C3">
       <value>10u</value>
       <footprint>Capacitors_SMD:C_0603</footprint>
-      <datasheet>http://www.farnell.com/datasheets/1747457.pdf</datasheet>
       <fields>
-        <field name="Farnell">1735528</field>
+        <field name="Farnell">2494230</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
@@ -54,9 +53,8 @@
     <comp ref="C1">
       <value>10u</value>
       <footprint>Capacitors_SMD:C_0603</footprint>
-      <datasheet>http://www.farnell.com/datasheets/1747457.pdf</datasheet>
       <fields>
-        <field name="Farnell">1735528</field>
+        <field name="Farnell">2494230</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
@@ -84,7 +82,7 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>567082BA</tstamp>
     </comp>
-    <comp ref="U5">
+    <comp ref="U6">
       <value>HTU21D</value>
       <footprint>footprints:HTU21D</footprint>
       <datasheet>http://www.farnell.com/datasheets/1792510.pdf</datasheet>
@@ -95,27 +93,27 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670851D</tstamp>
     </comp>
-    <comp ref="R3">
+    <comp ref="R4">
       <value>10k</value>
-      <footprint>Resistors_SMD:R_0805</footprint>
+      <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="Farnell">2502786</field>
+        <field name="Farnell">2447230</field>
       </fields>
       <libsource lib="device" part="R"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56708874</tstamp>
     </comp>
-    <comp ref="R2">
+    <comp ref="R3">
       <value>10k</value>
-      <footprint>Resistors_SMD:R_0805</footprint>
+      <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="Farnell">2502786</field>
+        <field name="Farnell">2447230</field>
       </fields>
       <libsource lib="device" part="R"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>567088B5</tstamp>
     </comp>
-    <comp ref="U6">
+    <comp ref="U7">
       <value>MS5637</value>
       <footprint>footprints:MS563702</footprint>
       <datasheet>http://www.farnell.com/datasheets/1756129.pdf</datasheet>
@@ -126,21 +124,21 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56708DE8</tstamp>
     </comp>
-    <comp ref="C14">
+    <comp ref="C17">
       <value>100n</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="Farnell">2407344</field>
+        <field name="Farnell">432210</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56708EC5</tstamp>
     </comp>
-    <comp ref="R6">
+    <comp ref="R7">
       <value>10k</value>
-      <footprint>Resistors_SMD:R_0805</footprint>
+      <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="Farnell">2502786</field>
+        <field name="Farnell">2447230</field>
       </fields>
       <libsource lib="device" part="R"/>
       <sheetpath names="/" tstamps="/"/>
@@ -157,7 +155,7 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670A3C2</tstamp>
     </comp>
-    <comp ref="U3">
+    <comp ref="U4">
       <value>RFM69W</value>
       <footprint>footprints:RFM69</footprint>
       <datasheet>http://www.hoperf.com/upload/rf/RFM69W-V1.3.pdf</datasheet>
@@ -177,32 +175,32 @@
     </comp>
     <comp ref="TP1">
       <value>ANT</value>
+      <footprint>footprints:Test_point</footprint>
       <libsource lib="testpoint" part="TestPoint"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670C17A</tstamp>
     </comp>
-    <comp ref="C4">
+    <comp ref="C7">
       <value>100n</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="Farnell">2407344</field>
+        <field name="Farnell">432210</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670C9CC</tstamp>
     </comp>
-    <comp ref="C3">
+    <comp ref="C6">
       <value>10u</value>
       <footprint>Capacitors_SMD:C_0603</footprint>
-      <datasheet>http://www.farnell.com/datasheets/1747457.pdf</datasheet>
       <fields>
-        <field name="Farnell">1735528</field>
+        <field name="Farnell">2494230</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670CA15</tstamp>
     </comp>
-    <comp ref="D1">
+    <comp ref="D2">
       <value>RED</value>
       <footprint>LEDs:LED-0805</footprint>
       <fields>
@@ -212,17 +210,17 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670D4A5</tstamp>
     </comp>
-    <comp ref="R1">
+    <comp ref="R2">
       <value>1k</value>
-      <footprint>Resistors_SMD:R_0805</footprint>
+      <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="Farnell">2331796</field>
+        <field name="Farnell">9233385</field>
       </fields>
       <libsource lib="device" part="R"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670D552</tstamp>
     </comp>
-    <comp ref="D2">
+    <comp ref="D4">
       <value>GREEN</value>
       <footprint>LEDs:LED-0805</footprint>
       <fields>
@@ -232,7 +230,7 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670D937</tstamp>
     </comp>
-    <comp ref="D3">
+    <comp ref="D5">
       <value>YELLOW</value>
       <footprint>LEDs:LED-0805</footprint>
       <fields>
@@ -242,34 +240,34 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670D9B4</tstamp>
     </comp>
-    <comp ref="R4">
+    <comp ref="R5">
       <value>1k</value>
-      <footprint>Resistors_SMD:R_0805</footprint>
+      <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="Farnell">2331796</field>
+        <field name="Farnell">9233385</field>
       </fields>
       <libsource lib="device" part="R"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670DB19</tstamp>
     </comp>
-    <comp ref="R5">
+    <comp ref="R6">
       <value>1k</value>
-      <footprint>Resistors_SMD:R_0805</footprint>
+      <footprint>Resistors_SMD:R_0603</footprint>
       <fields>
-        <field name="Farnell">2331796</field>
+        <field name="Farnell">9233385</field>
       </fields>
       <libsource lib="device" part="R"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670DB64</tstamp>
     </comp>
-    <comp ref="U7">
+    <comp ref="U8">
       <value>SWD</value>
       <footprint>footprints:SWD</footprint>
       <libsource lib="swd" part="SWD"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5670E52D</tstamp>
     </comp>
-    <comp ref="U4">
+    <comp ref="U5">
       <value>STM32L052K8</value>
       <footprint>footprints:UFQFPN32</footprint>
       <datasheet>http://www.farnell.com/datasheets/1886889.pdf</datasheet>
@@ -280,62 +278,61 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5675F5E5</tstamp>
     </comp>
-    <comp ref="C7">
+    <comp ref="C10">
       <value>100n</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="Farnell">2407344</field>
+        <field name="Farnell">432210</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5675FAE1</tstamp>
     </comp>
-    <comp ref="C8">
+    <comp ref="C11">
       <value>100n</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="Farnell">2407344</field>
+        <field name="Farnell">432210</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56760BD5</tstamp>
     </comp>
-    <comp ref="C12">
+    <comp ref="C15">
       <value>100n</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="Farnell">2407344</field>
+        <field name="Farnell">432210</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>567610E6</tstamp>
     </comp>
-    <comp ref="C13">
+    <comp ref="C16">
       <value>10u</value>
       <footprint>Capacitors_SMD:C_0603</footprint>
-      <datasheet>http://www.farnell.com/datasheets/1747457.pdf</datasheet>
       <fields>
-        <field name="Farnell">1735528</field>
+        <field name="Farnell">2494230</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56761145</tstamp>
     </comp>
-    <comp ref="C9">
+    <comp ref="C12">
       <value>1u</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="Farnell">2496995</field>
+        <field name="Farnell">2496916</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>567618D3</tstamp>
     </comp>
-    <comp ref="C10">
+    <comp ref="C13">
       <value>100n</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="Farnell">2407344</field>
+        <field name="Farnell">432210</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
@@ -352,37 +349,27 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56762471</tstamp>
     </comp>
-    <comp ref="C5">
+    <comp ref="C8">
       <value>15p</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="Farnell">1759193</field>
+        <field name="Farnell">1759055</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56762810</tstamp>
     </comp>
-    <comp ref="C6">
+    <comp ref="C9">
       <value>15p</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="Farnell">1759193</field>
+        <field name="Farnell">1759055</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>567628C9</tstamp>
     </comp>
-    <comp ref="U2">
-      <value>microusb-b</value>
-      <footprint>footprints:USB3065</footprint>
-      <fields>
-        <field name="Farnell">2443111</field>
-      </fields>
-      <libsource lib="microusb-b" part="microusb-b"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>56764139</tstamp>
-    </comp>
-    <comp ref="U8">
+    <comp ref="U1">
       <value>TPS79333DBVR</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23-5</footprint>
       <datasheet>http://www.farnell.com/datasheets/1972784.pdf</datasheet>
@@ -393,34 +380,34 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56785040</tstamp>
     </comp>
-    <comp ref="C15">
+    <comp ref="C2">
       <value>100n</value>
-      <footprint>Capacitors_SMD:C_0805</footprint>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <fields>
-        <field name="Farnell">2407344</field>
+        <field name="Farnell">432210</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5678522C</tstamp>
     </comp>
-    <comp ref="C16">
+    <comp ref="C4">
       <value>10n</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>567855AA</tstamp>
     </comp>
-    <comp ref="C17">
+    <comp ref="C5">
       <value>10u</value>
       <footprint>Capacitors_SMD:C_0603</footprint>
-      <datasheet>http://www.farnell.com/datasheets/1747457.pdf</datasheet>
       <fields>
-        <field name="Farnell">1735528</field>
+        <field name="Farnell">2494230</field>
       </fields>
       <libsource lib="device" part="C"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5678577A</tstamp>
     </comp>
-    <comp ref="D4">
+    <comp ref="D1">
       <value>TVS_small</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <datasheet>http://www.farnell.com/datasheets/1772768.pdf</datasheet>
@@ -431,7 +418,7 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56786E75</tstamp>
     </comp>
-    <comp ref="D5">
+    <comp ref="D3">
       <value>TVS_small</value>
       <footprint>Resistors_SMD:R_0603</footprint>
       <datasheet>http://www.farnell.com/datasheets/1772768.pdf</datasheet>
@@ -441,6 +428,54 @@
       <libsource lib="tvs_small" part="TVS_small"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>56787864</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>10k</value>
+      <footprint>Resistors_SMD:R_0603</footprint>
+      <fields>
+        <field name="Farnell">2447230</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5678C9FB</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>MICROUSB</value>
+      <footprint>agg:MICROUSB_MOLEX_47589-0001</footprint>
+      <fields>
+        <field name="Farnell">1568023</field>
+      </fields>
+      <libsource lib="microusb" part="MICROUSB"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5684927D</tstamp>
+    </comp>
+    <comp ref="TP2">
+      <value>3v3</value>
+      <footprint>footprints:Test_point</footprint>
+      <libsource lib="testpoint" part="TestPoint"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5684C50B</tstamp>
+    </comp>
+    <comp ref="TP3">
+      <value>GND</value>
+      <footprint>footprints:Test_point</footprint>
+      <libsource lib="testpoint" part="TestPoint"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5684CE6A</tstamp>
+    </comp>
+    <comp ref="TP4">
+      <value>SCK</value>
+      <footprint>footprints:Test_point_mini</footprint>
+      <libsource lib="testpoint" part="TestPoint"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5684D483</tstamp>
+    </comp>
+    <comp ref="TP5">
+      <value>SDA</value>
+      <footprint>footprints:Test_point_mini</footprint>
+      <libsource lib="testpoint" part="TestPoint"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5684D727</tstamp>
     </comp>
   </components>
   <libparts>
@@ -541,6 +576,23 @@
         <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="microusb" part="MICROUSB">
+      <description>Micro USB connector</description>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">MICROUSB</field>
+        <field name="Footprint">agg:MICROUSB_MOLEX_47589-0001</field>
+        <field name="Farnell">1568023</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCC" type="power_in"/>
+        <pin num="2" name="D-" type="BiDi"/>
+        <pin num="3" name="D+" type="BiDi"/>
+        <pin num="4" name="ID" type="passive"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="S" name="SHIELD" type="power_in"/>
+      </pins>
+    </libpart>
     <libpart lib="ms5637" part="MS5637">
       <fields>
         <field name="Reference">U</field>
@@ -589,7 +641,7 @@
         <pin num="13" name="MISO" type="output"/>
         <pin num="14" name="MOSI" type="input"/>
         <pin num="15" name="NSS" type="input"/>
-        <pin num="~" name="NC" type="NotConnected"/>
+        <pin num="16" name="NC" type="NotConnected"/>
       </pins>
     </libpart>
     <libpart lib="sma" part="SMA">
@@ -643,6 +695,7 @@
         <pin num="30" name="PB7" type="passive"/>
         <pin num="31" name="BOOT0" type="input"/>
         <pin num="32" name="PB8" type="passive"/>
+        <pin num="33" name="VSS" type="power_in"/>
       </pins>
     </libpart>
     <libpart lib="swd" part="SWD">
@@ -720,19 +773,6 @@
         <pin num="1" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="microusb-b" part="microusb-b">
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">microusb-b</field>
-      </fields>
-      <pins>
-        <pin num="1" name="VCC" type="power_out"/>
-        <pin num="2" name="D-" type="passive"/>
-        <pin num="3" name="D+" type="passive"/>
-        <pin num="4" name="ID" type="passive"/>
-        <pin num="5" name="GND" type="power_in"/>
-      </pins>
-    </libpart>
   </libparts>
   <libraries>
     <library logical="device">
@@ -765,295 +805,285 @@
     <library logical="testpoint">
       <uri>/home/dwt27/git/teapot/board/parts/testpoint.lib</uri>
     </library>
-    <library logical="microusb-b">
-      <uri>/home/dwt27/git/teapot/board/parts/microusb-b.lib</uri>
-    </library>
     <library logical="stm32l052k8">
       <uri>/home/dwt27/git/teapot/board/parts/stm32l052k8.lib</uri>
-    </library>
-    <library logical="tps79333dbvr">
-      <uri>/home/dwt27/git/teapot/board/parts/tps79333dbvr.lib</uri>
     </library>
     <library logical="tvs_small">
       <uri>/home/dwt27/git/teapot/board/parts/tvs_small.lib</uri>
     </library>
+    <library logical="tps79333dbvr">
+      <uri>/home/dwt27/git/teapot/board/parts/tps79333dbvr.lib</uri>
+    </library>
+    <library logical="microusb">
+      <uri>/home/dwt27/git/teapot/board/agg-kicad/lib/connector/microusb.lib</uri>
+    </library>
   </libraries>
   <nets>
-    <net code="1" name="Net-(U4-Pad19)">
-      <node ref="U4" pin="19"/>
-    </net>
-    <net code="2" name="GND">
-      <node ref="R6" pin="2"/>
-      <node ref="C10" pin="2"/>
-      <node ref="C9" pin="2"/>
-      <node ref="U2" pin="5"/>
-      <node ref="R5" pin="2"/>
-      <node ref="U3" pin="11"/>
-      <node ref="U3" pin="9"/>
-      <node ref="P2" pin="5"/>
-      <node ref="P2" pin="4"/>
-      <node ref="P2" pin="3"/>
-      <node ref="P2" pin="2"/>
-      <node ref="C14" pin="2"/>
-      <node ref="D4" pin="2"/>
-      <node ref="C15" pin="2"/>
-      <node ref="U8" pin="2"/>
-      <node ref="D5" pin="1"/>
-      <node ref="C17" pin="2"/>
-      <node ref="C6" pin="2"/>
-      <node ref="C5" pin="2"/>
-      <node ref="R4" pin="2"/>
-      <node ref="R1" pin="2"/>
-      <node ref="C3" pin="2"/>
-      <node ref="C4" pin="2"/>
-      <node ref="C11" pin="1"/>
-      <node ref="P1" pin="1"/>
-      <node ref="C1" pin="2"/>
-      <node ref="C2" pin="2"/>
-      <node ref="U1" pin="3"/>
-      <node ref="U6" pin="4"/>
-      <node ref="U5" pin="2"/>
-      <node ref="U4" pin="31"/>
-      <node ref="U7" pin="3"/>
-      <node ref="U7" pin="5"/>
-      <node ref="U7" pin="9"/>
-      <node ref="C12" pin="2"/>
-      <node ref="C13" pin="2"/>
-      <node ref="C8" pin="2"/>
-      <node ref="C7" pin="2"/>
-      <node ref="C16" pin="2"/>
-    </net>
-    <net code="3" name="Net-(U4-Pad28)">
-      <node ref="U4" pin="28"/>
-    </net>
-    <net code="4" name="Net-(U4-Pad18)">
-      <node ref="U4" pin="18"/>
-    </net>
-    <net code="5" name="Net-(U4-Pad27)">
-      <node ref="U4" pin="27"/>
-    </net>
-    <net code="6" name="Net-(U4-Pad26)">
-      <node ref="U4" pin="26"/>
-    </net>
-    <net code="7" name="Net-(U4-Pad16)">
-      <node ref="U4" pin="16"/>
-    </net>
-    <net code="8" name="Net-(U4-Pad25)">
-      <node ref="U4" pin="25"/>
-    </net>
-    <net code="9" name="Net-(U4-Pad15)">
-      <node ref="U4" pin="15"/>
-    </net>
-    <net code="10" name="Net-(U4-Pad14)">
-      <node ref="U4" pin="14"/>
-    </net>
-    <net code="11" name="/nRST">
-      <node ref="C7" pin="1"/>
-      <node ref="U4" pin="4"/>
-      <node ref="U7" pin="10"/>
-    </net>
-    <net code="12" name="+3V3">
-      <node ref="U1" pin="4"/>
-      <node ref="C11" pin="2"/>
-      <node ref="C14" pin="1"/>
-      <node ref="U6" pin="1"/>
-      <node ref="R2" pin="1"/>
-      <node ref="R3" pin="1"/>
-      <node ref="U4" pin="1"/>
-      <node ref="Q1" pin="2"/>
-      <node ref="C8" pin="1"/>
-      <node ref="C4" pin="1"/>
-      <node ref="U4" pin="17"/>
-      <node ref="C3" pin="1"/>
-      <node ref="D1" pin="2"/>
-      <node ref="C12" pin="1"/>
-      <node ref="C17" pin="1"/>
-      <node ref="U8" pin="5"/>
-      <node ref="C13" pin="1"/>
-      <node ref="U5" pin="5"/>
-      <node ref="U7" pin="1"/>
-      <node ref="U3" pin="8"/>
-    </net>
-    <net code="13" name="Net-(U4-Pad13)">
-      <node ref="U4" pin="13"/>
-    </net>
-    <net code="14" name="Net-(U7-Pad6)">
-      <node ref="U7" pin="6"/>
-    </net>
-    <net code="15" name="Net-(U7-Pad8)">
-      <node ref="U7" pin="8"/>
-    </net>
-    <net code="16" name="Net-(U7-Pad7)">
-      <node ref="U7" pin="7"/>
-    </net>
-    <net code="17" name="/SWCLK">
-      <node ref="U4" pin="24"/>
-      <node ref="U7" pin="4"/>
-    </net>
-    <net code="18" name="/SWDIO">
-      <node ref="U7" pin="2"/>
-      <node ref="U4" pin="23"/>
-    </net>
-    <net code="19" name="Net-(U4-Pad6)">
-      <node ref="U4" pin="6"/>
-    </net>
-    <net code="20" name="Net-(U4-Pad32)">
-      <node ref="U4" pin="32"/>
-    </net>
-    <net code="21" name="/USB_DP">
-      <node ref="U2" pin="3"/>
-      <node ref="U4" pin="22"/>
-    </net>
-    <net code="22" name="Net-(U4-Pad12)">
-      <node ref="U4" pin="12"/>
-    </net>
-    <net code="23" name="/USB_DM">
-      <node ref="U2" pin="2"/>
-      <node ref="U4" pin="21"/>
-    </net>
-    <net code="24" name="Net-(U4-Pad11)">
-      <node ref="U4" pin="11"/>
-    </net>
-    <net code="25" name="Net-(U4-Pad20)">
-      <node ref="U4" pin="20"/>
-    </net>
-    <net code="26" name="Net-(U4-Pad10)">
-      <node ref="U4" pin="10"/>
-    </net>
-    <net code="27" name="Net-(U4-Pad9)">
-      <node ref="U4" pin="9"/>
-    </net>
-    <net code="28" name="Net-(U4-Pad8)">
-      <node ref="U4" pin="8"/>
-    </net>
-    <net code="29" name="Net-(U4-Pad7)">
-      <node ref="U4" pin="7"/>
-    </net>
-    <net code="30" name="Net-(C10-Pad1)">
-      <node ref="C10" pin="1"/>
-      <node ref="U4" pin="5"/>
-      <node ref="C9" pin="1"/>
-    </net>
-    <net code="31" name="Net-(C16-Pad1)">
-      <node ref="C16" pin="1"/>
-      <node ref="U8" pin="4"/>
-    </net>
-    <net code="32" name="Net-(U2-Pad4)">
-      <node ref="U2" pin="4"/>
-    </net>
-    <net code="33" name="Net-(C6-Pad1)">
-      <node ref="C6" pin="1"/>
-      <node ref="U4" pin="2"/>
-      <node ref="Y1" pin="2"/>
-    </net>
-    <net code="34" name="Net-(C5-Pad1)">
-      <node ref="U4" pin="3"/>
-      <node ref="C5" pin="1"/>
-      <node ref="Y1" pin="1"/>
-    </net>
-    <net code="35" name="+5V">
-      <node ref="U2" pin="1"/>
-      <node ref="C15" pin="1"/>
-      <node ref="U8" pin="1"/>
-      <node ref="U8" pin="3"/>
-    </net>
-    <net code="36" name="Net-(U3-Pad~)">
-      <node ref="U3" pin="~"/>
-    </net>
-    <net code="37" name="Net-(U3-Pad7)">
-      <node ref="U3" pin="7"/>
-    </net>
-    <net code="38" name="Net-(U3-Pad6)">
-      <node ref="U3" pin="6"/>
-    </net>
-    <net code="39" name="Net-(U3-Pad5)">
-      <node ref="U3" pin="5"/>
-    </net>
-    <net code="40" name="Net-(U3-Pad4)">
-      <node ref="U3" pin="4"/>
-    </net>
-    <net code="41" name="Net-(U3-Pad3)">
-      <node ref="U3" pin="3"/>
-    </net>
-    <net code="42" name="Net-(U3-Pad2)">
-      <node ref="U3" pin="2"/>
-    </net>
-    <net code="43" name="/RFM_RESET">
-      <node ref="U3" pin="1"/>
-    </net>
-    <net code="44" name="/RFM_SCK">
-      <node ref="U3" pin="12"/>
-    </net>
-    <net code="45" name="Net-(D5-Pad2)">
-      <node ref="U3" pin="10"/>
-      <node ref="P2" pin="1"/>
-      <node ref="D5" pin="2"/>
-      <node ref="TP1" pin="1"/>
-    </net>
-    <net code="46" name="/LIGHT">
-      <node ref="R6" pin="1"/>
-      <node ref="Q1" pin="1"/>
-    </net>
-    <net code="47" name="/RFM_NSS">
-      <node ref="U3" pin="15"/>
-    </net>
-    <net code="48" name="/RFM_MOSI">
-      <node ref="U3" pin="14"/>
-    </net>
-    <net code="49" name="/RFM_MISO">
-      <node ref="U3" pin="13"/>
-    </net>
-    <net code="50" name="Net-(C2-Pad1)">
-      <node ref="C2" pin="1"/>
+    <net code="1" name="GND">
       <node ref="U1" pin="2"/>
-    </net>
-    <net code="51" name="Net-(L1-Pad2)">
-      <node ref="L1" pin="2"/>
-      <node ref="U1" pin="5"/>
-    </net>
-    <net code="52" name="/I2C_SCK">
+      <node ref="U5" pin="31"/>
+      <node ref="U4" pin="11"/>
+      <node ref="U4" pin="9"/>
+      <node ref="C16" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="C5" pin="2"/>
+      <node ref="C4" pin="2"/>
+      <node ref="TP3" pin="1"/>
+      <node ref="J1" pin="5"/>
+      <node ref="R7" pin="2"/>
+      <node ref="C7" pin="2"/>
+      <node ref="C10" pin="2"/>
+      <node ref="P2" pin="2"/>
+      <node ref="P2" pin="3"/>
+      <node ref="C11" pin="2"/>
+      <node ref="P2" pin="4"/>
+      <node ref="P2" pin="5"/>
+      <node ref="C15" pin="2"/>
       <node ref="R2" pin="2"/>
-      <node ref="U6" pin="3"/>
-      <node ref="U4" pin="29"/>
+      <node ref="U2" pin="3"/>
+      <node ref="D3" pin="1"/>
+      <node ref="D1" pin="2"/>
+      <node ref="U8" pin="9"/>
+      <node ref="C6" pin="2"/>
+      <node ref="R5" pin="2"/>
+      <node ref="R6" pin="2"/>
+      <node ref="U7" pin="4"/>
+      <node ref="C17" pin="2"/>
+      <node ref="C14" pin="1"/>
+      <node ref="U8" pin="3"/>
+      <node ref="U8" pin="5"/>
+      <node ref="U5" pin="33"/>
+      <node ref="C8" pin="2"/>
+      <node ref="C1" pin="2"/>
+      <node ref="C9" pin="2"/>
+      <node ref="C13" pin="2"/>
+      <node ref="P1" pin="1"/>
+      <node ref="C12" pin="2"/>
+      <node ref="U6" pin="2"/>
+      <node ref="C3" pin="2"/>
+    </net>
+    <net code="2" name="Net-(L1-Pad2)">
+      <node ref="U2" pin="5"/>
+      <node ref="L1" pin="2"/>
+    </net>
+    <net code="3" name="/LIGHT_SENSE">
+      <node ref="Q1" pin="1"/>
+      <node ref="R7" pin="1"/>
+      <node ref="U5" pin="8"/>
+    </net>
+    <net code="4" name="Net-(C4-Pad1)">
+      <node ref="C4" pin="1"/>
+      <node ref="U1" pin="4"/>
+    </net>
+    <net code="5" name="+5V">
+      <node ref="U1" pin="3"/>
+      <node ref="J1" pin="1"/>
+      <node ref="U1" pin="1"/>
+      <node ref="C2" pin="1"/>
+    </net>
+    <net code="6" name="Net-(J1-Pad4)">
+      <node ref="J1" pin="4"/>
+    </net>
+    <net code="7" name="Net-(J1-PadS)">
+      <node ref="J1" pin="S"/>
+    </net>
+    <net code="8" name="/USB_DP">
+      <node ref="J1" pin="3"/>
+      <node ref="U5" pin="22"/>
+    </net>
+    <net code="9" name="/USB_DM">
+      <node ref="J1" pin="2"/>
+      <node ref="U5" pin="21"/>
+    </net>
+    <net code="10" name="Net-(U5-Pad18)">
+      <node ref="U5" pin="18"/>
+    </net>
+    <net code="11" name="Net-(U5-Pad19)">
+      <node ref="U5" pin="19"/>
+    </net>
+    <net code="12" name="Net-(U5-Pad27)">
+      <node ref="U5" pin="27"/>
+    </net>
+    <net code="13" name="Net-(U5-Pad28)">
+      <node ref="U5" pin="28"/>
+    </net>
+    <net code="14" name="Net-(U5-Pad32)">
+      <node ref="U5" pin="32"/>
+    </net>
+    <net code="15" name="Net-(U5-Pad7)">
+      <node ref="U5" pin="7"/>
+    </net>
+    <net code="16" name="Net-(U5-Pad6)">
       <node ref="U5" pin="6"/>
     </net>
-    <net code="53" name="/I2C_SDA">
-      <node ref="U6" pin="2"/>
-      <node ref="U5" pin="1"/>
-      <node ref="U4" pin="30"/>
-      <node ref="R3" pin="2"/>
+    <net code="17" name="/LED_YELLOW">
+      <node ref="D5" pin="2"/>
+      <node ref="U5" pin="26"/>
     </net>
-    <net code="54" name="Net-(U5-Pad4)">
+    <net code="18" name="/LED_GREEN">
+      <node ref="U5" pin="25"/>
+      <node ref="D4" pin="2"/>
+    </net>
+    <net code="19" name="Net-(C9-Pad1)">
+      <node ref="U5" pin="2"/>
+      <node ref="C9" pin="1"/>
+      <node ref="Y1" pin="2"/>
+    </net>
+    <net code="20" name="Net-(C8-Pad1)">
+      <node ref="U5" pin="3"/>
+      <node ref="C8" pin="1"/>
+      <node ref="Y1" pin="1"/>
+    </net>
+    <net code="21" name="+3V3">
+      <node ref="C13" pin="1"/>
+      <node ref="R4" pin="1"/>
+      <node ref="C12" pin="1"/>
+      <node ref="C16" pin="1"/>
+      <node ref="C15" pin="1"/>
+      <node ref="C5" pin="1"/>
+      <node ref="U1" pin="5"/>
+      <node ref="U5" pin="5"/>
+      <node ref="D2" pin="2"/>
+      <node ref="U8" pin="1"/>
+      <node ref="U7" pin="1"/>
+      <node ref="C17" pin="1"/>
+      <node ref="R3" pin="1"/>
+      <node ref="C14" pin="2"/>
+      <node ref="U6" pin="5"/>
+      <node ref="U2" pin="2"/>
+      <node ref="U2" pin="4"/>
+      <node ref="C3" pin="1"/>
+      <node ref="U4" pin="8"/>
+      <node ref="C11" pin="1"/>
+      <node ref="U5" pin="17"/>
+      <node ref="TP2" pin="1"/>
+      <node ref="U5" pin="1"/>
+      <node ref="C7" pin="1"/>
+      <node ref="C6" pin="1"/>
+    </net>
+    <net code="22" name="/nRST">
+      <node ref="U8" pin="10"/>
+      <node ref="C10" pin="1"/>
       <node ref="U5" pin="4"/>
     </net>
-    <net code="55" name="Net-(U5-Pad3)">
-      <node ref="U5" pin="3"/>
+    <net code="23" name="Net-(U4-Pad7)">
+      <node ref="U4" pin="7"/>
     </net>
-    <net code="56" name="Net-(C1-Pad1)">
-      <node ref="L1" pin="1"/>
-      <node ref="P1" pin="2"/>
-      <node ref="D4" pin="1"/>
-      <node ref="U1" pin="6"/>
-      <node ref="U1" pin="1"/>
-      <node ref="C1" pin="1"/>
+    <net code="24" name="Net-(U4-Pad16)">
+      <node ref="U4" pin="16"/>
     </net>
-    <net code="57" name="Net-(D3-Pad1)">
-      <node ref="R5" pin="1"/>
-      <node ref="D3" pin="1"/>
+    <net code="25" name="/RFM_NSS">
+      <node ref="U5" pin="10"/>
+      <node ref="U4" pin="15"/>
     </net>
-    <net code="58" name="Net-(D2-Pad1)">
-      <node ref="D2" pin="1"/>
-      <node ref="R4" pin="1"/>
+    <net code="26" name="/RFM_MOSI">
+      <node ref="U4" pin="14"/>
+      <node ref="U5" pin="13"/>
     </net>
-    <net code="59" name="/LED_YELLOW">
+    <net code="27" name="/RFM_MISO">
+      <node ref="U4" pin="13"/>
+      <node ref="U5" pin="12"/>
+    </net>
+    <net code="28" name="/RFM_SCK">
+      <node ref="U5" pin="11"/>
+      <node ref="U4" pin="12"/>
+    </net>
+    <net code="29" name="Net-(U4-Pad6)">
+      <node ref="U4" pin="6"/>
+    </net>
+    <net code="30" name="Net-(U4-Pad5)">
+      <node ref="U4" pin="5"/>
+    </net>
+    <net code="31" name="Net-(U4-Pad4)">
+      <node ref="U4" pin="4"/>
+    </net>
+    <net code="32" name="Net-(U4-Pad3)">
+      <node ref="U4" pin="3"/>
+    </net>
+    <net code="33" name="Net-(U4-Pad2)">
+      <node ref="U4" pin="2"/>
+    </net>
+    <net code="34" name="/RFM_RESET">
+      <node ref="U5" pin="9"/>
+      <node ref="U4" pin="1"/>
+    </net>
+    <net code="35" name="/LIGHT_EN">
+      <node ref="U5" pin="20"/>
+      <node ref="Q1" pin="2"/>
+    </net>
+    <net code="36" name="Net-(D3-Pad2)">
+      <node ref="TP1" pin="1"/>
+      <node ref="U4" pin="10"/>
+      <node ref="P2" pin="1"/>
       <node ref="D3" pin="2"/>
     </net>
-    <net code="60" name="/LED_GREEN">
-      <node ref="D2" pin="2"/>
-    </net>
-    <net code="61" name="Net-(D1-Pad1)">
-      <node ref="D1" pin="1"/>
+    <net code="37" name="Net-(C1-Pad1)">
       <node ref="R1" pin="1"/>
+      <node ref="D1" pin="1"/>
+      <node ref="P1" pin="2"/>
+      <node ref="L1" pin="1"/>
+      <node ref="C1" pin="1"/>
+      <node ref="U2" pin="1"/>
+      <node ref="U2" pin="6"/>
+    </net>
+    <net code="38" name="/I2C_SCK">
+      <node ref="TP4" pin="1"/>
+      <node ref="U5" pin="29"/>
+      <node ref="U6" pin="6"/>
+      <node ref="U7" pin="3"/>
+      <node ref="R3" pin="2"/>
+    </net>
+    <net code="39" name="/I2C_SDA">
+      <node ref="U6" pin="1"/>
+      <node ref="U5" pin="30"/>
+      <node ref="R4" pin="2"/>
+      <node ref="U7" pin="2"/>
+      <node ref="TP5" pin="1"/>
+    </net>
+    <net code="40" name="Net-(U6-Pad4)">
+      <node ref="U6" pin="4"/>
+    </net>
+    <net code="41" name="Net-(U6-Pad3)">
+      <node ref="U6" pin="3"/>
+    </net>
+    <net code="42" name="/BATT_MON">
+      <node ref="U5" pin="14"/>
+      <node ref="R1" pin="2"/>
+    </net>
+    <net code="43" name="Net-(U8-Pad8)">
+      <node ref="U8" pin="8"/>
+    </net>
+    <net code="44" name="Net-(U8-Pad6)">
+      <node ref="U8" pin="6"/>
+    </net>
+    <net code="45" name="Net-(U5-Pad16)">
+      <node ref="U5" pin="16"/>
+    </net>
+    <net code="46" name="Net-(U5-Pad15)">
+      <node ref="U5" pin="15"/>
+    </net>
+    <net code="47" name="Net-(D2-Pad1)">
+      <node ref="R2" pin="1"/>
+      <node ref="D2" pin="1"/>
+    </net>
+    <net code="48" name="Net-(D4-Pad1)">
+      <node ref="R5" pin="1"/>
+      <node ref="D4" pin="1"/>
+    </net>
+    <net code="49" name="Net-(D5-Pad1)">
+      <node ref="R6" pin="1"/>
+      <node ref="D5" pin="1"/>
+    </net>
+    <net code="50" name="/SWDIO">
+      <node ref="U5" pin="23"/>
+      <node ref="U8" pin="2"/>
+    </net>
+    <net code="51" name="Net-(U8-Pad7)">
+      <node ref="U8" pin="7"/>
+    </net>
+    <net code="52" name="/SWCLK">
+      <node ref="U8" pin="4"/>
+      <node ref="U5" pin="24"/>
     </net>
   </nets>
 </export>
