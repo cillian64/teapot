@@ -508,17 +508,17 @@ Text Label 4800 3450 0    60   ~ 0
 I2C_SCK
 Text Label 4800 3350 0    60   ~ 0
 I2C_SDA
-Text Label 3300 3850 2    60   ~ 0
-LIGHT_SENSE
 Text Label 3300 3950 2    60   ~ 0
+LIGHT_SENSE
+Text Label 4600 4350 0    60   ~ 0
 RFM_RESET
-Text Label 3300 4050 2    60   ~ 0
+Text Label 4600 3850 0    60   ~ 0
 RFM_NSS
-Text Label 3300 4150 2    60   ~ 0
+Text Label 4600 3750 0    60   ~ 0
 RFM_SCK
-Text Label 3300 4250 2    60   ~ 0
+Text Label 4600 3650 0    60   ~ 0
 RFM_MISO
-Text Label 3300 4350 2    60   ~ 0
+Text Label 4600 3550 0    60   ~ 0
 RFM_MOSI
 $Comp
 L LED D2
@@ -566,9 +566,9 @@ F 3 "" H 4650 1950 50  0000 C CNN
 	1    4650 1950
 	1    0    0    -1  
 $EndComp
-Text Label 4600 3850 0    60   ~ 0
+Text Label 3300 3750 2    60   ~ 0
 LED_YELLOW
-Text Label 4600 3750 0    60   ~ 0
+Text Label 3300 3650 2    60   ~ 0
 LED_GREEN
 Text Label 3450 6300 2    60   ~ 0
 LED_YELLOW
@@ -1095,7 +1095,7 @@ F 4 "2368174" H 9750 1750 60  0001 C CNN "Farnell"
 	1    9750 1750
 	0    -1   -1   0   
 $EndComp
-Text Label 4600 4350 0    60   ~ 0
+Text Label 3300 3850 2    60   ~ 0
 LIGHT_EN
 Text Label 9850 3350 2    60   ~ 0
 LIGHT_EN
@@ -1389,11 +1389,7 @@ Wire Notes Line
 	10300 2350 7300 2350
 Wire Notes Line
 	7300 2350 7300 900 
-NoConn ~ 3300 3650
-NoConn ~ 3300 3750
 NoConn ~ 4600 3150
-NoConn ~ 4600 3550
-NoConn ~ 4600 3650
 NoConn ~ 4600 4450
 NoConn ~ 4600 4550
 $Comp
@@ -1511,8 +1507,14 @@ nRST
 Text Label 3650 5350 0    60   ~ 0
 SWDIO
 Text Label 3650 5450 0    60   ~ 0
-SWDCLK
+SWCLK
 NoConn ~ 3650 5550
 Wire Notes Line
 	900  5800 5950 5800
+NoConn ~ 3300 4050
+NoConn ~ 3300 4150
+NoConn ~ 3300 4250
+NoConn ~ 3300 4350
+NoConn ~ 3300 4550
+NoConn ~ 3300 4650
 $EndSCHEMATC
