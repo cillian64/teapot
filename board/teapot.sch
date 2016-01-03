@@ -508,7 +508,7 @@ Text Label 4800 3450 0    60   ~ 0
 I2C_SCK
 Text Label 4800 3350 0    60   ~ 0
 I2C_SDA
-Text Label 3300 3950 2    60   ~ 0
+Text Label 3300 4150 2    60   ~ 0
 LIGHT_SENSE
 Text Label 4600 4350 0    60   ~ 0
 RFM_RESET
@@ -1095,7 +1095,7 @@ F 4 "2368174" H 9750 1750 60  0001 C CNN "Farnell"
 	1    9750 1750
 	0    -1   -1   0   
 $EndComp
-Text Label 3300 3850 2    60   ~ 0
+Text Label 3300 4050 2    60   ~ 0
 LIGHT_EN
 Text Label 9850 3350 2    60   ~ 0
 LIGHT_EN
@@ -1113,7 +1113,7 @@ F 4 "2447230" H 2050 1050 60  0001 C CNN "Farnell"
 $EndComp
 Text Label 2200 1050 0    60   ~ 0
 BATT_MON
-Text Label 3300 4450 2    60   ~ 0
+Text Label 3300 3950 2    60   ~ 0
 BATT_MON
 $Comp
 L +3V3 #PWR043
@@ -1511,8 +1511,8 @@ SWCLK
 NoConn ~ 3650 5550
 Wire Notes Line
 	900  5800 5950 5800
-NoConn ~ 3300 4050
-NoConn ~ 3300 4150
+NoConn ~ 3300 3850
+NoConn ~ 3300 4450
 NoConn ~ 3300 4250
 NoConn ~ 3300 4350
 NoConn ~ 3300 4550
