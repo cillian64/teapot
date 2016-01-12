@@ -1,4 +1,4 @@
-update=Sat 02 Jan 2016 01:01:06 GMT
+update=Tue 12 Jan 2016 00:27:58 GMT
 version=1
 last_client=kicad
 [pcbnew]
@@ -71,3 +71,4 @@ LibName39=parts/tps79333dbvr
 LibName40=parts/tvs_small
 LibName41=agg-kicad/lib/connector/microusb
 LibName42=agg-kicad/lib/connector/swd_tc
+LibName43=parts/stm32l052k6t6
