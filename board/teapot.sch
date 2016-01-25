@@ -1242,8 +1242,6 @@ NoConn ~ 3450 4325
 NoConn ~ 3450 4525
 NoConn ~ 3450 4625
 NoConn ~ 3450 4425
-NoConn ~ 4650 3325
-NoConn ~ 4650 3425
 $Comp
 L +3V3 #PWR047
 U 1 1 5696443C
@@ -1546,8 +1544,8 @@ Wire Wire Line
 	7600 1750 7850 1750
 Text Label 7850 1150 2    60   ~ 0
 RFM_DIO0
-Text Label 1550 4475 0    60   ~ 0
+Text Label 4650 3325 0    60   ~ 0
 RFM_DIO0
-Text Label 1550 4625 0    60   ~ 0
+Text Label 4650 3425 0    60   ~ 0
 RFM_DIO4
 $EndSCHEMATC
