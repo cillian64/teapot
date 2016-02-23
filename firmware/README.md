@@ -4,7 +4,9 @@ This firmware uses the
 recommended by libopencm3.  It can be installed on recent Ubuntu:
 
 ```sudo add-apt-repository ppa:team-gcc-arm-embedded/ppa
+
 sudo apt-get update
+
 sudo apt-get install gcc-arm-embedded```
 
 # Submodules
@@ -16,12 +18,15 @@ Check out the correct version of libopencm3:
 Before doing anything else, build libopencm3:
 
 ```cd libopencm3
+
 make
+
 cd ..```
 
 Then build and flash the firmware:
 
 ```make
+
 make flash```
 
 To debug:
