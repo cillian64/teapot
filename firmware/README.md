@@ -33,3 +33,7 @@ To debug:
 
 `make debug`
 
+# Sources
+* `teapot.c` contains the start point, `main()`.
+* `teapot_pins.h` contains pin assignments on the board, while `teapot_pins.h`
+  contains the setup function which assigns pin modes.
