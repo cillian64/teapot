@@ -8,10 +8,10 @@ void teapot_pins_init(void);
 /* Clock GPIOs, set pin modes */
 
 /* LEDs */
-#define LED_GREEN           GPIO1
-#define LED_GREEN_PORT      GPIOA
-#define LED_YELLOW          GPIO0
-#define LED_YELLOW_PORT     GPIOA
+#define LED_ACT           GPIO1
+#define LED_ACT_PORT      GPIOA
+#define LED_ERR          GPIO0
+#define LED_ERR_PORT     GPIOA
 
 /* Analog inputs, plus LIGHT_EN */
 #define BATT_MON            GPIO2

@@ -10,12 +10,12 @@ void teapot_pins_init(void)
     rcc_periph_clock_enable(RCC_GPIOB);
 
     /* LEDs - default off */
-    gpio_clear(LED_GREEN_PORT, LED_GREEN);
-    gpio_clear(LED_YELLOW_PORT, LED_YELLOW);
-    gpio_mode_setup(LED_GREEN_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,
-                    LED_GREEN);
-    gpio_mode_setup(LED_YELLOW_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,
-                    LED_YELLOW);
+    gpio_clear(LED_ACT_PORT, LED_ACT);
+    gpio_clear(LED_ERR_PORT, LED_ERR);
+    gpio_mode_setup(LED_ACT_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,
+                    LED_ACT);
+    gpio_mode_setup(LED_ERR_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,
+                    LED_ERR);
 
     /* LIGHT_EN */
     gpio_clear(LIGHT_EN_PORT, LIGHT_EN);
