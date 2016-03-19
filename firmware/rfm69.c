@@ -135,8 +135,8 @@ void rfm69_setfreq(uint32_t frf)
     _rfm69_setmode(RFM69_OPMODE_SLEEP);
 
     /* Program 3 FRF registers */
-    _rfm69_writereg(RFM69_REGFRFMSB, (frf << 16) & 0xff);
-    _rfm69_writereg(RFM69_REGFRFMID, (frf << 8) & 0xff);
+    _rfm69_writereg(RFM69_REGFRFMSB, (frf >> 16) & 0xff);
+    _rfm69_writereg(RFM69_REGFRFMID, (frf >> 8) & 0xff);
     _rfm69_writereg(RFM69_REGFRFLSB, frf & 0xff);
 }
 
