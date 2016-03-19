@@ -204,9 +204,82 @@ void rfm69_receive(uint8_t *buf, uint8_t len)
     panic();
 }
 
-/* Set the transmit power.  `power' is a power in dBm */
-void rfm69_setpower(uint8_t power)
+/* Set the transmit power.  `power' is a power in dBm from -2dBm to 13dBm */
+void rfm69_setpower(int8_t power)
 {
-    panic();
+    uint8_t RegPaLevel = 0x00;
+
+    if((power < -2) || (power > 13))
+        panic();
+    
+    RegPaLevel &= RFM69_PALEVEL_PA0ON;
+    RegPaLevel |= RFM69_PALEVEL_PA1ON;
+    RegPaLevel &= RFM69_PALEVEL_PA2ON;
+
+    /* With this PA setup, Pout = -18dBm + OutputPower */
+    uint8_t OutputPower = (uint8_t)(power + 18);
+    OutputPower &= 0b00011111;
+    RegPaLevel |= OutputPower;
+
+    _rfm69_writereg(RFM69_REGPALEVEL, RegPaLevel);
+}
+
+/* Setup physical laye settings.
+ * fdev is frequency deviation in dimensionless hoperf units
+ * bitrate is bitrate in dimensionless hoperf units */
+void rfm69_physetup(uint16_t fdev, uint16_t bitrate)
+{
+    /* Write deviation */
+    _rfm69_writereg(RFM69_REGFDEVMSB, (fdev << 8) & 0b00111111);
+    _rfm69_writereg(RFM69_REGFDEVLSB, fdev & 0xff);
+
+    /* Write bitrate */
+    _rfm69_writereg(RFM69_REGBITRATEMSB, (bitrate << 8) & 0xff);
+    _rfm69_writereg(RFM69_REGBITRATELSB, bitrate & 0xff);
+}
+
+/* Setup packet-mode settings.
+ * variablelength: Do we want to include a length with each packet?
+ * preamblelength: number of preamble bytes
+ * synclength: number of sync bytes, 1-8
+ * syncvalue: values of sync bytes */
+void rfm69_packetsetup(bool variablelength, uint16_t preamblelength,
+                       uint8_t synclength, uint8_t *syncvalue,
+                       bool manchester, bool whitening, bool crc)
+{
+    uint8_t RegPacketConfig1 = 0x00;
+    uint8_t RegSyncConfig = 0x00;
+
+    /* Validate parameters */
+    if(whitening && manchester)
+        panic(); /* Can't do both */
+    if(synclength > 8)
+        panic(); /* Can only do 8 sync bytes */
+
+
+    if(variablelength)
+        RegPacketConfig1 |= RFM69_REGPACKETCONFIG1_PACKETFORMAT;
+    if(whitening)
+        RegPacketConfig1 |= RFM69_REGPACKETCONFIG1_WHITENING;
+    if(manchester)
+        RegPacketConfig1 |= RFM69_REGPACKETCONFIG1_MANCHESTER;
+    if(crc)
+        RegPacketConfig1 |= RFM69_REGPACKETCONFIG1_CRCON;
+    _rfm69_writereg(RFM69_REGPACKETCONFIG1, RegPacketConfig1);
+
+    /* Preamble length */
+    _rfm69_writereg(RFM69_REGPREAMBLEMSB, (preamblelength << 8) & 0xff);
+    _rfm69_writereg(RFM69_REGPREAMBLELSB, preamblelength & 0xff);
+
+    if(synclength > 0)
+    {
+        RegSyncConfig |= RFM69_REGSYNCCONFIG_SYNCON;
+        RegSyncConfig |= (synclength - 1) << 3;
+        /* Sync values are sequential in memory so we can bulkwrite them all */
+        _rfm69_bulkwrite(RFM69_REGSYNCVALUE1, syncvalue, synclength);
+    }
+    _rfm69_writereg(RFM69_REGSYNCCONFIG, RegSyncConfig);
+
+
 }
 

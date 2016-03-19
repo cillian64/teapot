@@ -2,6 +2,7 @@
 #define RFM69_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /* Register locations: */
 #define RFM69_REGFIFO           0x00
@@ -78,9 +79,12 @@
 
 void rfm69_init(void);
 void rfm69_setfreq(uint32_t frf);
-void rfm69_opmode(uint8_t opmode);
 void rfm69_transmit(uint8_t *buf, uint8_t len);
 void rfm69_receive(uint8_t *buf, uint8_t len);
-void rfm69_setpower(uint8_t power);
+void rfm69_setpower(int8_t power);
+void rfm69_physetup(uint16_t fdev, uint16_t bitrate);
+void rfm69_packetsetup(bool variablelength, uint16_t preamblelength,
+                       uint8_t synclength, uint8_t *syncvalue,
+                       bool manchester, bool whitening, bool crc);
 
 #endif
