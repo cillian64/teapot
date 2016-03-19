@@ -175,26 +175,23 @@ static void _rfm69_setmode(uint8_t mode)
  * synchronous - it will not return until transmission is complete */
 void rfm69_transmit(uint8_t *buf, uint8_t len)
 {
-    /* If we are in transmit, wait for transmit to finish */
-    while(_rfm69_getmode() == RFM69_OPMODE_TX);
+    /* Go into transmit mode */
+    _rfm69_setmode(RFM69_OPMODE_TX);
+    while(_rfm69_getmode() != RFM69_OPMODE_TX);
 
-    /* If we are in sleep, fs or rx, bring us up to standby */
-    uint8_t mode = _rfm69_getmode();
-    if(mode == RFM69_OPMODE_SLEEP || mode == RFM69_OPMODE_FS ||
-       mode == RFM69_OPMODE_RX)
-    {
-        _rfm69_setmode(RFM69_OPMODE_STDBY);
-        while(_rfm69_getmode() != RFM69_OPMODE_STDBY);
-    }
+    /* Wait for PA ramp-up */
+    while(!(_rfm69_readreg(RFM69_REGIRQFLAGS1) & RFM69_REGIRQFLAGS1_TXREADY));
 
     /* Write the packet to the RFM69's FIFO */
     _rfm69_bulkwrite(RFM69_REGFIFO, buf, len);
 
-    /* Initiate transmit */
-    _rfm69_setmode(RFM69_OPMODE_TX);
+    /* Wait for send to complete */
+    while(!(_rfm69_readreg(RFM69_REGIRQFLAGS2) &
+            RFM69_REGIRQFLAGS2_PACKETSENT));
 
-    /* Block until transmit completes */
-    while(_rfm69_getmode() == RFM69_OPMODE_TX);
+    /* Return to standby */
+    _rfm69_setmode(RFM69_OPMODE_STDBY);
+    while(_rfm69_getmode() != RFM69_OPMODE_STDBY);
 }
 
 /* Receive `len' bytes into buffer `buf'.  This function
