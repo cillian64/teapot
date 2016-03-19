@@ -28,6 +28,12 @@ void teapot_pins_init(void)
                     LIGHT_SENSE);
 
     /* Radio stuff */
+    /* Bring up reset pin, hold in reset: */
+    gpio_mode_setup(RFM_RESET_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,
+                    RFM_RESET);
+    gpio_set(RFM_RESET_PORT, RFM_RESET);
+    delay_ms(1); /* Check RFM gets reset on powerup */
+    /* Setup SPI */
     rcc_periph_clock_enable(RCC_SPI1);
     /* Setup NSS for manual control. Check it doesn't blip low when we first
      * setup the pin. */
