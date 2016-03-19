@@ -21,25 +21,18 @@
 #define SPI_DR8(spi_base) MMIO8((spi_base)+0x0c)
 static void spi_send8(uint32_t spi, uint8_t data);
 static uint8_t spi_read8(uint32_t spi);
-
 /* Send and receive 8 bits, synchronously */
 static uint8_t _rfm69_spi_xfer8(uint8_t data);
-
 /* Write a byte to a register */
 static void _rfm69_writereg(uint8_t address, uint8_t data);
-
 /* Read a byte from a register */
 static uint8_t _rfm69_readreg(uint8_t address);
-
 /* Bulk write to registers from a buffer */
 static void _rfm69_bulkwrite(uint8_t address, uint8_t *buffer, uint8_t len);
-
 /* Bulk read from registers into a buffer */
 static void _rfm69_bulkread(uint8_t address, uint8_t *buffer, uint8_t len);
-
 /* Set op mode */
 static void _rfm69_setmode(uint8_t mode);
-
 /* Get op mode */
 static uint8_t _rfm69_getmode(void);
 
@@ -84,7 +77,8 @@ static void _rfm69_bulkwrite(uint8_t address, uint8_t *buffer, uint8_t len)
     uint8_t i;
     gpio_clear(RFM_NSS_PORT, RFM_NSS);
     (void)_rfm69_spi_xfer8(address | 0b10000000); /* Set MSB to write */
-    for(i=0; i<len; i++)
+    (void)_rfm69_spi_xfer8(len); /* Now send packet length */
+    for(i=0; i<len; i++) /* Now send whole packet */
         (void)_rfm69_spi_xfer8(buffer[i]);
     gpio_set(RFM_NSS_PORT, RFM_NSS);
 }
