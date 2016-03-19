@@ -115,7 +115,8 @@ void rfm69_init(void)
 
     spi_enable(SPI1);
 
-    /* Wait for RFM to warm up */
+    /* Release RESET and wait for RFM to warm up */
+    gpio_clear(RFM_RESET_PORT, RFM_RESET);
     delay_ms(10);
 
     /* Set the frequency:
