@@ -15,6 +15,11 @@
 #include "rfm69.h"
 #include "util.h"
 
+/* #define SEMIHOSTING */
+#ifdef SEMIHOSTING
+#include <stdio.h>
+#endif
+
 /*********** Internal function declarations ************/
 /* For some weird reason libopencm3 only provides spi_read8/send8 for f03
  * devices, not for l0. So we recreate them here */
@@ -170,6 +175,44 @@ static void _rfm69_setmode(uint8_t mode)
     }*/
     /*while(_rfm69_getmode() != mode);*/
 }
+
+#ifdef SEMIHOSTING
+/* Convert a number from 0-15 into a hex digit character */
+char dtoh(uint8_t digit)
+{
+    if(digit<=9)
+        return '0'+digit;
+    else if(digit<=15)
+        return 'a'+digit-10;
+    else
+        panic();
+    return ' ';  /* Otherwise it appears we may not return */
+}
+
+/* Print out all the RFM69 registers from 0x00 to 0x70 using semihosting */
+void dumpregisters(void)
+{
+    /* printf with %x and %d format specifiers is too big for our ROM.
+     * So do a simple DIY */
+    for(uint8_t addr=0; addr<0x71; addr++)
+    {
+        uint8_t data = _rfm69_readreg(addr);
+        fputs("addr 0x", stdout);
+        putc(dtoh(addr/16), stdout);
+        putc(dtoh(addr%16), stdout);
+        fputs(": ", stdout);
+        for(uint8_t i=0; i<8; i++)
+        {
+            putc(dtoh((data>>(7-i))%2), stdout);
+            if(i==3)
+                putc(' ', stdout);
+        }
+        putc('\n', stdout);
+        if(addr%16 == 15)
+            putc('\n', stdout);
+    }
+}
+#endif /* SEMIHOSTING */
 
 /* Transmit bytes from buffer `buf', length `len' bytes.  This function is
  * synchronous - it will not return until transmission is complete */

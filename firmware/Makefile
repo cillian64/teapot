@@ -31,6 +31,9 @@ GIT_COMMIT = $(shell git rev-parse --short=8 HEAD | cut -c 1-8)
 #CPPFLAGS += -I../common/
 CFLAGS += -std=c99 -DFIRMWARE_VERSION=\"$(GIT_COMMIT)\"
 
+# Uncomment to use semihosting:
+#LDLIBS = --specs=rdimon.specs -lm -lc -lrdimon
+
 include Makefile.include
 
 

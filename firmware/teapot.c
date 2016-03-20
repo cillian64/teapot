@@ -8,6 +8,11 @@
 #include "rfm69.h"
 #include "util.h"
 
+/* #define SEMIHOSTING */
+#ifdef SEMIHOSTING
+#include <stdio.h>
+void initialise_monitor_handles(void);
+#endif
 
 static void radio_init(void);
 
@@ -41,6 +46,12 @@ static void radio_init(void)
 
 int main(void)
 {
+#ifdef SEMIHOSTING
+    initialise_monitor_handles();
+    setbuf(stdout, NULL);
+    puts("Hello, gdb!");
+#endif
+
     teapot_pins_init();
     radio_init();
     gpio_clear(LED_ERR_PORT, LED_ERR);
