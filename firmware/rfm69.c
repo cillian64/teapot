@@ -270,11 +270,11 @@ void rfm69_setpower(int8_t power)
 void rfm69_physetup(uint16_t fdev, uint16_t bitrate)
 {
     /* Write deviation */
-    _rfm69_writereg(RFM69_REGFDEVMSB, (fdev << 8) & 0b00111111);
+    _rfm69_writereg(RFM69_REGFDEVMSB, (fdev >> 8) & 0b00111111);
     _rfm69_writereg(RFM69_REGFDEVLSB, fdev & 0xff);
 
     /* Write bitrate */
-    _rfm69_writereg(RFM69_REGBITRATEMSB, (bitrate << 8) & 0xff);
+    _rfm69_writereg(RFM69_REGBITRATEMSB, (bitrate >> 8) & 0xff);
     _rfm69_writereg(RFM69_REGBITRATELSB, bitrate & 0xff);
 }
 
@@ -308,7 +308,7 @@ void rfm69_packetsetup(bool variablelength, uint16_t preamblelength,
     _rfm69_writereg(RFM69_REGPACKETCONFIG1, RegPacketConfig1);
 
     /* Preamble length */
-    _rfm69_writereg(RFM69_REGPREAMBLEMSB, (preamblelength << 8) & 0xff);
+    _rfm69_writereg(RFM69_REGPREAMBLEMSB, (preamblelength >> 8) & 0xff);
     _rfm69_writereg(RFM69_REGPREAMBLELSB, preamblelength & 0xff);
 
     if(synclength > 0)
