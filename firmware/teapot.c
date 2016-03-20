@@ -8,6 +8,7 @@
 #include "rfm69.h"
 #include "util.h"
 #include "ukhasnet.h"
+#include "light.h"
 
 /* #define SEMIHOSTING */
 #ifdef SEMIHOSTING
@@ -57,20 +58,26 @@ int main(void)
     puts("Hello, gdb!");
 #endif
 
+    gpio_set(LED_ERR_PORT, LED_ERR);
     teapot_pins_init();
     radio_init();
+    light_init();
     gpio_clear(LED_ERR_PORT, LED_ERR);
 
     while(true)
     {
         gpio_set(LED_ACT_PORT, LED_ACT); /* begin actions */
+        gpio_set(LIGHT_EN_PORT, LIGHT_EN);
+        delay_ms(1);
+        uint8_t light = get_light();
+        gpio_clear(LIGHT_EN_PORT, LIGHT_EN);
 
         packet_len = makepacket(buf, 64, sequence, "TEA1",
                                 false, 123, /* batt */
                                 false, -456, /* temp */
                                 false, 42, /* hum */
                                 false, 123456, /* press */
-                                false, 231); /* light */
+                                true, light); /* light */
         if(sequence++ == 'z')
             sequence = 'b';
         rfm69_transmit((uint8_t*)buf, packet_len);

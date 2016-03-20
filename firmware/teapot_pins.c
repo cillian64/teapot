@@ -2,6 +2,7 @@
 #include <libopencm3/stm32/gpio.h>
 
 #include "teapot_pins.h"
+#include "util.h"
 
 void teapot_pins_init(void)
 {
