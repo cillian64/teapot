@@ -7,6 +7,7 @@
 #include "teapot_pins.h"
 #include "rfm69.h"
 #include "util.h"
+#include "ukhasnet.h"
 
 /* #define SEMIHOSTING */
 #ifdef SEMIHOSTING
@@ -46,6 +47,10 @@ static void radio_init(void)
 
 int main(void)
 {
+    char sequence = 'a';
+    char buf[64];
+    uint8_t packet_len;
+
 #ifdef SEMIHOSTING
     initialise_monitor_handles();
     setbuf(stdout, NULL);
@@ -56,17 +61,22 @@ int main(void)
     radio_init();
     gpio_clear(LED_ERR_PORT, LED_ERR);
 
-    char* buf = "3a:hello[TEA1]";
-    uint8_t buflen = 14;
-
-    while(true) /* main loop */
+    while(true)
     {
-        gpio_set(LED_ACT_PORT, LED_ACT);
-        rfm69_transmit((uint8_t*)buf, buflen);
-        delay_ms(10);
-        gpio_clear(LED_ACT_PORT, LED_ACT);
+        gpio_set(LED_ACT_PORT, LED_ACT); /* begin actions */
 
-        delay_ms(1000);
+        packet_len = makepacket(buf, 64, sequence, "TEA1",
+                                false, 123, /* batt */
+                                false, -456, /* temp */
+                                false, 42, /* hum */
+                                false, 123456, /* press */
+                                false, 231); /* light */
+        if(sequence++ == 'z')
+            sequence = 'b';
+        rfm69_transmit((uint8_t*)buf, packet_len);
+        gpio_clear(LED_ACT_PORT, LED_ACT); /* end of action */
+
+        delay_ms(5000);
     }
 
     return 0;
