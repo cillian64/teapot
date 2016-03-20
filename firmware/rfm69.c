@@ -34,6 +34,8 @@ static void _rfm69_writereg(uint8_t address, uint8_t data);
 static uint8_t _rfm69_readreg(uint8_t address);
 /* Bulk write to registers from a buffer */
 static void _rfm69_bulkwrite(uint8_t address, uint8_t *buffer, uint8_t len);
+/* Bulk write to registers from a buffer with length */
+static void _rfm69_bulkwritewithlen(uint8_t address, uint8_t *buffer, uint8_t len);
 /* Bulk read from registers into a buffer */
 static void _rfm69_bulkread(uint8_t address, uint8_t *buffer, uint8_t len);
 /* Set op mode */
@@ -78,6 +80,16 @@ static uint8_t _rfm69_readreg(uint8_t address)
 }
 
 static void _rfm69_bulkwrite(uint8_t address, uint8_t *buffer, uint8_t len)
+{
+    uint8_t i;
+    gpio_clear(RFM_NSS_PORT, RFM_NSS);
+    (void)_rfm69_spi_xfer8(address | 0b10000000); /* Set MSB to write */
+    for(i=0; i<len; i++) /* Now send whole packet */
+        (void)_rfm69_spi_xfer8(buffer[i]);
+    gpio_set(RFM_NSS_PORT, RFM_NSS);
+}
+
+static void _rfm69_bulkwritewithlen(uint8_t address, uint8_t *buffer, uint8_t len)
 {
     uint8_t i;
     gpio_clear(RFM_NSS_PORT, RFM_NSS);
@@ -226,7 +238,7 @@ void rfm69_transmit(uint8_t *buf, uint8_t len)
     while(!(_rfm69_readreg(RFM69_REGIRQFLAGS1) & RFM69_REGIRQFLAGS1_TXREADY));
 
     /* Write the packet to the RFM69's FIFO */
-    _rfm69_bulkwrite(RFM69_REGFIFO, buf, len);
+    _rfm69_bulkwritewithlen(RFM69_REGFIFO, buf, len);
 
     /* Wait for send to complete */
     while(!(_rfm69_readreg(RFM69_REGIRQFLAGS2) &
