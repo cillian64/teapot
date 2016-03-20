@@ -15,6 +15,7 @@
 #define RFM69_REGFRFMSB         0x07
 #define RFM69_REGFRFMID         0x08
 #define RFM69_REGFRFLSB         0x09
+#define RFM69_REGVERSION        0x10
 #define RFM69_REGOSC1           0x0A
 #define RFM69_REGLISTEN1        0x0D
 #define RFM69_REGLISTEN2        0x0E
@@ -32,6 +33,7 @@
 #define RFM69_REGSYNCVALUE1     0x2F
 #define RFM69_REGPACKETCONFIG1  0x37
 #define RFM69_REGPAYLOADLENGTH  0x38
+#define RFM69_REGFIFOTHRESH     0x3C
 #define RFM69_REGPACKETCONFIG2  0x3D
 #define RFM69_REGTESTPA1        0x5A
 #define RFM69_REGTESTPA2        0x5C
@@ -75,6 +77,9 @@
 #define RFM69_REGIRQFLAGS2_PACKETSENT   (1<<3)
 #define RFM69_REGIRQFLAGS2_PAYLOADREADY (1<<2)
 #define RFM69_REGIRQFLAGS2_CRCOK        (1<<1)
+
+/* RegFifoThresh */
+#define RFM69_REGFIFOTHRESH_TXSTARTCONDITION    (1<<7)
 
 
 void rfm69_init(void);

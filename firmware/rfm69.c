@@ -136,12 +136,15 @@ void rfm69_init(void)
     gpio_clear(RFM_RESET_PORT, RFM_RESET);
     delay_ms(10);
 
-    /* Set the frequency:
-     * Fstep = Fxosc / 2^19 = 32e6 / 2^19
-     * freq = Fstep * FRF
-     * FRF = freq / (32e6 / 2^19)
-     *     = 869.5 / 32 * 2^19 = 14245888 */
-    rfm69_setfreq(14245888);
+    gpio_clear(LED_ERR_PORT, LED_ERR);
+    gpio_clear(LED_ACT_PORT, LED_ACT);
+    if(_rfm69_readreg(RFM69_REGVERSION) != 0x24)
+        panic();
+
+    /* Set tx to start as soon as we start filling the FIFO */
+    uint8_t RegFifoThresh = 0x00;
+    RegFifoThresh |= RFM69_REGFIFOTHRESH_TXSTARTCONDITION;
+    _rfm69_writereg(RFM69_REGFIFOTHRESH, RegFifoThresh);
 }
 
 /* Set frequency.  The value provided is not a frequency in Hz, it is he FRF
