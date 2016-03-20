@@ -27,8 +27,8 @@ static void radio_init(void)
      *     = 869.5 / 32 * 2^19 = 14245888 */
     rfm69_setfreq(14245888);
 
-    /* Set max output power 13dBm */
-    rfm69_setpower(13);
+    /* Set output power in dBm */
+    rfm69_setpower(2);
 
     /* Shift: 24kHz: fdev=24e3/fstep = 24e3/61 = 393
      * 2000-baud: bitrate = fxosc / 2000 = 32e6/2000 = 16000

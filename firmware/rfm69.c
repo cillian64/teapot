@@ -259,20 +259,20 @@ void rfm69_receive(uint8_t *buf, uint8_t len)
     panic();
 }
 
-/* Set the transmit power.  `power' is a power in dBm from -2dBm to 13dBm */
+/* Set the transmit power.  `power' is a power in dBm from +2dBm to +17dBm */
 void rfm69_setpower(int8_t power)
 {
     uint8_t RegPaLevel = 0x00;
 
-    if((power < -2) || (power > 13))
+    if((power < 2) || (power > 17))
         panic();
     
     RegPaLevel &= RFM69_PALEVEL_PA0ON;
     RegPaLevel |= RFM69_PALEVEL_PA1ON;
-    RegPaLevel &= RFM69_PALEVEL_PA2ON;
+    RegPaLevel |= RFM69_PALEVEL_PA2ON;
 
-    /* With this PA setup, Pout = -18dBm + OutputPower */
-    uint8_t OutputPower = (uint8_t)(power + 18);
+    /* With this PA setup, Pout = -14dBm + OutputPower */
+    uint8_t OutputPower = (uint8_t)(power + 14);
     OutputPower &= 0b00011111;
     RegPaLevel |= OutputPower;
 
