@@ -8,7 +8,7 @@
 #include "rfm69.h"
 #include "util.h"
 #include "ukhasnet.h"
-#include "light.h"
+#include "analog.h"
 
 /* #define SEMIHOSTING */
 #ifdef SEMIHOSTING
@@ -61,7 +61,7 @@ int main(void)
     gpio_set(LED_ERR_PORT, LED_ERR);
     teapot_pins_init();
     radio_init();
-    light_init();
+    analog_init();
     gpio_clear(LED_ERR_PORT, LED_ERR);
 
     while(true)
@@ -73,7 +73,7 @@ int main(void)
         gpio_clear(LIGHT_EN_PORT, LIGHT_EN);
 
         packet_len = makepacket(buf, 64, sequence, "TEA1",
-                                false, 123, /* batt */
+                                true, get_batt(), /* batt */
                                 false, -456, /* temp */
                                 false, 42, /* hum */
                                 false, 123456, /* press */
@@ -83,7 +83,7 @@ int main(void)
         rfm69_transmit((uint8_t*)buf, packet_len);
         gpio_clear(LED_ACT_PORT, LED_ACT); /* end of action */
 
-        delay_ms(5000);
+        delay_ms(3000);
     }
 
     return 0;
