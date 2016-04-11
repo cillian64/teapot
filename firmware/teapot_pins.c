@@ -49,10 +49,9 @@ void teapot_pins_init(void)
     gpio_set_af(RFM_MOSI_PORT, GPIO_AF0, RFM_MOSI);
 
     /* I2C bus */
-    /* TODO: i2c stuff... 
-    rcc_periph_clock_enable(RCC_I2C1);
-    rcc_set_i2c_clock_hsi(I2C1);
-    i2c_reset(I2C1);
-    */
+    gpio_mode_setup(I2C_SCL_PORT, GPIO_MODE_AF, GPIO_PUPD_NONE, I2C_SCL);
+    gpio_mode_setup(I2C_SDA_PORT, GPIO_MODE_AF, GPIO_PUPD_NONE, I2C_SDA);
+    gpio_set_af(I2C_SCL_PORT, GPIO_AF1, I2C_SCL);
+    gpio_set_af(I2C_SDA_PORT, GPIO_AF1, I2C_SDA);
 }
 

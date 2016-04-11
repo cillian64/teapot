@@ -9,6 +9,7 @@
 #include "util.h"
 #include "ukhasnet.h"
 #include "analog.h"
+#include "i2c.h"
 
 /* #define SEMIHOSTING */
 #ifdef SEMIHOSTING
