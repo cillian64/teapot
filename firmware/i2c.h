@@ -65,7 +65,7 @@
 
 
 void i2c_init(void);
-void i2c_transfer(bool addr10bit, uint16_t addr, bool transmit,
-                  uint8_t nbytes, uint8_t *buffer);
+void i2c_transfer(uint8_t addr, bool transmit, uint8_t nbytes,
+                  uint8_t *buffer);
 
 #endif
