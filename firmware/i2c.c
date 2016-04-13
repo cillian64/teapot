@@ -57,25 +57,16 @@ void i2c_tx(uint8_t data)
     I2C1_TXDR = data;
 }
 
-void i2c_transfer(bool addr10bit, uint16_t addr, bool transmit,
-                  uint8_t nbytes, uint8_t *buffer)
+void i2c_transfer(uint8_t addr, bool transmit, uint8_t nbytes,
+                  uint8_t *buffer)
 {
     if(I2C1_CR2 & I2C_CR2_START)
         panic();
 
-    if(addr10bit)
-    {
-        I2C1_CR2 |= I2C_CR2_ADD10;
-        I2C1_CR2 &= ~0x3ff; /* Clear 10 LSbits */
-        I2C1_CR2 |= addr & 0x3ff; /* Insert 10-bit addr at lsbits */
-    /* Maybe consider HEAD10R */
-    }
-    else /* 7-bit addressing */
-    {
-        I2C1_CR2 &= ~I2C_CR2_ADD10;
-        I2C1_CR2 &= ~0xfe; /* Clear bits 1-7 */
-        I2C1_CR2 |= (addr & 0x7f) << 1; /* Insert 7-bit addr at 1-7 */
-    }
+    /* Assume 7-bit addressing */
+    I2C1_CR2 &= ~I2C_CR2_ADD10;
+    I2C1_CR2 &= ~0xfe; /* Clear bits 1-7 */
+    I2C1_CR2 |= (addr & 0x7f) << 1; /* Insert 7-bit addr at 1-7 */
 
     if(transmit)
         I2C1_CR2 &= ~I2C_CR2_RD_WRN;
