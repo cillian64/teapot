@@ -14,8 +14,8 @@ uint16_t get_temperature(void)
 
     buffer[0] = 0xe3; /* temperature, hold master */
 
-    i2c_transfer(false, 0x40, true, 1, buffer);
-    i2c_transfer(false, 0x40, false, 2, buffer);
+    i2c_transfer(0x40, true, 1, buffer);
+    i2c_transfer(0x40, false, 2, buffer);
 
     if(!(buffer[0] & 0x02))
         panic(); /* measurement type is incorrect */
@@ -30,8 +30,8 @@ uint16_t get_humidity(void)
 
     buffer[0] = 0xe5; /* humidity, hold master */
 
-    i2c_transfer(false, 0x40, true, 1, buffer);
-    i2c_transfer(false, 0x40, false, 2, buffer);
+    i2c_transfer(0x40, true, 1, buffer);
+    i2c_transfer(0x40, false, 2, buffer);
 
     if(buffer[0] & 0x02)
         panic(); /* measurement type is incorrect */
