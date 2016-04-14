@@ -53,5 +53,9 @@ void teapot_pins_init(void)
     gpio_mode_setup(I2C_SDA_PORT, GPIO_MODE_AF, GPIO_PUPD_NONE, I2C_SDA);
     gpio_set_af(I2C_SCL_PORT, GPIO_AF1, I2C_SCL);
     gpio_set_af(I2C_SDA_PORT, GPIO_AF1, I2C_SDA);
+    gpio_set_output_options(I2C_SCL_PORT, GPIO_OTYPE_OD, GPIO_OSPEED_HIGH,
+                            I2C_SCL);
+    gpio_set_output_options(I2C_SDA_PORT, GPIO_OTYPE_OD, GPIO_OSPEED_HIGH,
+                            I2C_SDA);
 }
 
