@@ -60,6 +60,9 @@ int main(void)
 #endif
 
     gpio_set(LED_ERR_PORT, LED_ERR);
+    rcc_osc_on(RCC_HSI16);
+    rcc_wait_for_osc_ready(RCC_HSI16);
+    rcc_set_sysclk_source(RCC_HSI16);
     teapot_pins_init();
     radio_init();
     analog_init();

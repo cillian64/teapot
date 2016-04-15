@@ -20,7 +20,7 @@ void delay_ms(const uint32_t delay)
 {
     uint32_t i, j;
     for(i=0; i<delay; i++)
-        for(j=0; j<500; j++)
+        for(j=0; j<3333; j++)
             __asm__("nop");
 }
 
