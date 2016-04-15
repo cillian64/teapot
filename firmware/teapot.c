@@ -10,6 +10,7 @@
 #include "ukhasnet.h"
 #include "analog.h"
 #include "i2c.h"
+#include "sensors.h"
 
 /* #define SEMIHOSTING */
 #ifdef SEMIHOSTING
@@ -40,6 +41,7 @@ static void radio_init(void)
 
     /* 3-byte preamble of 0xAA, 0xAA, 0xAA
      * 2-byte sync of 0x2D, 0xAA
+     
      * preamble, sync, length, data, CRC16 */
     uint8_t syncvalue[2] = {0x2d, 0xaa};
     rfm69_packetsetup(true, 3, 2, syncvalue, false, false, true);
@@ -66,7 +68,20 @@ int main(void)
     teapot_pins_init();
     radio_init();
     analog_init();
+    i2c_init();
     gpio_clear(LED_ERR_PORT, LED_ERR);
+
+    delay_ms(1000);
+
+    while(true)
+    {
+        gpio_set(LED_ACT_PORT, LED_ACT);
+        delay_ms(5);
+        get_temperature();
+        gpio_clear(LED_ACT_PORT, LED_ACT);
+        delay_ms(1000);
+    }
+        
 
     while(true)
     {
@@ -85,9 +100,9 @@ int main(void)
         if(sequence++ == 'z')
             sequence = 'b';
         rfm69_transmit((uint8_t*)buf, packet_len);
+        
         gpio_clear(LED_ACT_PORT, LED_ACT); /* end of action */
-
-        delay_ms(3000);
+        delay_ms(1000);
     }
 
     return 0;

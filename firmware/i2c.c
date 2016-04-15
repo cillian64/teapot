@@ -6,6 +6,7 @@
 
 #include "i2c.h"
 #include "util.h"
+#include "teapot_pins.h"
 
 uint8_t i2c_rx(void);
 void i2c_tx(uint8_t data);
