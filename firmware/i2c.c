@@ -39,8 +39,9 @@ void i2c_init(void)
     I2C1_CR1 |= I2C_CR1_PE;
     while(!(I2C1_CR1 & I2C_CR1_PE));
 
-    /* Automatically send stop condition after transfers */
-    I2C1_CR2 |= I2C_CR2_AUTOEND;
+    /* Do not auto-end - we need repeated starts */
+    I2C1_CR2 &= ~I2C_CR2_AUTOEND;
+
     /* Automagical ACK control */
     I2C1_CR2 &= ~I2C_CR2_RELOAD;
 }
@@ -58,10 +59,10 @@ void i2c_tx(uint8_t data)
 }
 
 void i2c_transfer(uint8_t addr, bool transmit, uint8_t nbytes,
-                  uint8_t *buffer)
+                  uint8_t *buffer, bool stop)
 {
-    if(I2C1_CR2 & I2C_CR2_START)
-        panic();
+/*    if(I2C1_CR2 & I2C_CR2_START)
+        panic();*/
 
     /* Assume 7-bit addressing */
     I2C1_CR2 &= ~I2C_CR2_ADD10;
@@ -77,6 +78,13 @@ void i2c_transfer(uint8_t addr, bool transmit, uint8_t nbytes,
     while(I2C1_CR2 & I2C_CR2_START); /* START cleared after slave addr sent
                                         regardless of ACK and also if
                                         arbitration lost */
+
+    /* Check if NACK received: */
+//    if(I2C1_ISR | I2C_ISR_NACKF)
+//    {
+//        panic();
+//    }
+
     I2C1_CR2 &= ~(0xff << 16);
     I2C1_CR2 |= (uint32_t)nbytes << 16;
 
@@ -85,5 +93,8 @@ void i2c_transfer(uint8_t addr, bool transmit, uint8_t nbytes,
             i2c_tx(buffer[i]);
         else
             buffer[i] = i2c_rx();
-    /* Autostop done in hardware */
+
+    if(stop)
+        I2C1_CR2 |= I2C_CR2_STOP;
 }
+

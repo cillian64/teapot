@@ -12,10 +12,13 @@ uint16_t get_temperature(void)
 {
     uint8_t buffer[2];
 
-    buffer[0] = 0xe3; /* temperature, hold master */
+    buffer[0] = 0xf3; /* temperature, no hold master */
 
-    i2c_transfer(0x40, true, 1, buffer);
-    i2c_transfer(0x40, false, 2, buffer);
+    i2c_transfer(0x40, I2C_TX, 1, buffer, I2C_STOP);
+    delay_ms(100);
+    i2c_transfer(0x40, I2C_TX, 1, buffer, I2C_NOSTOP);
+    delay_ms(100);
+    i2c_transfer(0x40, I2C_RX, 2, buffer, I2C_STOP);
 
     if(!(buffer[0] & 0x02))
         panic(); /* measurement type is incorrect */
@@ -30,8 +33,8 @@ uint16_t get_humidity(void)
 
     buffer[0] = 0xe5; /* humidity, hold master */
 
-    i2c_transfer(0x40, true, 1, buffer);
-    i2c_transfer(0x40, false, 2, buffer);
+    i2c_transfer(0x40, I2C_TX, 1, buffer, I2C_NOSTOP);
+    i2c_transfer(0x40, I2C_RX, 2, buffer, I2C_STOP);
 
     if(buffer[0] & 0x02)
         panic(); /* measurement type is incorrect */
@@ -46,14 +49,14 @@ void pressure_init(void)
     uint8_t buffer[2];
 
     command = 0x1e; /* reset */
-    i2c_transfer(ms5637_address, true, 1, &command);
+    i2c_transfer(ms5637_address, I2C_TX, 1, &command, I2C_STOP);
 
     /* Read 7 calibration values from PROM */
     for(uint8_t prom_addr=0; prom_addr<7; prom_addr++)
     {
         command = 0xa0 | prom_addr;
-        i2c_transfer(ms5637_address, true, 1, &command);
-        i2c_transfer(ms5637_address, false, 2, buffer);
+        i2c_transfer(ms5637_address, I2C_TX, 1, &command, I2C_STOP);
+        i2c_transfer(ms5637_address, I2C_RX, 2, buffer, I2C_STOP);
         ms5637_prom[prom_addr] = (uint16_t)buffer[1] << 8 | buffer[0];
     }
 }
@@ -67,20 +70,20 @@ uint32_t get_pressure(void)
 
     /* Read D1 */
     command = 0x40; /* Read D1 with 256 oversampling */
-    i2c_transfer(ms5637_address, true, 1, &command);
+    i2c_transfer(ms5637_address, I2C_TX, 1, &command, I2C_STOP);
     delay_ms(1);
     command = 0x00; /* Read ADC */
-    i2c_transfer(ms5637_address, true, 1, &command);
-    i2c_transfer(ms5637_address, false, 3, buffer);
+    i2c_transfer(ms5637_address, I2C_TX, 1, &command, I2C_STOP);
+    i2c_transfer(ms5637_address, I2C_RX, 3, buffer, I2C_STOP);
     d1 = (uint32_t)buffer[2] << 16 | (uint32_t)buffer[1] << 8 | buffer[0];
 
     /* Read D2 */
     buffer[0] = 0x50; /* Read D2 with 256 oversampling */
-    i2c_transfer(ms5637_address, true, 1, &command);
+    i2c_transfer(ms5637_address, I2C_TX, 1, &command, I2C_STOP);
     delay_ms(1);
     command = 0x00; /* Read ADC */
-    i2c_transfer(ms5637_address, true, 1, &command);
-    i2c_transfer(ms5637_address, false, 3, buffer);
+    i2c_transfer(ms5637_address, I2C_TX, 1, &command, I2C_STOP);
+    i2c_transfer(ms5637_address, I2C_RX, 3, buffer, I2C_STOP);
     d2 = (uint32_t)buffer[2] << 16 | (uint32_t)buffer[1] << 8 | buffer[0];
 
     /* Difference between actual and reference temperature */

@@ -63,9 +63,14 @@
 #define I2C_ISR_BUSY (1<<15)
 #define I2C_ISR_DIR (1<<16)
 
+#define I2C_TX true
+#define I2C_RX false
+#define I2C_STOP true
+#define I2C_NOSTOP false
+
 
 void i2c_init(void);
 void i2c_transfer(uint8_t addr, bool transmit, uint8_t nbytes,
-                  uint8_t *buffer);
+                  uint8_t *buffer, bool stop);
 
 #endif
