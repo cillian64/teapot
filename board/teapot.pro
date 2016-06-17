@@ -1,4 +1,4 @@
-update=Fri 17 Jun 2016 14:26:05 BST
+update=Fri 17 Jun 2016 17:17:39 BST
 version=1
 last_client=kicad
 [pcbnew]
@@ -63,11 +63,8 @@ LibName31=parts/htu21d
 LibName32=parts/ms5637
 LibName33=parts/tept
 LibName34=parts/rfm69w
-LibName35=parts/sma
-LibName36=parts/testpoint
-LibName37=parts/swd
-LibName38=parts/tps79333dbvr
-LibName39=parts/tvs_small
-LibName40=agg-kicad/lib/connector/microusb
-LibName41=agg-kicad/lib/connector/swd_tc
-LibName42=agg-kicad/lib/ic/microcontroller/stm32f0xxcxux
+LibName35=parts/testpoint
+LibName36=parts/tvs_small
+LibName37=agg-kicad/lib/connector/microusb
+LibName38=agg-kicad/lib/connector/swd_tc
+LibName39=agg-kicad/lib/ic/microcontroller/stm32f0xxcxux
