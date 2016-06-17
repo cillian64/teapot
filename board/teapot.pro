@@ -1,4 +1,4 @@
-update=Fri 17 Jun 2016 17:36:36 BST
+update=Fri 17 Jun 2016 17:49:48 BST
 version=1
 last_client=kicad
 [pcbnew]
@@ -69,3 +69,4 @@ LibName37=agg-kicad/lib/connector/microusb
 LibName38=agg-kicad/lib/connector/swd_tc
 LibName39=agg-kicad/lib/ic/microcontroller/stm32f0xxcxux
 LibName40=parts/amg88
+LibName41=agg-kicad/lib/misc/part
