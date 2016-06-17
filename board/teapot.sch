@@ -395,37 +395,14 @@ RFM_MISO
 Text Label 8950 1450 0    60   ~ 0
 RFM_SCK
 $Comp
-L SMA P2
-U 1 1 5670BE45
-P 10050 1650
-F 0 "P2" H 10150 1550 60  0000 C CNN
-F 1 "SMA" H 10150 1750 60  0000 C CNN
-F 2 "footprints:SMA-142-0701-801" H 10050 1650 60  0001 C CNN
-F 3 "" H 10050 1650 60  0000 C CNN
-F 4 "1342651" H 10050 1650 60  0001 C CNN "Farnell"
-	1    10050 1650
-	1    0    0    -1  
-$EndComp
-$Comp
 L TestPoint TP1
 U 1 1 5670C17A
-P 9200 1650
-F 0 "TP1" H 9300 1700 60  0000 C CNN
-F 1 "ANT" H 9300 1600 60  0000 C CNN
-F 2 "footprints:Test_point" H 9200 1650 60  0001 C CNN
-F 3 "" H 9200 1650 60  0000 C CNN
-	1    9200 1650
-	1    0    0    -1  
-$EndComp
-$Comp
-L GND #PWR014
-U 1 1 5670C5C3
-P 9900 1900
-F 0 "#PWR014" H 9900 1650 50  0001 C CNN
-F 1 "GND" H 9900 1750 50  0000 C CNN
-F 2 "" H 9900 1900 50  0000 C CNN
-F 3 "" H 9900 1900 50  0000 C CNN
-	1    9900 1900
+P 9500 1650
+F 0 "TP1" H 9600 1700 60  0000 C CNN
+F 1 "ANT" H 9600 1600 60  0000 C CNN
+F 2 "footprints:Test_point" H 9500 1650 60  0001 C CNN
+F 3 "" H 9500 1650 60  0000 C CNN
+	1    9500 1650
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -780,13 +757,13 @@ $EndComp
 $Comp
 L TVS_small D3
 U 1 1 56787864
-P 9750 1750
-F 0 "D3" H 9750 1825 50  0000 C CNN
-F 1 "TVS_small" H 9750 1675 50  0001 C CNN
-F 2 "Resistors_SMD:R_0603" H 9750 1750 60  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/1772768.pdf" H 9750 1750 60  0001 C CNN
-F 4 "2368174" H 9750 1750 60  0001 C CNN "Farnell"
-	1    9750 1750
+P 9300 1750
+F 0 "D3" H 9300 1825 50  0000 C CNN
+F 1 "TVS_small" H 9300 1675 50  0001 C CNN
+F 2 "Resistors_SMD:R_0603" H 9300 1750 60  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/1772768.pdf" H 9300 1750 60  0001 C CNN
+F 4 "2368174" H 9300 1750 60  0001 C CNN "Farnell"
+	1    9300 1750
 	0    -1   -1   0   
 $EndComp
 Text Label 1650 5250 2    60   ~ 0
@@ -976,27 +953,6 @@ Wire Wire Line
 	9850 4050 10100 4050
 Connection ~ 9850 4050
 Wire Wire Line
-	8950 1650 9950 1650
-Wire Wire Line
-	9850 1550 9950 1550
-Wire Wire Line
-	9900 1550 9900 1500
-Wire Wire Line
-	9900 1500 9950 1500
-Connection ~ 9900 1550
-Wire Wire Line
-	9900 1750 9900 1900
-Wire Wire Line
-	9900 1800 9950 1800
-Connection ~ 9900 1750
-Connection ~ 9200 1650
-Wire Wire Line
-	9850 1550 9850 1750
-Connection ~ 9850 1750
-Connection ~ 9900 1800
-Wire Wire Line
-	9850 1750 9950 1750
-Wire Wire Line
 	8950 1550 9000 1550
 Wire Wire Line
 	9000 1550 9000 1850
@@ -1028,7 +984,7 @@ Wire Wire Line
 	7500 3150 7500 3250
 Wire Wire Line
 	7500 3250 7550 3250
-Connection ~ 9750 1650
+Connection ~ 9300 1650
 Wire Wire Line
 	1900 1050 1900 1500
 Wire Wire Line
@@ -1039,9 +995,6 @@ Connection ~ 2000 1450
 Connection ~ 2000 1650
 Wire Wire Line
 	2200 1650 2200 1850
-Wire Wire Line
-	9750 1850 9900 1850
-Connection ~ 9900 1850
 Wire Wire Line
 	1900 1050 2050 1050
 Connection ~ 1900 1450
@@ -1310,4 +1263,17 @@ F 3 "" H -3950 2500 50  0000 C CNN
 $EndComp
 Text Notes -4050 2800 0    60   ~ 0
 VBAT
+$Comp
+L GND #PWR?
+U 1 1 5764CF24
+P 9300 1850
+F 0 "#PWR?" H 9300 1600 50  0001 C CNN
+F 1 "GND" H 9305 1677 50  0000 C CNN
+F 2 "" H 9300 1850 50  0000 C CNN
+F 3 "" H 9300 1850 50  0000 C CNN
+	1    9300 1850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8950 1650 9500 1650
 $EndSCHEMATC
