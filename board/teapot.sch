@@ -241,36 +241,36 @@ $EndComp
 $Comp
 L R R4
 U 1 1 56708874
-P 5450 4050
-F 0 "R4" V 5550 4050 50  0000 C CNN
-F 1 "10k" V 5450 4050 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" V 5380 4050 50  0001 C CNN
-F 3 "" H 5450 4050 50  0000 C CNN
-F 4 "2447230" H 5450 4050 60  0001 C CNN "Farnell"
-	1    5450 4050
+P -1100 4550
+F 0 "R4" V -1000 4550 50  0000 C CNN
+F 1 "10k" V -1100 4550 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V -1170 4550 50  0001 C CNN
+F 3 "" H -1100 4550 50  0000 C CNN
+F 4 "2447230" H -1100 4550 60  0001 C CNN "Farnell"
+	1    -1100 4550
 	1    0    0    -1  
 $EndComp
 $Comp
 L R R3
 U 1 1 567088B5
-P 5350 4050
-F 0 "R3" V 5250 4050 50  0000 C CNN
-F 1 "10k" V 5350 4050 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" V 5280 4050 50  0001 C CNN
-F 3 "" H 5350 4050 50  0000 C CNN
-F 4 "2447230" H 5350 4050 60  0001 C CNN "Farnell"
-	1    5350 4050
+P -1200 4550
+F 0 "R3" V -1300 4550 50  0000 C CNN
+F 1 "10k" V -1200 4550 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V -1270 4550 50  0001 C CNN
+F 3 "" H -1200 4550 50  0000 C CNN
+F 4 "2447230" H -1200 4550 60  0001 C CNN "Farnell"
+	1    -1200 4550
 	1    0    0    1   
 $EndComp
 $Comp
 L +3V3 #PWR010
 U 1 1 56708996
-P 5400 3850
-F 0 "#PWR010" H 5400 3700 50  0001 C CNN
-F 1 "+3V3" H 5400 3990 50  0000 C CNN
-F 2 "" H 5400 3850 50  0000 C CNN
-F 3 "" H 5400 3850 50  0000 C CNN
-	1    5400 3850
+P -1150 4350
+F 0 "#PWR010" H -1150 4200 50  0001 C CNN
+F 1 "+3V3" H -1150 4490 50  0000 C CNN
+F 2 "" H -1150 4350 50  0000 C CNN
+F 3 "" H -1150 4350 50  0000 C CNN
+	1    -1150 4350
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -478,23 +478,23 @@ F 3 "" H 7800 2100 50  0000 C CNN
 $EndComp
 Text Notes 10300 2450 2    60   ~ 0
 RADIO
-Text Label 4650 4400 0    60   ~ 0
+Text Label -2100 4900 0    60   ~ 0
 I2C_SCK
-Text Label 1650 5150 2    60   ~ 0
+Text Label -2100 2800 0    60   ~ 0
 LIGHT_SENSE
-Text Label 4650 3500 0    60   ~ 0
+Text Label -2100 3700 0    60   ~ 0
 RFM_RESET
-Text Label 4650 4000 0    60   ~ 0
+Text Label -2100 3800 0    60   ~ 0
 RFM_NSS
-Text Label 4650 4100 0    60   ~ 0
+Text Label -2100 4600 0    60   ~ 0
 RFM_SCK
-Text Label 4650 4200 0    60   ~ 0
+Text Label -2100 4700 0    60   ~ 0
 RFM_MISO
-Text Label 4650 4300 0    60   ~ 0
+Text Label -2100 4800 0    60   ~ 0
 RFM_MOSI
-Text Label 1650 4850 2    60   ~ 0
+Text Label -2100 4300 0    60   ~ 0
 LED_YELLOW
-Text Label 1650 4950 2    60   ~ 0
+Text Label -2100 4400 0    60   ~ 0
 LED_GREEN
 Text Label 9500 5150 2    60   ~ 0
 LED_YELLOW
@@ -765,7 +765,7 @@ F 4 "2368174" H 9300 1750 60  0001 C CNN "Farnell"
 	1    9300 1750
 	0    -1   -1   0   
 $EndComp
-Text Label 1650 5250 2    60   ~ 0
+Text Label -2100 2700 0    60   ~ 0
 LIGHT_EN
 Text Label 9850 3350 2    60   ~ 0
 LIGHT_EN
@@ -783,7 +783,7 @@ F 4 "2447230" H 2200 1050 60  0001 C CNN "Farnell"
 $EndComp
 Text Label 2350 1050 0    60   ~ 0
 BATT_MON
-Text Label 1650 5050 2    60   ~ 0
+Text Label -2100 2500 0    60   ~ 0
 BATT_MON
 Text Notes 10050 6300 2    60   ~ 0
 Status LEDs
@@ -825,23 +825,23 @@ $EndComp
 $Comp
 L TestPoint TP4
 U 1 1 5684D483
-P 5350 4250
-F 0 "TP4" H 5225 4225 60  0000 C CNN
-F 1 "SCK" H 5250 4300 60  0000 C CNN
-F 2 "footprints:Test_point_mini" H 5350 4250 60  0001 C CNN
-F 3 "" H 5350 4250 60  0000 C CNN
-	1    5350 4250
+P -1200 4750
+F 0 "TP4" H -1325 4725 60  0000 C CNN
+F 1 "SCK" H -1300 4800 60  0000 C CNN
+F 2 "footprints:Test_point_mini" H -1200 4750 60  0001 C CNN
+F 3 "" H -1200 4750 60  0000 C CNN
+	1    -1200 4750
 	1    0    0    -1  
 $EndComp
 $Comp
 L TestPoint TP5
 U 1 1 5684D727
-P 5450 4250
-F 0 "TP5" H 5550 4225 60  0000 C CNN
-F 1 "SDA" H 5550 4300 60  0000 C CNN
-F 2 "footprints:Test_point_mini" H 5450 4250 60  0001 C CNN
-F 3 "" H 5450 4250 60  0000 C CNN
-	1    5450 4250
+P -1100 4750
+F 0 "TP5" H -1000 4725 60  0000 C CNN
+F 1 "SDA" H -1000 4800 60  0000 C CNN
+F 2 "footprints:Test_point_mini" H -1100 4750 60  0001 C CNN
+F 3 "" H -1100 4750 60  0000 C CNN
+	1    -1100 4750
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -906,14 +906,6 @@ F 3 "" H -4950 2500 50  0000 C CNN
 	1    -4950 2500
 	1    0    0    -1  
 $EndComp
-Text Label 7850 1550 2    60   ~ 0
-RFM_DIO4
-Text Label 7850 1150 2    60   ~ 0
-RFM_DIO0
-Text Label 4650 3300 0    60   ~ 0
-RFM_DIO0
-Text Label 4650 3400 0    60   ~ 0
-RFM_DIO4
 $Comp
 L STM32F0xxCxUx IC101
 U 1 1 57641C61
@@ -1020,7 +1012,7 @@ Text Notes -4550 2800 0    60   ~ 0
 VDDA
 Text Notes -5050 2800 0    60   ~ 0
 VDD
-Text Label 4650 4500 0    60   ~ 0
+Text Label -2100 5000 0    60   ~ 0
 I2C_SDA
 $Comp
 L C C101
@@ -1300,10 +1292,10 @@ Wire Wire Line
 Wire Wire Line
 	9900 5150 9900 5300
 Wire Wire Line
-	5400 3850 5400 3900
+	-1150 4350 -1150 4400
 Wire Wire Line
-	5350 3900 5450 3900
-Connection ~ 5400 3900
+	-1200 4400 -1100 4400
+Connection ~ -1150 4400
 Connection ~ 7300 3450
 Wire Wire Line
 	7300 3150 7500 3150
@@ -1372,8 +1364,8 @@ Wire Notes Line
 Wire Notes Line
 	7300 2350 7300 900 
 Connection ~ 4200 1450
-Connection ~ 5450 4250
-Connection ~ 5350 4250
+Connection ~ -1100 4750
+Connection ~ -1200 4750
 Wire Wire Line
 	3500 5325 3550 5325
 Wire Wire Line
@@ -1384,13 +1376,13 @@ Wire Wire Line
 	-4050 3900 -4050 4100
 Connection ~ -4950 2200
 Wire Wire Line
-	5350 4200 5350 4400
+	-1200 4900 -1200 4700
 Wire Wire Line
-	5350 4400 4650 4400
+	-2100 4900 -1200 4900
 Wire Wire Line
-	5450 4200 5450 4500
+	-1100 5000 -1100 4700
 Wire Wire Line
-	5450 4500 4650 4500
+	-2100 5000 -1100 5000
 Connection ~ -3600 3900
 Connection ~ -3600 4100
 Connection ~ 7600 1750
@@ -1465,4 +1457,8 @@ Wire Wire Line
 	-1250 7200 -1250 7750
 Wire Wire Line
 	-1600 7300 -1600 7450
+NoConn ~ 7850 1150
+NoConn ~ 7850 1550
+Text Label -2100 5200 0    60   ~ 0
+AMG88_INT
 $EndSCHEMATC
