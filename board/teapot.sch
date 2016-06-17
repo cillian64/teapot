@@ -1459,6 +1459,6 @@ Wire Wire Line
 	-1600 7300 -1600 7450
 NoConn ~ 7850 1150
 NoConn ~ 7850 1550
-Text Label -2100 5200 0    60   ~ 0
+Text Label -2900 3800 2    60   ~ 0
 AMG88_INT
 $EndSCHEMATC
