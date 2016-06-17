@@ -33,14 +33,12 @@ LIBS:htu21d
 LIBS:ms5637
 LIBS:tept
 LIBS:rfm69w
-LIBS:sma
 LIBS:testpoint
-LIBS:swd
-LIBS:tps79333dbvr
 LIBS:tvs_small
 LIBS:microusb
 LIBS:swd_tc
 LIBS:stm32f0xxcxux
+LIBS:amg88
 LIBS:teapot-cache
 EELAYER 25 0
 EELAYER END
@@ -1276,4 +1274,16 @@ F 3 "" H 9300 1850 50  0000 C CNN
 $EndComp
 Wire Wire Line
 	8950 1650 9500 1650
+$Comp
+L AMG88 U?
+U 1 1 57642B50
+P -3100 7400
+F 0 "U?" H -3125 7947 60  0000 C CNN
+F 1 "AMG88" H -3125 7841 60  0000 C CNN
+F 2 "footprints:AMG88" H -3150 7800 60  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/1995912.pdf" H -3150 7800 60  0001 C CNN
+F 4 "2481446" H -3100 7400 60  0001 C CNN "Farnell"
+	1    -3100 7400
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
