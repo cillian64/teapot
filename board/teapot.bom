@@ -2,7 +2,7 @@ Bill Of Materials
 =================
 
 Source file: teapot.xml
-Date: 2016-02-11T17:55:27.916024
+Date: 2016-06-26T22:06:35.621016
 
 Parts Missing Footprints
 ------------------------
@@ -10,15 +10,18 @@ Parts Missing Footprints
 
 Parts Missing Order Codes
 -------------------------
-U4     RFM69W          footprints:RFM69
 TP1    ANT             footprints:Test_point
-U8     SWD             footprints:SWD
-C4     10n             Capacitors_SMD:C_0603
 TP2    3v3             footprints:Test_point
 TP3    GND             footprints:Test_point
 TP4    SCK             footprints:Test_point_mini
 TP5    SDA             footprints:Test_point_mini
 P3     SWD_TC          agg:TC2030-NL
+X103   PART            Mounting_Holes:MountingHole_2.7mm_M2.5
+X101   PART            Mounting_Holes:MountingHole_2.7mm_M2.5
+X102   PART            Mounting_Holes:MountingHole_2.7mm_M2.5
+X104   PART            Mounting_Holes:MountingHole_2.7mm_M2.5
+X105   PART            footprints:teapot
+P101   SMA             footprints:SMA-142-0701-801
 
 Inconsistent Order Codes
 ------------------------
@@ -29,24 +32,24 @@ Vendor Specific BOMs
   Farnell
   ~~~~~~~
 2290331,1,1x GREEN LED_0805
-1470478,1,1x TPS79333DBVR SOT-23-5
+9330798,1,1x 20R R_0603
 432210,8,8x 100n C_0603
+2099242,1,1x YELLOW LED_0805
 1702629,1,1x BATT AA_holder
+2469557,1,1x STM32F0xxCxUx QFN-48-EP-ST
 1759055,2,2x 15p C_0603
-9233385,3,3x 1k R_0603
-2488333,1,1x STM32L052K6T6 LQFP32_ST
+9233385,2,2x 1k R_0603
 2362663,1,1x MS5637 MS563702
 2470318,1,1x 4u7 Inductor_1212
+2211176,1,1x 1.5uF C_0603
 2494230,5,5x 10u C_0603
-2099241,1,1x RED LED_0805
+2481446,1,1x AMG88 AMG88
 2492362,1,1x TLV61225 SC-70
 2393536,1,1x HTU21D HTU21D
-1342651,1,1x SMA SMA-142-0701-801
-1568023,1,1x MICROUSB MICROUSB_MOLEX_475
 2447230,4,4x 10k R_0603
 SC12389,1,1x TEPT4400 LED-3MM
-2496916,1,1x 1u C_0603
-2099242,1,1x YELLOW LED_0805
+2496916,2,2x 1u C_0603
+RF00489,1,1x RFM69W RFM69
 2101347,1,1x 32.768k XTAL_1206
 2368174,2,2x TVS_small R_0603
 
@@ -54,24 +57,24 @@ SC12389,1,1x TEPT4400 LED-3MM
 Assembly BOM
 ------------
 2290331              1   GREEN           LED_0805        D4
-1470478              1   TPS79333DBVR    SOT-23-5        U1
-432210               8   100n            C_0603          C10 C11 C13 C14 C15 C17 C2 C7
+9330798              1   20R             R_0603          R101
+432210               8   100n            C_0603          C10 C101 C11 C13 C14 C15 C17 C7
+2099242              1   YELLOW          LED_0805        D5
 1702629              1   BATT            AA_holder       P1
+2469557              1   STM32F0xxCxUx   QFN-48-EP-ST    IC101
 1759055              2   15p             C_0603          C8 C9
-9233385              3   1k              R_0603          R2 R5 R6
-2488333              1   STM32L052K6T6   LQFP32_ST       U5
+9233385              2   1k              R_0603          R5 R6
 2362663              1   MS5637          MS563702        U7
 2470318              1   4u7             Inductor_1212   L1
-2494230              5   10u             C_0603          C1 C16 C3 C5 C6
-2099241              1   RED             LED_0805        D2
+2211176              1   1.5uF           C_0603          C103
+2494230              5   10u             C_0603          C1 C104 C16 C3 C6
+2481446              1   AMG88           AMG88           U101
 2492362              1   TLV61225        SC-70           U2
 2393536              1   HTU21D          HTU21D          U6
-1342651              1   SMA             SMA-142-0701-801 P2
-1568023              1   MICROUSB        MICROUSB_MOLEX_47589-0001 J1
 2447230              4   10k             R_0603          R1 R3 R4 R7
 SC12389              1   TEPT4400        LED-3MM         Q1
-2496916              1   1u              C_0603          C12
-2099242              1   YELLOW          LED_0805        D5
+2496916              2   1u              C_0603          C102 C12
+RF00489              1   RFM69W          RFM69           U4
 2101347              1   32.768k         XTAL_1206       Y1
 2368174              2   TVS_small       R_0603          D1 D3
 
