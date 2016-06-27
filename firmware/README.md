@@ -1,39 +1,7 @@
-# Toolchain
-This firmware uses the
-[gcc-arm-embedded](https://launchpad.net/gcc-arm-embedded) toolchain
-recommended by libopencm3.  It can be installed on recent Ubuntu:
-
-`sudo add-apt-repository ppa:team-gcc-arm-embedded/ppa`
-
-`sudo apt-get update`
-
-`sudo apt-get install gcc-arm-embedded`
-
-# Submodules
-Check out the correct version of libopencm3:
-
-`git submodule update --init`
-
-# Building, flashing, and debugging
-Before doing anything else, build libopencm3:
-
-`cd libopencm3`
-
-`make`
-
-`cd ..`
-
-Then build and flash the firmware:
-
-`make`
-
-`make flash`
-
-To debug:
-
-`make debug`
-
-# Sources
-* `teapot.c` contains the start point, `main()`.
-* `teapot_pins.h` contains pin assignments on the board, while `teapot_pins.h`
-  contains the setup function which assigns pin modes.
+# Firmware
+* `r2` is the first firmware revision written in libopencm3 for the original
+  L0 teapot boards, marked r2.
+* `r2_5` is the firmware for the original teapot boards with an F0 retrofitted.
+  This is still the r2 PCB, but with a different STM32 fitted.
+* `r3` is the firmware for the new r3 PCBs with an F0, no USB, and the
+  Panasonic Grid-eye AMG88 thermopile array.
