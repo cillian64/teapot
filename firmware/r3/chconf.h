@@ -140,7 +140,7 @@
  *
  * @note    The default is @p TRUE.
  */
-#define CH_CFG_USE_TM                       TRUE
+#define CH_CFG_USE_TM                       FALSE
 
 /**
  * @brief   Threads registry APIs.
@@ -319,7 +319,7 @@
  *
  * @note    The default is @p FALSE.
  */
-#define CH_DBG_STATISTICS                   TRUE
+#define CH_DBG_STATISTICS                   FALSE
 
 /**
  * @brief   Debug option, system state check.
@@ -355,7 +355,7 @@
  *
  * @note    The default is @p CH_DBG_TRACE_MASK_DISABLED.
  */
-#define CH_DBG_TRACE_MASK                   CH_DBG_TRACE_MASK_ENABLED
+#define CH_DBG_TRACE_MASK                   CH_DBG_TRACE_MASK_ALL
 
 /**
  * @brief   Trace buffer entries.
@@ -395,7 +395,7 @@
  * @note    This debug option is not currently compatible with the
  *          tickless mode.
  */
-#define CH_DBG_THREADS_PROFILING            TRUE
+#define CH_DBG_THREADS_PROFILING            FALSE
 
 /** @} */
 
