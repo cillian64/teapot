@@ -18,6 +18,8 @@
 #include "hal.h"
 #include "ch_test.h"
 
+#include "analog.h"
+
 /*
  * Blue LED blinker thread, times are in milliseconds.
  */
@@ -68,8 +70,15 @@ int main(void) {
   /*
    * Creates the blinker threads.
    */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
-  chThdCreateStatic(waThread2, sizeof(waThread2), NORMALPRIO, Thread2, NULL);
+//  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+//  chThdCreateStatic(waThread2, sizeof(waThread2), NORMALPRIO, Thread2, NULL);
+
+  palClearLine(LINE_LED_YELLOW);
+  palClearLine(LINE_LED_GREEN);
+
+  /* Create analog thread */
+  chThdCreateStatic(waThreadAnalog, sizeof(waThreadAnalog), NORMALPRIO,
+                    ThreadAnalog, NULL);
 
   /*
    * Normal main() thread activity, in this demo it does nothing except
