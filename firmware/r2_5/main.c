@@ -18,6 +18,8 @@
 #include "hal.h"
 #include "ch_test.h"
 
+#include "rfm69.h"
+
 /*
  * Green LED blinker thread, times are in milliseconds.
  */
@@ -29,10 +31,8 @@ static THD_FUNCTION(Thread1, arg) {
 
   while (true) {
     palClearLine(LINE_LED_GREEN);
-    palSetLine(LINE_LED_YELLOW);
     chThdSleepMilliseconds(500);
     palSetLine(LINE_LED_GREEN);
-    palClearLine(LINE_LED_YELLOW);
     chThdSleepMilliseconds(500);
   }
 }
@@ -52,15 +52,14 @@ int main(void) {
   halInit();
   chSysInit();
 
-  /*
-   * Creates the blinker thread.
-   */
+  /* LED heartbeat thread */
   chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
-  /*
-   * Normal main() thread activity, in this demo it does nothing except
-   * sleeping in a loop and check the button state.
-   */
+  /* Clear errors */
+  palClearLine(LINE_LED_YELLOW);
+
+  rfm69_init();
+
   while (true) {
     chThdSleepMilliseconds(500);
   }
