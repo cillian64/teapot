@@ -19,6 +19,7 @@
 #include "ch_test.h"
 
 #include "rfm69.h"
+#include "ukhasnet.h"
 
 /*
  * Green LED blinker thread, times are in milliseconds.
@@ -58,9 +59,15 @@ int main(void) {
   /* Clear errors */
   palClearLine(LINE_LED_YELLOW);
 
-  rfm69_init();
+  ukhasnet_radio_init();
+
+  uint8_t packet_buf[70];
+  uint8_t packet_len;
+  packet_len = makepacket(packet_buf, 70, 'a', "DERP1",
+                          false, 0, false, 0, false, 0, false, 0, false, 0);
 
   while (true) {
-    chThdSleepMilliseconds(500);
+    chThdSleepMilliseconds(1000);
+    rfm69_transmit(packet_buf, packet_len);
   }
 }

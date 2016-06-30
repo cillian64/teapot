@@ -114,7 +114,10 @@ CSRC = $(STARTUPSRC) \
        $(BOARDSRC) \
        $(TESTSRC) \
        main.c \
-       analog.c
+       analog.c \
+       ../common/rfm69.c \
+       ../common/ukhasnet.c \
+       ../common/util.c
 
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
@@ -148,7 +151,8 @@ ASMXSRC = $(STARTUPASM) $(PORTASM) $(OSALASM)
 INCDIR = $(CHIBIOS)/os/license \
          $(STARTUPINC) $(KERNINC) $(PORTINC) $(OSALINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) $(TESTINC) \
-         $(CHIBIOS)/os/various
+         $(CHIBIOS)/os/various \
+         ../common/
 
 #
 # Project, sources and paths

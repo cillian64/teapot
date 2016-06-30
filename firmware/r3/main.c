@@ -19,6 +19,8 @@
 #include "ch_test.h"
 
 #include "analog.h"
+#include "rfm69.h"
+#include "ukhasnet.h"
 
 /*
  * Blue LED blinker thread, times are in milliseconds.
@@ -76,6 +78,8 @@ int main(void) {
   palClearLine(LINE_LED_YELLOW);
   palClearLine(LINE_LED_GREEN);
 
+  ukhasnet_radio_init();
+
   /* Create analog thread */
   chThdCreateStatic(waThreadAnalog, sizeof(waThreadAnalog), NORMALPRIO,
                     ThreadAnalog, NULL);
@@ -86,7 +90,12 @@ int main(void) {
    * pressed the test procedure is launched with output on the serial
    * driver 1.
    */
+
+  const char *packet = "3aX1337:hello[DERP2]";
+
   while (true) {
-    chThdSleepMilliseconds(500);
+    chThdSleepMilliseconds(1000);
+    rfm69_transmit(packet, 20);
+    
   }
 }

@@ -6,6 +6,29 @@
 
 const uint8_t number_hops = 3;
 
+/* Setup the RFM69 for UKHASnet operation */
+void ukhasnet_radio_init(void)
+{
+    rfm69_init();
+
+    /* Fstep = Fxosc / 2^19 = 32e6 / 2^19
+     * FRF = freq / (32e6 / 2^19)
+           = 869.5 / 32 * 2^19 = 14245888 */
+    rfm69_setfreq(14245888);
+
+    rfm69_setpower(2); /* Transmit power, in dBm */
+
+    /* Shift: 24kHz.  fdev = 24e3/fstep = 24e3/61 = 393
+     * 2000-baud: bitrate = fxosc / 2000 = 32e6/2000 = 16000 */
+    rfm69_physetup(393, 16000);
+
+    /* 3-byte preamble of 0xAA, 0xAA, 0xAA
+     * 2-byte sync of 0x2D, 0xAA */
+    uint8_t syncvalue[2] = {0x2d, 0xaa};
+    rfm69_packetsetup(true, 3, 2, syncvalue, false, false, true);
+}
+
+
 /* Generate a ukhasnet packet in buf, with maximum length buf_len.
  * Return the length of the packet generated */
 uint8_t makepacket(char *buf, uint8_t buf_len,

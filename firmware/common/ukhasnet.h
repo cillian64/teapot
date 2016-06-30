@@ -4,6 +4,9 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+/* Setup the RFM69 for UKHASnet operation */
+void ukhasnet_radio_init(void);
+
 /* Generate a ukhasnet packet in buf, with maximum length buf_len.
  * Return the length of the packet generated */
 uint8_t makepacket(char *buf, uint8_t buf_len,
