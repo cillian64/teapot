@@ -23,6 +23,9 @@
 #include "ukhasnet.h"
 #include "grid-eye.h"
 
+#include <stdio.h>
+#include <string.h>
+
 /*
  * Blue LED blinker thread, times are in milliseconds.
  */
@@ -63,6 +66,15 @@ static const I2CConfig i2cconfig = {
     0,      // CR2
 };
 
+void initialise_monitor_handles(void);
+
+/* Puts with no newline */
+void puts_non(char *str);
+void puts_non(char *str)
+{
+    for(uint32_t i=0; i<strlen(str); i++)
+        putchar(str[i]);
+}
 
 int main(void)
 {
@@ -76,11 +88,32 @@ int main(void)
 
     uint16_t pixels[64];
 
+    initialise_monitor_handles();
+    setbuf(stdout, NULL);
+
     while (true)
     {
+        char str[32];
+        chThdSleepMilliseconds(1000);
         grideye_get(pixels);
 
-        palToggleLine(LINE_LED_GREEN);
-        chThdSleepMilliseconds(pixels[5]*4);
+        puts_non("\033[2J");
+        for(uint8_t row=0; row<8; row++)
+        {
+            for(uint8_t col=0; col<8; col++)
+            {
+                uint8_t i = row*8 + col;
+                str[0] = '0';
+                if(pixels[i] < 100)
+                    itoa(pixels[i], str+1, 10);
+                else
+                    itoa(pixels[i], str, 10);
+                    
+                puts_non(str);
+                putchar(' ');
+
+            }
+            putchar('\n');
+        }
     }
 }

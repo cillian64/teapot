@@ -28,6 +28,14 @@ void grideye_get(uint16_t *pixels)
     if(result != MSG_OK)
         panic();
 
+    /* With the teapot mounted radio-side-up (silk correct orientation)
+     * the grid-eye is also correctly orientated, window at the top.
+     * Pixels are ordered right-to-left then bottom-to-top.
+     * Ideally we want pixels in standard image/reading order,
+     * left-to-right then top-to-bottom.
+     * To do this we just reverse the pixel order. (Alternatively the teapot
+     * could be inverted */
+
     for(uint8_t i=0; i<64; i++)
         pixels[i] = rx_buf[2*i] | ((uint16_t)rx_buf[2*i + 1] << 8);
 }

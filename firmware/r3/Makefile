@@ -215,7 +215,7 @@ UINCDIR =
 ULIBDIR =
 
 # List all user libraries here
-ULIBS =
+ULIBS = --specs=rdimon.specs -lm -lc -lrdimon
 
 #
 # End of user defines
