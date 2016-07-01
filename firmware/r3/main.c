@@ -23,8 +23,10 @@
 #include "ukhasnet.h"
 #include "grid-eye.h"
 
+#ifdef SEMIHOSTING
 #include <stdio.h>
 #include <string.h>
+#endif
 
 /*
  * Blue LED blinker thread, times are in milliseconds.
@@ -88,8 +90,10 @@ int main(void)
 
     uint16_t pixels[64];
 
+#ifdef SEMIHOSTING
     initialise_monitor_handles();
     setbuf(stdout, NULL);
+#endif
 
     while (true)
     {
@@ -97,6 +101,7 @@ int main(void)
         chThdSleepMilliseconds(1000);
         grideye_get(pixels);
 
+#ifdef SEMIHOSTING
         puts_non("\033[2J");
         for(uint8_t row=0; row<8; row++)
         {
@@ -115,5 +120,6 @@ int main(void)
             }
             putchar('\n');
         }
+#endif
     }
 }

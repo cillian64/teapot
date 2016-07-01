@@ -202,9 +202,6 @@ CPPWARN = -Wall -Wextra -Wundef
 # Start of user section
 #
 
-# List all user C define here, like -D_DEBUG=1
-UDEFS =
-
 # Define ASM defines here
 UADEFS =
 
@@ -214,8 +211,10 @@ UINCDIR =
 # List the user directory to look for the libraries here
 ULIBDIR =
 
-# List all user libraries here
+# Semihosting:
+# Comment following two lines to disable:
 ULIBS = --specs=rdimon.specs -lm -lc -lrdimon
+UDEFS = -D_SEMIHOSTING
 
 #
 # End of user defines
