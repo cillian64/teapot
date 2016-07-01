@@ -22,6 +22,7 @@
 #include "rfm69.h"
 #include "ukhasnet.h"
 #include "grid-eye.h"
+#include "sensors.h"
 
 #ifdef SEMIHOSTING
 #include <stdio.h>
@@ -63,11 +64,12 @@ static THD_FUNCTION(Thread2, arg)
 }
 
 static const I2CConfig i2cconfig = {
-    0,      // TIMINGR
+    1<<31 | 1<<30 | 1<<29 | 1<<28, // TIMINGR
     0,      // CR1
     0,      // CR2
 };
 
+#ifdef SEMIHOSTING
 void initialise_monitor_handles(void);
 
 /* Puts with no newline */
@@ -77,6 +79,7 @@ void puts_non(char *str)
     for(uint32_t i=0; i<strlen(str); i++)
         putchar(str[i]);
 }
+#endif
 
 int main(void)
 {
@@ -93,33 +96,18 @@ int main(void)
 #ifdef SEMIHOSTING
     initialise_monitor_handles();
     setbuf(stdout, NULL);
+    puts("Hello, world.");
 #endif
 
     while (true)
     {
-        char str[32];
         chThdSleepMilliseconds(1000);
-        grideye_get(pixels);
 
 #ifdef SEMIHOSTING
-        puts_non("\033[2J");
-        for(uint8_t row=0; row<8; row++)
-        {
-            for(uint8_t col=0; col<8; col++)
-            {
-                uint8_t i = row*8 + col;
-                str[0] = '0';
-                if(pixels[i] < 100)
-                    itoa(pixels[i], str+1, 10);
-                else
-                    itoa(pixels[i], str, 10);
-                    
-                puts_non(str);
-                putchar(' ');
-
-            }
-            putchar('\n');
-        }
+        volatile uint32_t pressure = get_pressure();
+        char str[32];
+        itoa(pressure, str, 10);
+        puts(str);
 #endif
     }
 }

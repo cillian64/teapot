@@ -116,6 +116,7 @@ CSRC = $(STARTUPSRC) \
        main.c \
        analog.c \
        grid-eye.c \
+       sensors.c \
        ../common/rfm69.c \
        ../common/ukhasnet.c \
        ../common/util.c
@@ -214,7 +215,7 @@ ULIBDIR =
 # Semihosting:
 # Comment following two lines to disable:
 ULIBS = --specs=rdimon.specs -lm -lc -lrdimon
-UDEFS = -D_SEMIHOSTING
+UDEFS = -DSEMIHOSTING
 
 #
 # End of user defines
