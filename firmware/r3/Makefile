@@ -115,6 +115,7 @@ CSRC = $(STARTUPSRC) \
        $(TESTSRC) \
        main.c \
        analog.c \
+       grid-eye.c \
        ../common/rfm69.c \
        ../common/ukhasnet.c \
        ../common/util.c
