@@ -80,10 +80,6 @@ int main(void) {
 
   ukhasnet_radio_init();
 
-  /* Create analog thread */
-  chThdCreateStatic(waThreadAnalog, sizeof(waThreadAnalog), NORMALPRIO,
-                    ThreadAnalog, NULL);
-
   /*
    * Normal main() thread activity, in this demo it does nothing except
    * sleeping in a loop and check the button state, when the button is
