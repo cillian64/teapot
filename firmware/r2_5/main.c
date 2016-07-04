@@ -17,9 +17,11 @@
 #include "ch.h"
 #include "hal.h"
 #include "ch_test.h"
+#include "chprintf.h"
 
 #include "rfm69.h"
 #include "ukhasnet.h"
+#include "usbcfg.h"
 
 /*
  * Green LED blinker thread, times are in milliseconds.
@@ -38,9 +40,7 @@ static THD_FUNCTION(Thread1, arg) {
   }
 }
 
-/*
- * Application entry point.
- */
+
 int main(void) {
 
   /*
@@ -61,8 +61,19 @@ int main(void) {
 
   ukhasnet_radio_init();
 
+  /* Start up USB-serial driver */
+  sduObjectInit(&SDU1);
+  sduStart(&SDU1, &serusbcfg);
+
+  /* Activate USB driver and bus pull-up on D+.  The delay means we don't have
+   * to disconnect the cable after a reset. */
+  usbDisconnectBus(serusbcfg.usbp);
+  chThdSleepMilliseconds(1500);
+  usbStart(serusbcfg.usbp, &usbcfg);
+  usbConnectBus(serusbcfg.usbp);
 
   while (true) {
     chThdSleepMilliseconds(1000);
+    chprintf(&SDU1, "Hello, USB!\n");
   }
 }
