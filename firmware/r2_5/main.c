@@ -31,10 +31,10 @@ static THD_FUNCTION(Thread1, arg) {
   chRegSetThreadName("blinker");
 
   while (true) {
-    palClearLine(LINE_LED_GREEN);
-    chThdSleepMilliseconds(500);
     palSetLine(LINE_LED_GREEN);
-    chThdSleepMilliseconds(500);
+    chThdSleepMilliseconds(50);
+    palClearLine(LINE_LED_GREEN);
+    chThdSleepMilliseconds(950);
   }
 }
 
@@ -61,13 +61,8 @@ int main(void) {
 
   ukhasnet_radio_init();
 
-  uint8_t packet_buf[70];
-  uint8_t packet_len;
-  packet_len = makepacket(packet_buf, 70, 'a', "DERP1",
-                          false, 0, false, 0, false, 0, false, 0, false, 0);
 
   while (true) {
     chThdSleepMilliseconds(1000);
-    rfm69_transmit(packet_buf, packet_len);
   }
 }
