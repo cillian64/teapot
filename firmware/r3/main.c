@@ -92,6 +92,8 @@ int main(void) {
   while (true) {
     chThdSleepMilliseconds(1000);
     rfm69_transmit(packet, 20);
-    
+    palSetLine(LINE_LED_GREEN);
+    chThdSleepMilliseconds(50);
+    palClearLine(LINE_LED_GREEN);
   }
 }
