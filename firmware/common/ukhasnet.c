@@ -3,6 +3,7 @@
 
 #include "ukhasnet.h"
 #include "util.h"
+#include "rfm69.h"
 
 const uint8_t number_hops = 3;
 
