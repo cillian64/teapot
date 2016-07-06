@@ -72,8 +72,21 @@ int main(void) {
   usbStart(serusbcfg.usbp, &usbcfg);
   usbConnectBus(serusbcfg.usbp);
 
+  uint8_t rxbuf[64];
+  uint8_t packet_len;
+
   while (true) {
-    chThdSleepMilliseconds(1000);
-    chprintf(&SDU1, "Hello, USB!\n");
+    packet_len = rfm69_receive(rxbuf, 64);
+
+#ifndef GATEWAY
+    /* Append a NULL character so we can use printf as a string */
+    rx_buf[packet_len] = '\0';
+    chprintf(&SDU1, "%s\n", rx_buf);
+#endif
+
+#ifdef REPEATER
+    packet_len = ukhasnet_addhop(rxbuf, packet_len, "TEA0", 64);
+    ukhasnet_transmit(rxbuf, packet_len);
+#endif
   }
 }
