@@ -17,4 +17,12 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
                    bool has_press, uint32_t press,       /* Pressure, pascal */
                    bool has_light, uint8_t light);      /* Light sensor */
 
+/* Add a hop to the hops field of a packet.
+ * packet_len is the old length of the packet, including the terminating ']'
+ * We return the new length of the packet, including the terminating ']'.
+ * If the extended packet won't fit in the buffer length, buf_len, we panic
+ * node_name should be a null-terminated string. */
+uint8_t ukhasnet_addhop(uint8_t *buf, uint8_t packet_len, char *node_name,
+                        uint8_t buf_len);
+
 #endif

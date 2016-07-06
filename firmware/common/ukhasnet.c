@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdint.h>
+#include <string.h>
 
 #include "ukhasnet.h"
 #include "util.h"
@@ -135,3 +136,31 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
     return length;
 }
 
+/* Add a hop to the hops field of a packet.
+ * packet_len is the old length of the packet, including the terminating ']'
+ * We return the new length of the packet, including the terminating ']'.
+ * If the extended packet won't fit in the buffer length, buf_len, we panic.
+ * node_name should be a null-terminated string. */
+uint8_t ukhasnet_addhop(uint8_t *buf, uint8_t packet_len, char *node_name,
+                        uint8_t buf_len)
+{
+    uint8_t new_packet_len = packet_len + strlen(node_name);
+    if(new_packet_len > buf_len)
+        panic();
+
+    /* The end of the packet will look like [node1,node2]
+     * We overwrite the final ] with a ',' then append node_name and a ]
+     */
+    if(buf[packet_len - 1] != ']')
+        panic();
+    buf[packet_len - 1] = ',';
+
+    /* Append the node_name.  Use memcpy not strcpy because the buf is
+     * not necessarily very string-like */
+    memcpy(buf + packet_len, node_name, strlen(node_name));
+
+    /* Now append the final closing ']' */
+    buf[new_packet_len - 1] = ']';
+
+    return new_packet_len;
+}
