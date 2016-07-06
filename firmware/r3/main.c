@@ -90,6 +90,7 @@ int main(void)
     palClearLine(LINE_LED_GREEN);
 
     i2cStart(&I2CD1, &i2cconfig);
+    ukhasnet_radio_init();
 
     uint16_t pixels[64];
 
@@ -102,12 +103,5 @@ int main(void)
     while (true)
     {
         chThdSleepMilliseconds(1000);
-
-#ifdef SEMIHOSTING
-        volatile uint32_t pressure = get_pressure();
-        char str[32];
-        itoa(pressure, str, 10);
-        puts(str);
-#endif
     }
 }

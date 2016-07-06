@@ -85,7 +85,7 @@
 void rfm69_init(void);
 void rfm69_setfreq(uint32_t frf);
 void rfm69_transmit(uint8_t *buf, uint8_t len);
-void rfm69_receive(uint8_t *buf, uint8_t len);
+uint8_t rfm69_receive(uint8_t *buf, uint8_t max_len);
 void rfm69_setpower(int8_t power);
 void rfm69_physetup(uint16_t fdev, uint16_t bitrate);
 void rfm69_packetsetup(bool variablelength, uint16_t preamblelength,

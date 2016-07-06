@@ -220,11 +220,44 @@ void rfm69_transmit(uint8_t *buf, uint8_t len)
     while(_rfm69_getmode() != RFM69_OPMODE_STDBY);
 }
 
-/* Receive `len' bytes into buffer `buf'.  This function
- * is synchronous - it will not return until reception is complete */
-void rfm69_receive(uint8_t *buf, uint8_t len)
+/* Receive bytes into buffer 'buf'.
+ * This function is syncronous -- it will not return until a successful
+ * reception has completed.
+ * maxlen is the length of the buffer -- if we receive a packet bigger than
+ * this, we will panic.  We return the length of a received packet. */
+uint8_t rfm69_receive(uint8_t *buf, uint8_t max_len)
 {
-    panic();
+    uint8_t packet_len;
+
+    /* Mode change to RX and wait for effect */
+    _rfm69_setmode(RFM69_OPMODE_RX);
+    while(_rfm69_getmode() != RFM69_OPMODE_RX);
+
+    /* Wait for packet reception */
+    while(true)
+    {
+        /* If we receive a packet, break out and handle it: */
+        if(_rfm69_readreg(RFM69_REGIRQFLAGS2)
+           & RFM69_REGIRQFLAGS2_PAYLOADREADY)
+            break;
+
+        /* If we have stopped receiving because of a timeout, begin receiving
+         * again: */
+        if(_rfm69_getmode() != RFM69_OPMODE_RX)
+        {
+            _rfm69_setmode(RFM69_OPMODE_RX);
+            while(_rfm69_getmode() != RFM69_OPMODE_RX);
+        }
+    }
+    /* Packet received okay. Retrieve packet length and check it fits */
+    packet_len = _rfm69_readreg(RFM69_REGPAYLOADLENGTH);
+    if(packet_len > max_len)
+        panic();
+
+    /* Now read it back into the buffer */
+    _rfm69_bulkread(RFM69_REGFIFO, buf, packet_len);
+
+    return packet_len;
 }
 
 /* Set the transmit power.  `power' is a power in dBm from +2dBm to +17dBm */
