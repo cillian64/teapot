@@ -72,11 +72,15 @@ int main(void) {
   usbStart(serusbcfg.usbp, &usbcfg);
   usbConnectBus(serusbcfg.usbp);
 
-  uint8_t rxbuf[64];
+  uint8_t rx_buf[64];
   uint8_t packet_len;
 
   while (true) {
-    packet_len = rfm69_receive(rxbuf, 64);
+    packet_len = rfm69_receive(rx_buf, 64);
+
+    palSetLine(LINE_LED_GREEN);
+    chThdSleepMilliseconds(50);
+    palClearLine(LINE_LED_GREEN);
 
 #ifndef GATEWAY
     /* Append a NULL character so we can use printf as a string */
@@ -85,8 +89,8 @@ int main(void) {
 #endif
 
 #ifdef REPEATER
-    packet_len = ukhasnet_addhop(rxbuf, packet_len, "TEA0", 64);
-    ukhasnet_transmit(rxbuf, packet_len);
+    packet_len = ukhasnet_addhop(rx_buf, packet_len, "TEA0", 64);
+    ukhasnet_transmit(rx_buf, packet_len);
 #endif
   }
 }
