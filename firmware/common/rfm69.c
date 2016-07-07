@@ -249,12 +249,13 @@ uint8_t rfm69_receive(uint8_t *buf, uint8_t max_len)
             while(_rfm69_getmode() != RFM69_OPMODE_RX);
         }
     }
-    /* Packet received okay. Retrieve packet length and check it fits */
-    packet_len = _rfm69_readreg(RFM69_REGPAYLOADLENGTH);
+    /* Packet received okay. Retrieve packet length from first byte
+     * of packet */
+    packet_len = _rfm69_readreg(RFM69_REGFIFO);
     if(packet_len > max_len)
         panic();
 
-    /* Now read it back into the buffer */
+    /* Now read the packet back into the buffer, except the length byte */
     _rfm69_bulkread(RFM69_REGFIFO, buf, packet_len);
 
     return packet_len;
