@@ -215,8 +215,8 @@ ULIBDIR =
 
 # Semihosting:
 # Comment following two lines to disable:
-ULIBS = --specs=rdimon.specs -lm -lc -lrdimon
-UDEFS = -DSEMIHOSTING
+#ULIBS = --specs=rdimon.specs -lm -lc -lrdimon
+#UDEFS = -DSEMIHOSTING
 
 #
 # End of user defines
