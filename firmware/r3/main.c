@@ -100,8 +100,26 @@ int main(void)
     puts("Hello, world.");
 #endif
 
+    const char* nodename = "TEA10";
+    char seq = 'a';
+    char packetbuf[64];
+    uint8_t packet_len;
+
     while (true)
     {
         chThdSleepMilliseconds(1000);
+        packet_len = makepacket(packetbuf, 64, seq, nodename,
+                                false, 0, false, 0, false, 0,
+                                false, 0, false, 0);
+        rfm69_transmit(packetbuf, packet_len);
+
+        palSetLine(LINE_LED_GREEN);
+        chThdSleepMilliseconds(50);
+        palClearLine(LINE_LED_GREEN);
+
+        if(seq < 'z')
+            seq++;
+        else
+            seq = 'b';
     }
 }
