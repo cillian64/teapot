@@ -17,7 +17,7 @@ while True:
     line = ser.readline()[:-1]  # Chop trailing \n
     print(line.decode('utf-8'))
 
-    requests.post('http://www.ukhas.net/api/upload', data = {
-        'origin': 'TEA0',
-        'data': line})
+#    requests.post('http://www.ukhas.net/api/upload', data = {
+#        'origin': 'TEA0',
+#        'data': line})
 

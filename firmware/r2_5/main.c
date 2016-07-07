@@ -70,11 +70,11 @@ int main(void) {
   usbStart(serusbcfg.usbp, &usbcfg);
   usbConnectBus(serusbcfg.usbp);
 
-  uint8_t rx_buf[64];
+  uint8_t rx_buf[100];
   uint8_t packet_len;
 
   while (true) {
-    packet_len = rfm69_receive(rx_buf, 64);
+    packet_len = rfm69_receive(rx_buf, 100);
 
     palSetLine(LINE_LED_GREEN);
     chThdSleepMilliseconds(50);

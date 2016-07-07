@@ -208,8 +208,16 @@ void rfm69_transmit(uint8_t *buf, uint8_t len)
     /* Wait for PA ramp-up */
     while(!(_rfm69_readreg(RFM69_REGIRQFLAGS1) & RFM69_REGIRQFLAGS1_TXREADY));
 
-    /* Write the packet to the RFM69's FIFO */
-    _rfm69_bulkwritewithlen(RFM69_REGFIFO, buf, len);
+    /* Write the length of the packet to the FIFO */
+    _rfm69_writereg(RFM69_REGFIFO, len);
+
+    /* Write bytes as possible while FifoThreshold is not set. */
+    for(uint8_t i=0; i < len; i++)
+    {
+        while(_rfm69_readreg(RFM69_REGIRQFLAGS2) &
+                             RFM69_REGIRQFLAGS2_FIFOLEVEL);
+        _rfm69_writereg(RFM69_REGFIFO, buf[i]);
+    }
 
     /* Wait for send to complete */
     while(!(_rfm69_readreg(RFM69_REGIRQFLAGS2) &
@@ -227,19 +235,75 @@ void rfm69_transmit(uint8_t *buf, uint8_t len)
  * this, we will panic.  We return the length of a received packet. */
 uint8_t rfm69_receive(uint8_t *buf, uint8_t max_len)
 {
-    uint8_t packet_len;
+    volatile uint8_t packet_len;
 
     /* Mode change to RX and wait for effect */
     _rfm69_setmode(RFM69_OPMODE_RX);
     while(_rfm69_getmode() != RFM69_OPMODE_RX);
 
-    /* Wait for packet reception */
+    /* Ensure the FIFO is empty before we start */
+    while(_rfm69_readreg(RFM69_REGIRQFLAGS2) &
+                         RFM69_REGIRQFLAGS2_FIFONOTEMPTY)
+    {
+        palSetLine(LINE_LED_YELLOW);
+        palSetLine(LINE_LED_GREEN);
+        (void)_rfm69_readreg(RFM69_REGFIFO);
+    }
+    palClearLine(LINE_LED_YELLOW);
+    palClearLine(LINE_LED_GREEN);
+
+    /* Loop until successful packet reception */
     while(true)
     {
-        /* If we receive a packet, break out and handle it: */
-        if(_rfm69_readreg(RFM69_REGIRQFLAGS2)
-           & RFM69_REGIRQFLAGS2_PAYLOADREADY)
+        /* If FIFO becomes not empty, we need to start receiving. */
+        if(_rfm69_readreg(RFM69_REGIRQFLAGS2) &
+                          RFM69_REGIRQFLAGS2_FIFONOTEMPTY)
+        {
+
+            /* First check we can fit the packet: */
+            packet_len = _rfm69_readreg(RFM69_REGFIFO);
+            if(packet_len > max_len)
+            {
+                /* If we can't, dump it. It's probably spurious */
+                _rfm69_setmode(RFM69_OPMODE_STDBY);
+                while(_rfm69_getmode() != RFM69_OPMODE_STDBY);
+
+                palSetLine(LINE_LED_YELLOW);
+                chThdSleepMilliseconds(50);
+                palClearLine(LINE_LED_YELLOW);
+
+                _rfm69_setmode(RFM69_OPMODE_RX);
+                while(_rfm69_readreg(RFM69_REGIRQFLAGS2) &
+                                     RFM69_REGIRQFLAGS2_FIFONOTEMPTY)
+                    (void)_rfm69_readreg(RFM69_REGFIFO);
+                continue;
+            }
+
+
+            /* Now keep receiving bytes when available until we get enough */
+            for(uint8_t i = 0; i < max_len; i++)
+            {
+                while(!(_rfm69_readreg(RFM69_REGIRQFLAGS2) &
+                                       RFM69_REGIRQFLAGS2_FIFONOTEMPTY));
+                buf[i] = _rfm69_readreg(RFM69_REGFIFO);
+
+                if(_rfm69_readreg(RFM69_REGIRQFLAGS2) & RFM69_REGIRQFLAGS2_PAYLOADREADY)
+                {
+                    packet_len = i + 1;
+                    break;
+                }
+            }
+
+            /* We now have enough bytes.  Wait for PayloadReady signal to
+             * indicate the packet was OK */
+            /* TODO: We need a timeout or something here so if the packet
+             * wasn't okay we can return to receiving... */
+            while(!(_rfm69_readreg(RFM69_REGIRQFLAGS2) &
+                                   RFM69_REGIRQFLAGS2_PAYLOADREADY));
+
             break;
+        }
+
 
         /* If we have stopped receiving because of a timeout, begin receiving
          * again: */
@@ -249,14 +313,9 @@ uint8_t rfm69_receive(uint8_t *buf, uint8_t max_len)
             while(_rfm69_getmode() != RFM69_OPMODE_RX);
         }
     }
-    /* Packet received okay. Retrieve packet length from first byte
-     * of packet */
-    packet_len = _rfm69_readreg(RFM69_REGFIFO);
-    if(packet_len > max_len)
-        panic();
 
-    /* Now read the packet back into the buffer, except the length byte */
-    _rfm69_bulkread(RFM69_REGFIFO, buf, packet_len);
+    /* Finally, change mode to STDBY to clear the FIFO. */
+    _rfm69_setmode(RFM69_OPMODE_STDBY);
 
     return packet_len;
 }

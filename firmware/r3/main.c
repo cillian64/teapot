@@ -100,15 +100,15 @@ int main(void)
     puts("Hello, world.");
 #endif
 
-    const char* nodename = "TEA10";
-    char seq = 'a';
-    char packetbuf[64];
-    uint8_t packet_len;
+//    const char* nodename = "TEA10";
+//    char seq = 'a';
+//    char packetbuf[64];
+//    uint8_t packet_len;
 
     while (true)
     {
         chThdSleepMilliseconds(1000);
-        packet_len = makepacket(packetbuf, 64, seq, nodename,
+/*        packet_len = makepacket(packetbuf, 64, seq, nodename,
                                 false, 0, false, 0, false, 0,
                                 false, 0, false, 0);
         rfm69_transmit(packetbuf, packet_len);
@@ -120,6 +120,20 @@ int main(void)
         if(seq < 'z')
             seq++;
         else
-            seq = 'b';
+            seq = 'b';*/
+
+        char bigpacket[78];
+        for(uint8_t i=0; i<26; i++)
+            bigpacket[i] = 'a';
+        for(uint8_t i=0; i<26; i++)
+            bigpacket[i+26] = 'a';
+        for(uint8_t i=0; i<26; i++)
+            bigpacket[i+52] = 'a';
+        rfm69_transmit(bigpacket, 64);
+        palSetLine(LINE_LED_GREEN);
+        chThdSleepMilliseconds(50);
+        palClearLine(LINE_LED_GREEN);
+
+
     }
 }
