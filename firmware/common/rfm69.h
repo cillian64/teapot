@@ -92,5 +92,6 @@ void rfm69_physetup(uint16_t fdev, uint16_t bitrate);
 void rfm69_packetsetup(bool variablelength, uint16_t preamblelength,
                        uint8_t synclength, uint8_t *syncvalue,
                        bool manchester, bool whitening, bool crc);
+void rfm69_spistart(void);
 
 #endif

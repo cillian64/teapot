@@ -14,6 +14,8 @@
     limitations under the License.
 */
 
+#include <string.h>
+
 #include "ch.h"
 #include "hal.h"
 #include "ch_test.h"
@@ -26,48 +28,25 @@
 
 #ifdef SEMIHOSTING
 #include <stdio.h>
-#include <string.h>
 #endif
-
-/*
- * Blue LED blinker thread, times are in milliseconds.
- */
-static THD_WORKING_AREA(waThread1, 128);
-static THD_FUNCTION(Thread1, arg)
-{
-    (void)arg;
-    chRegSetThreadName("blinker1");
-    while (true)
-    {
-        palClearPad(GPIOA, GPIOA_LED_GREEN);
-        chThdSleepMilliseconds(500);
-        palSetPad(GPIOA, GPIOA_LED_GREEN);
-        chThdSleepMilliseconds(500);
-    }
-}
-
-/*
- * Green LED blinker thread, times are in milliseconds.
- */
-static THD_WORKING_AREA(waThread2, 128);
-static THD_FUNCTION(Thread2, arg)
-{
-    (void)arg;
-    chRegSetThreadName("blinker2");
-    while (true)
-    {
-        palClearPad(GPIOB, GPIOB_LED_YELLOW);
-        chThdSleepMilliseconds(250);
-        palSetPad(GPIOB, GPIOB_LED_YELLOW);
-        chThdSleepMilliseconds(250);
-    }
-}
 
 static const I2CConfig i2cconfig = {
     1<<31 | 1<<30 | 1<<29 | 1<<28, // TIMINGR
     0,      // CR1
     0,      // CR2
 };
+
+/*
+ * Blue LED blinker thread, times are in milliseconds.
+ */
+static THD_WORKING_AREA(waThread1, 64);
+static THD_FUNCTION(Thread1, arg)
+{
+    (void)arg;
+    chRegSetThreadName("runthread");
+
+}
+
 
 #ifdef SEMIHOSTING
 void initialise_monitor_handles(void);
@@ -89,37 +68,42 @@ int main(void)
     palClearLine(LINE_LED_YELLOW);
     palClearLine(LINE_LED_GREEN);
 
-    i2cStart(&I2CD1, &i2cconfig);
-    ukhasnet_radio_init();
-
-    uint16_t pixels[64];
-
 #ifdef SEMIHOSTING
     initialise_monitor_handles();
     setbuf(stdout, NULL);
     puts("Hello, world.");
 #endif
 
-    const char* nodename = "TEA10";
-    char seq = 'a';
-    char packetbuf[64];
-    uint8_t packet_len;
+    uint16_t *pixels = chHeapAlloc(NULL, 64*sizeof(uint16_t));
+    uint8_t *packet_buf = chHeapAlloc(NULL, 48*sizeof(uint8_t));
 
-    while (true)
+    packet_buf[0] = 'G';
+    packet_buf[1] = 'R';
+    packet_buf[2] = 'I';
+    packet_buf[3] = 'D';
+
+    while(true)
     {
-        chThdSleepMilliseconds(1000);
-        packet_len = makepacket(packetbuf, 64, seq, nodename,
-                                false, 0, false, 0, false, 0,
-                                false, 0, false, 0);
-        rfm69_transmit(packetbuf, packet_len);
 
         palSetLine(LINE_LED_GREEN);
-        chThdSleepMilliseconds(50);
-        palClearLine(LINE_LED_GREEN);
+        spiStop(&SPID1);
+        i2cStart(&I2CD1, &i2cconfig);
+        grideye_get(pixels);
+        i2cStop(&I2CD1);
 
-        if(seq < 'z')
-            seq++;
-        else
-            seq = 'b';
+        ukhasnet_radio_init();
+        packet_buf[4] = '1';
+        memcpy(packet_buf+6, (uint8_t*)pixels, 43);
+        rfm69_transmit(packet_buf, 48);
+
+        packet_buf[4] = '2';
+        memcpy(packet_buf+6, (uint8_t*)pixels + 43, 43);
+        rfm69_transmit(packet_buf, 48);
+
+        packet_buf[4] = '3';
+        memcpy(packet_buf+6, (uint8_t*)pixels + 86, 42);
+        rfm69_transmit(packet_buf, 47);
+
+        palClearLine(LINE_LED_GREEN);
     }
 }

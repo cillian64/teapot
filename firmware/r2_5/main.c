@@ -18,6 +18,7 @@
 #include "hal.h"
 #include "ch_test.h"
 #include "chprintf.h"
+#include "hal_serial.h"
 
 #include "rfm69.h"
 #include "ukhasnet.h"
@@ -82,8 +83,11 @@ int main(void) {
 
 #ifndef GATEWAY
     /* Append a NULL character so we can use printf as a string */
-    rx_buf[packet_len] = '\0';
-    chprintf(&SDU1, "%s\n", rx_buf);
+//    rx_buf[packet_len] = '\0';
+//    chprintf(&SDU1, "%s\n", rx_buf);
+    
+    streamWrite(&SDU1, rx_buf, packet_len);
+    streamPut(&SDU1, '\n');
 #endif
 
 #ifdef REPEATER

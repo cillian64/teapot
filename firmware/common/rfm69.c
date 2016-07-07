@@ -96,6 +96,12 @@ static const SPIConfig spiconfig = {
 };
 
 /************* External function definitions ***********/
+
+void rfm69_spistart(void)
+{
+    spiStart(&SPID1, &spiconfig);
+}
+
 /* Initialise RFM */
 void rfm69_init(void)
 {
