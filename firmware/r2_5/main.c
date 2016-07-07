@@ -53,11 +53,9 @@ int main(void) {
   halInit();
   chSysInit();
 
-  /* LED heartbeat thread */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
-
-  /* Clear errors */
+  /* Clear LEDs */
   palClearLine(LINE_LED_YELLOW);
+  palClearLine(LINE_LED_GREEN);
 
   ukhasnet_radio_init();
 
