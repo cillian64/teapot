@@ -16,6 +16,7 @@
 #define RFM69_REGFRFMID         0x08
 #define RFM69_REGFRFLSB         0x09
 #define RFM69_REGVERSION        0x10
+#define RFM69_REGRXBW           0x19
 #define RFM69_REGOSC1           0x0A
 #define RFM69_REGLISTEN1        0x0D
 #define RFM69_REGLISTEN2        0x0E

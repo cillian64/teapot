@@ -292,6 +292,12 @@ void rfm69_physetup(uint16_t fdev, uint16_t bitrate)
     /* Write bitrate */
     _rfm69_writereg(RFM69_REGBITRATEMSB, (bitrate >> 8) & 0xff);
     _rfm69_writereg(RFM69_REGBITRATELSB, bitrate & 0xff);
+
+    /* Set RX bandwidth */
+    uint8_t RegRxBw = _rfm69_readreg(RFM69_REGRXBW);
+    RegRxBw &= 0b11111000;
+    RegRxBw |= 0x02;
+    _rfm69_writereg(RFM69_REGRXBW, RegRxBw);
 }
 
 /* Setup packet-mode settings.
