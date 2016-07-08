@@ -24,7 +24,7 @@ array[0,0] = 120
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
-im = plt.imshow(array, cmap=plt.get_cmap("coolwarm"))
+im = plt.imshow(array, cmap=plt.get_cmap("coolwarm"), interpolation="none")
 plt.colorbar()
 fig.show()
 
