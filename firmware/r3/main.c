@@ -14,6 +14,8 @@
     limitations under the License.
 */
 
+#include <string.h>
+
 #include "ch.h"
 #include "hal.h"
 #include "ch_test.h"
@@ -21,81 +23,87 @@
 #include "analog.h"
 #include "rfm69.h"
 #include "ukhasnet.h"
+#include "grid-eye.h"
+#include "sensors.h"
+
+#ifdef SEMIHOSTING
+#include <stdio.h>
+#endif
+
+static const I2CConfig i2cconfig = {
+    1<<31 | 1<<30 | 1<<29 | 1<<28, // TIMINGR
+    0,      // CR1
+    0,      // CR2
+};
 
 /*
  * Blue LED blinker thread, times are in milliseconds.
  */
-static THD_WORKING_AREA(waThread1, 128);
-static THD_FUNCTION(Thread1, arg) {
+static THD_WORKING_AREA(waThread1, 64);
+static THD_FUNCTION(Thread1, arg)
+{
+    (void)arg;
+    chRegSetThreadName("runthread");
 
-  (void)arg;
-  chRegSetThreadName("blinker1");
-  while (true) {
-    palClearPad(GPIOA, GPIOA_LED_GREEN);
-    chThdSleepMilliseconds(500);
-    palSetPad(GPIOA, GPIOA_LED_GREEN);
-    chThdSleepMilliseconds(500);
-  }
 }
 
-/*
- * Green LED blinker thread, times are in milliseconds.
- */
-static THD_WORKING_AREA(waThread2, 128);
-static THD_FUNCTION(Thread2, arg) {
 
-  (void)arg;
-  chRegSetThreadName("blinker2");
-  while (true) {
-    palClearPad(GPIOB, GPIOB_LED_YELLOW);
-    chThdSleepMilliseconds(250);
-    palSetPad(GPIOB, GPIOB_LED_YELLOW);
-    chThdSleepMilliseconds(250);
-  }
+#ifdef SEMIHOSTING
+void initialise_monitor_handles(void);
+
+/* Puts with no newline */
+void puts_non(char *str);
+void puts_non(char *str)
+{
+    for(uint32_t i=0; i<strlen(str); i++)
+        putchar(str[i]);
 }
+#endif
 
-/*
- * Application entry point.
- */
-int main(void) {
+int main(void)
+{
+    halInit();
+    chSysInit();
 
-  /*
-   * System initializations.
-   * - HAL initialization, this also initializes the configured device drivers
-   *   and performs the board-specific initializations.
-   * - Kernel initialization, the main() function becomes a thread and the
-   *   RTOS is active.
-   */
-  halInit();
-  chSysInit();
+    palClearLine(LINE_LED_YELLOW);
+    palClearLine(LINE_LED_GREEN);
 
-  /*
-   * Creates the blinker threads.
-   */
-//  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
-//  chThdCreateStatic(waThread2, sizeof(waThread2), NORMALPRIO, Thread2, NULL);
+#ifdef SEMIHOSTING
+    initialise_monitor_handles();
+    setbuf(stdout, NULL);
+    puts("Hello, world.");
+#endif
 
-  palClearLine(LINE_LED_YELLOW);
-  palClearLine(LINE_LED_GREEN);
+    uint16_t *pixels = chHeapAlloc(NULL, 64*sizeof(uint16_t));
+    uint8_t *packet_buf = chHeapAlloc(NULL, 48*sizeof(uint8_t));
 
-  ukhasnet_radio_init();
+    packet_buf[0] = 'G';
+    packet_buf[1] = 'R';
+    packet_buf[2] = 'I';
+    packet_buf[3] = 'D';
 
-  /* Create analog thread */
-  chThdCreateStatic(waThreadAnalog, sizeof(waThreadAnalog), NORMALPRIO,
-                    ThreadAnalog, NULL);
+    while(true)
+    {
 
-  /*
-   * Normal main() thread activity, in this demo it does nothing except
-   * sleeping in a loop and check the button state, when the button is
-   * pressed the test procedure is launched with output on the serial
-   * driver 1.
-   */
+        palSetLine(LINE_LED_GREEN);
+        spiStop(&SPID1);
+        i2cStart(&I2CD1, &i2cconfig);
+        grideye_get(pixels);
+        i2cStop(&I2CD1);
 
-  const char *packet = "3aX1337:hello[DERP2]";
+        ukhasnet_radio_init();
+        packet_buf[4] = '1';
+        memcpy(packet_buf+6, (uint8_t*)pixels, 43);
+        rfm69_transmit(packet_buf, 48);
 
-  while (true) {
-    chThdSleepMilliseconds(1000);
-    rfm69_transmit(packet, 20);
-    
-  }
+        packet_buf[4] = '2';
+        memcpy(packet_buf+6, (uint8_t*)pixels + 43, 43);
+        rfm69_transmit(packet_buf, 48);
+
+        packet_buf[4] = '3';
+        memcpy(packet_buf+6, (uint8_t*)pixels + 86, 42);
+        rfm69_transmit(packet_buf, 47);
+
+        palClearLine(LINE_LED_GREEN);
+    }
 }

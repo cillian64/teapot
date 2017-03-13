@@ -16,6 +16,7 @@
 #define RFM69_REGFRFMID         0x08
 #define RFM69_REGFRFLSB         0x09
 #define RFM69_REGVERSION        0x10
+#define RFM69_REGRXBW           0x19
 #define RFM69_REGOSC1           0x0A
 #define RFM69_REGLISTEN1        0x0D
 #define RFM69_REGLISTEN2        0x0E
@@ -85,11 +86,12 @@
 void rfm69_init(void);
 void rfm69_setfreq(uint32_t frf);
 void rfm69_transmit(uint8_t *buf, uint8_t len);
-void rfm69_receive(uint8_t *buf, uint8_t len);
+uint8_t rfm69_receive(uint8_t *buf, uint8_t max_len);
 void rfm69_setpower(int8_t power);
 void rfm69_physetup(uint16_t fdev, uint16_t bitrate);
 void rfm69_packetsetup(bool variablelength, uint16_t preamblelength,
                        uint8_t synclength, uint8_t *syncvalue,
                        bool manchester, bool whitening, bool crc);
+void rfm69_spistart(void);
 
 #endif

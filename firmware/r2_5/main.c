@@ -17,9 +17,12 @@
 #include "ch.h"
 #include "hal.h"
 #include "ch_test.h"
+#include "chprintf.h"
+#include "hal_serial.h"
 
 #include "rfm69.h"
 #include "ukhasnet.h"
+#include "usbcfg.h"
 
 /*
  * Green LED blinker thread, times are in milliseconds.
@@ -31,16 +34,14 @@ static THD_FUNCTION(Thread1, arg) {
   chRegSetThreadName("blinker");
 
   while (true) {
-    palClearLine(LINE_LED_GREEN);
-    chThdSleepMilliseconds(500);
     palSetLine(LINE_LED_GREEN);
-    chThdSleepMilliseconds(500);
+    chThdSleepMilliseconds(50);
+    palClearLine(LINE_LED_GREEN);
+    chThdSleepMilliseconds(950);
   }
 }
 
-/*
- * Application entry point.
- */
+
 int main(void) {
 
   /*
@@ -53,21 +54,45 @@ int main(void) {
   halInit();
   chSysInit();
 
-  /* LED heartbeat thread */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
-
-  /* Clear errors */
+  /* Clear LEDs */
   palClearLine(LINE_LED_YELLOW);
+  palClearLine(LINE_LED_GREEN);
 
   ukhasnet_radio_init();
 
-  uint8_t packet_buf[70];
+  /* Start up USB-serial driver */
+  sduObjectInit(&SDU1);
+  sduStart(&SDU1, &serusbcfg);
+
+  /* Activate USB driver and bus pull-up on D+.  The delay means we don't have
+   * to disconnect the cable after a reset. */
+  usbDisconnectBus(serusbcfg.usbp);
+  chThdSleepMilliseconds(1500);
+  usbStart(serusbcfg.usbp, &usbcfg);
+  usbConnectBus(serusbcfg.usbp);
+
+  uint8_t rx_buf[64];
   uint8_t packet_len;
-  packet_len = makepacket(packet_buf, 70, 'a', "DERP1",
-                          false, 0, false, 0, false, 0, false, 0, false, 0);
 
   while (true) {
-    chThdSleepMilliseconds(1000);
-    rfm69_transmit(packet_buf, packet_len);
+    packet_len = rfm69_receive(rx_buf, 64);
+
+    palSetLine(LINE_LED_GREEN);
+    chThdSleepMilliseconds(50);
+    palClearLine(LINE_LED_GREEN);
+
+#ifndef GATEWAY
+    /* Append a NULL character so we can use printf as a string */
+//    rx_buf[packet_len] = '\0';
+//    chprintf(&SDU1, "%s\n", rx_buf);
+    
+    streamWrite(&SDU1, rx_buf, packet_len);
+    streamPut(&SDU1, '\n');
+#endif
+
+#ifdef REPEATER
+    packet_len = ukhasnet_addhop(rx_buf, packet_len, "TEA0", 64);
+    ukhasnet_transmit(rx_buf, packet_len);
+#endif
   }
 }

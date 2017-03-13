@@ -5,7 +5,8 @@
 
 # Compiler options here.
 ifeq ($(USE_OPT),)
-  USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16
+#  USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16
+   USE_OPT = -O0 -ggdb -fomit-frame-pointer -falign-functions=16
 endif
 
 # C specific options here (added to USE_OPT).
@@ -115,6 +116,8 @@ CSRC = $(STARTUPSRC) \
        $(TESTSRC) \
        main.c \
        analog.c \
+       grid-eye.c \
+       sensors.c \
        ../common/rfm69.c \
        ../common/ukhasnet.c \
        ../common/util.c
@@ -201,9 +204,6 @@ CPPWARN = -Wall -Wextra -Wundef
 # Start of user section
 #
 
-# List all user C define here, like -D_DEBUG=1
-UDEFS =
-
 # Define ASM defines here
 UADEFS =
 
@@ -213,8 +213,10 @@ UINCDIR =
 # List the user directory to look for the libraries here
 ULIBDIR =
 
-# List all user libraries here
-ULIBS =
+# Semihosting:
+# Comment following two lines to disable:
+#ULIBS = --specs=rdimon.specs -lm -lc -lrdimon
+#UDEFS = -DSEMIHOSTING
 
 #
 # End of user defines

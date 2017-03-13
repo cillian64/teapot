@@ -96,6 +96,12 @@ static const SPIConfig spiconfig = {
 };
 
 /************* External function definitions ***********/
+
+void rfm69_spistart(void)
+{
+    spiStart(&SPID1, &spiconfig);
+}
+
 /* Initialise RFM */
 void rfm69_init(void)
 {
@@ -220,11 +226,45 @@ void rfm69_transmit(uint8_t *buf, uint8_t len)
     while(_rfm69_getmode() != RFM69_OPMODE_STDBY);
 }
 
-/* Receive `len' bytes into buffer `buf'.  This function
- * is synchronous - it will not return until reception is complete */
-void rfm69_receive(uint8_t *buf, uint8_t len)
+/* Receive bytes into buffer 'buf'.
+ * This function is syncronous -- it will not return until a successful
+ * reception has completed.
+ * maxlen is the length of the buffer -- if we receive a packet bigger than
+ * this, we will panic.  We return the length of a received packet. */
+uint8_t rfm69_receive(uint8_t *buf, uint8_t max_len)
 {
-    panic();
+    uint8_t packet_len;
+
+    /* Mode change to RX and wait for effect */
+    _rfm69_setmode(RFM69_OPMODE_RX);
+    while(_rfm69_getmode() != RFM69_OPMODE_RX);
+
+    /* Wait for packet reception */
+    while(true)
+    {
+        /* If we receive a packet, break out and handle it: */
+        if(_rfm69_readreg(RFM69_REGIRQFLAGS2)
+           & RFM69_REGIRQFLAGS2_PAYLOADREADY)
+            break;
+
+        /* If we have stopped receiving because of a timeout, begin receiving
+         * again: */
+        if(_rfm69_getmode() != RFM69_OPMODE_RX)
+        {
+            _rfm69_setmode(RFM69_OPMODE_RX);
+            while(_rfm69_getmode() != RFM69_OPMODE_RX);
+        }
+    }
+    /* Packet received okay. Retrieve packet length from first byte
+     * of packet */
+    packet_len = _rfm69_readreg(RFM69_REGFIFO);
+    if(packet_len > max_len)
+        panic();
+
+    /* Now read the packet back into the buffer, except the length byte */
+    _rfm69_bulkread(RFM69_REGFIFO, buf, packet_len);
+
+    return packet_len;
 }
 
 /* Set the transmit power.  `power' is a power in dBm from +2dBm to +17dBm */
@@ -259,6 +299,12 @@ void rfm69_physetup(uint16_t fdev, uint16_t bitrate)
     /* Write bitrate */
     _rfm69_writereg(RFM69_REGBITRATEMSB, (bitrate >> 8) & 0xff);
     _rfm69_writereg(RFM69_REGBITRATELSB, bitrate & 0xff);
+
+    /* Set RX bandwidth */
+    uint8_t RegRxBw = _rfm69_readreg(RFM69_REGRXBW);
+    RegRxBw &= 0b11111000;
+    RegRxBw |= 0x02;
+    _rfm69_writereg(RFM69_REGRXBW, RegRxBw);
 }
 
 /* Setup packet-mode settings.
