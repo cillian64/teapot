@@ -1,4 +1,4 @@
-BMP_PATH = /dev/ttyACM0
+BMP_PATH = /dev/cu.usbmodemD6CBAEC1
 
 flash: build/$(PROJECT).elf
 	arm-none-eabi-gdb --batch \
