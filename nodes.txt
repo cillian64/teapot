@@ -1,0 +1,17 @@
+NODE ID | BOARD REVISION | STATUS
+--------+----------------+-----------------------------------------------------
+TEA1    | r2 (stm32l0)   | No I2C or USB or analog: could be repeater
+TEA2    | r2 (stm32l0)   | No I2C or USB or analog: could be repeater
+TEA3    | r2 (stm32l0)   | No I2C or USB or analog: could be repeater
+TEA4    | r2.5 (stm32f0) | USB Gateway
+TEA10   | r3 plain       | Mostly working I think
+TEA11   | r3 plain       | Needs bringup, battery holder, antenna
+TEA12   | r3 plain       | Needs bringup, battery holder, antenna
+TEA13   | r3 plain       | Needs bringup, battery holder, antenna
+TEA14   | r3 plain       | Needs bringup, battery holder, antenna
+TEA15   | r3 grideye     | Works sometimes, not sure if ukhn protocol
+TEA16   | r3 grideye     | Needs bringup, battery holder, antenna
+TEA17   | r3 grideye     | Needs bringup, battery holder, antenna
+TEA18   | r3 grideye     | Needs bringup, battery holder, antenna
+TEA19   | r3 grideye     | Needs bringup, battery holder, antenna
+
