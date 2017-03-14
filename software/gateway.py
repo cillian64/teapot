@@ -4,7 +4,7 @@ import serial
 import sys
 import requests
 
-default_serial = "/dev/ttyACM2"
+default_serial = "/dev/cu.usbmodem401"
 
 if len(sys.argv) == 2:
     default_serial = sys.argv[1]
@@ -21,7 +21,6 @@ while True:
     hops = line.decode('utf-8')[0]
     seq = line.decode('utf-8')[1]
     if hops >= '0' and hops <= '9' and seq >= 'a' and seq <= 'z':
-        requests.post('http://www.ukhas.net/api/upload', data = {
+        requests.post('http://www.ukhas.net/api/upload', data={
             'origin': 'TEA0',
             'data': line})
-

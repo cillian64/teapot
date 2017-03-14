@@ -24,33 +24,8 @@
 #include "ukhasnet.h"
 #include "usbcfg.h"
 
-/*
- * Green LED blinker thread, times are in milliseconds.
- */
-static THD_WORKING_AREA(waThread1, 128);
-static THD_FUNCTION(Thread1, arg) {
-
-  (void)arg;
-  chRegSetThreadName("blinker");
-
-  while (true) {
-    palSetLine(LINE_LED_GREEN);
-    chThdSleepMilliseconds(50);
-    palClearLine(LINE_LED_GREEN);
-    chThdSleepMilliseconds(950);
-  }
-}
-
 
 int main(void) {
-
-  /*
-   * System initializations.
-   * - HAL initialization, this also initializes the configured device drivers
-   *   and performs the board-specific initializations.
-   * - Kernel initialization, the main() function becomes a thread and the
-   *   RTOS is active.
-   */
   halInit();
   chSysInit();
 
@@ -79,20 +54,15 @@ int main(void) {
 
     palSetLine(LINE_LED_GREEN);
     chThdSleepMilliseconds(50);
-    palClearLine(LINE_LED_GREEN);
 
-#ifndef GATEWAY
-    /* Append a NULL character so we can use printf as a string */
-//    rx_buf[packet_len] = '\0';
-//    chprintf(&SDU1, "%s\n", rx_buf);
-    
+    // Gateway:
     streamWrite(&SDU1, rx_buf, packet_len);
     streamPut(&SDU1, '\n');
-#endif
 
-#ifdef REPEATER
-    packet_len = ukhasnet_addhop(rx_buf, packet_len, "TEA0", 64);
-    ukhasnet_transmit(rx_buf, packet_len);
-#endif
+    // Repeater:
+//    packet_len = ukhasnet_addhop(rx_buf, packet_len, "TEA0", 64);
+//    ukhasnet_transmit(rx_buf, packet_len);
+
+    palClearLine(LINE_LED_GREEN);
   }
 }
