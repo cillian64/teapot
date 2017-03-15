@@ -1,32 +1,48 @@
 # TEApot
-TEApot: Tiny (or Temperamental) Environment Analyser.  A
-[ukhasnet](https://www.ukhas.net) node with temperature, light, humidity, and
-maybe pressure sensing.  ukhasnet node IDs `TEAnn` starting at `TEA01`.
+TEApot: Tiny Environment Analyser.  A
+[ukhasnet](https://www.ukhas.net) node with various sensors.
+ukhasnet node IDs `TEA0` through `TEAe`.
 
-#Structure
-* `boards/` contains schematics and board layouts for KiCAD EDA 4.0.
+# Structure
+* [board](board/) contains schematics and board layouts for KiCAD EDA 4
+* [case](case/) contains plans for laser-cut cases for the nodes
+* [firmware](firmware/) contains firmware for the various node flavours
+* [software](software/) contains Python3 software for the USB gateway and
+  GridEye receiver.
 
-#TEApots
-* `TEA01`-`TEA10` planned for the
-[Computer Laboratory](https://www.cl.cam.ac.uk/)
-[DTG corridor](https://www.cl.cam.ac.uk/research/dtg/www/).
+# Nodes
+## Hardware
+* Microcontroller: STM32F0 and STM32L0
+* Power: AA or D alkaline cell with TLV61225 boost switcher
+* Assorted sensors:
+    * T: Temperature (HTU21d)
+    * H: Humidity (HTU21d)
+    * P: Pressure (MS5637)
+    * S: Light (TEPT4400)
+    * X: 8x8 thermopile array (AMG88 Grid-eye)
 
-#Parts
-* Micro: STM32F070F6P6
-* Power: 
-    * Battery: 2x AAA in series in rear-mounted holder.
-    * TLV61225 boost switcher
-* Sensors:
-    * 1x I2C for temp/RH and pressure
-    * ADCs for light and battery voltage
-    * RTC for wakeup timing
-    * TEPT4400 photo-transistor for light
-    * HTU21D for temperature and relative humidity
-        * 3v3 power, 0.02uA asleep, 450uA converting
-        * Precise and accurate temperature and relative humidity
-        * I2C query interface
-        * DFN package.
-        * Happy with low duty cycle operation.
-    * MS563702BA03-50 for pressure
-        * Not worth fitting on all 10 nodes in the same building.
+## Variants
+* r2 was the first set manufactured.  Issues with I2C meant sensors did not
+  work.  L0 variants are lower power than F0 but do not support USB.  L0
+  variants include a RTC crystal.
+* r3 was the second set manufactured, omitting USB but including support
+  for the Grid-eye sensor and fixing I2C issues.  All boards include an RTC
+  crystal.
 
+Node | Board | Sensors | Status
+---- | ----- | ------- | ------
+TEA0 | r2 F0 |         | USB Gateway
+TEA1 | r2 L0 |         | Repeater (needs firmware)
+TEA2 | r2 L0 |         | Repeater (needs firmware)
+TEA3 | r2 L0 |         | Repeater (needs antenna and firmware)
+TEA4 | r2 L0 |         | Repeater (needs antenna and firmware)
+TEA5 | r3    | THPS    | Mostly working
+TEA6 | r3    | THPS    | Flash, radio OK, needs battery holder, antenna
+TEA7 | r3    | THPS    | Flash, radio OK, needs battery holder, antenna
+TEA8 | r3    | THPS    | Flash, radio OK, needs battery holder, antenna
+TEA9 | r3    | THPS    | Flash, radio OK, needs battery holder, antenna
+TEAa | r3    | THPSX   | Works sometimes, currently not UKHN protocol
+TEAb | r3    | THPSX   | Flash, radio OK, needs battery holder, antenna
+TEAc | r3    | THPSX   | Flash, radio OK, needs battery holder, antenna
+TEAd | r3    | THPSX   | Flash, radio OK, needs battery holder, antenna
+TEAe | r3    | THPSX   | Flash, radio OK, needs battery holder, antenna
