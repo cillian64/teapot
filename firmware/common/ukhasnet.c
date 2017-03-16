@@ -34,16 +34,30 @@ void ukhasnet_radio_init(void)
 /* Generate a ukhasnet packet in buf, with maximum length buf_len.
  * Return the length of the packet generated */
 uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
-                   char seq, char* label, /* Seq count, node label */
+                   char *seq, char* label, /* Seq count, node label */
                    bool has_battery, uint16_t voltage,  /* voltage V*100 */
                    bool has_temp, int16_t temp,         /* temperature, C*10 */
                    bool has_hum, uint8_t hum,           /* rel humidity, % */
                    bool has_press, uint32_t press,      /* Pressure, pascal */
-                   bool has_light, uint8_t light)       /* Light sensor */
+                   bool has_light, uint8_t light,       /* Light sensor */
+                   char *comment)
 {
     uint8_t length = 0;
 
-    /* TODO: Check premptively if buf_len is long enough */
+    // Check the packet will fit.
+    length += 2; // TTL, sequence, []
+    if(has_battery)             length += 5;
+    if(has_temp)                length += 6;
+    if(has_hum)                 length += 3;
+    if(has_press)               length += 7;
+    if(has_light)               length += 4;
+    if(strlen(comment) != 0)    length += 1;
+    length += strlen(comment);
+    length += strlen(label);
+    if(length >= buf_len)
+        panic();
+
+    length = 0;
 
     /* Number of hops */
     if(number_hops > 9)
@@ -51,9 +65,13 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
     buf[length++] = '0' + number_hops;
 
     /* Sequence counter */
-    if((seq < 'a') || (seq > 'z'))
+    if((*seq < 'a') || (*seq > 'z'))
         panic();
-    buf[length++] = seq;
+    buf[length++] = *seq;
+    if(*seq < 'z')
+        *seq += 1;
+    else
+        *seq = 'b';
 
     if(has_battery) /* battery */
     {
@@ -124,10 +142,19 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
         buf[length++] = '0';
     }
 
+    /* Now, comment */
+    size_t comment_len = strlen(comment);
+    if(comment_len != 0)
+    {
+        buf[length++] = ':';
+        memcpy(buf + length, comment, comment_len);
+        length += comment_len;
+    }
+
     /* Finally, node label */
     buf[length++] = '[';
-    for(uint8_t i=0; label[i] != '\0'; i++)
-        buf[length++] = label[i];
+    memcpy(buf + length, label, strlen(label));
+    length += strlen(label);
     buf[length++] = ']';
 
     if(length > buf_len)
