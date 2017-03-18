@@ -118,6 +118,7 @@ CSRC = $(STARTUPSRC) \
        analog.c \
        grid-eye.c \
        sensors.c \
+       base64.c \
        ../common/rfm69.c \
        ../common/ukhasnet.c \
        ../common/util.c
