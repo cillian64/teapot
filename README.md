@@ -37,12 +37,12 @@ TEA2 | r2 L0 |         | Repeater (needs firmware)
 TEA3 | r2 L0 |         | Repeater (needs antenna and firmware)
 TEA4 | r2 L0 |         | Repeater (needs antenna and firmware)
 TEA5 | r3    | THPS    | Mostly working
-TEA6 | r3    | THPS    | Flash, radio OK, needs battery holder, antenna
-TEA7 | r3    | THPS    | Flash, radio OK, needs battery holder, antenna
-TEA8 | r3    | THPS    | Flash, radio OK, needs battery holder, antenna
-TEA9 | r3    | THPS    | Flash, radio OK, needs battery holder, antenna
-TEAa | r3    | THPSX   | Works sometimes, currently not UKHN protocol
-TEAb | r3    | THPSX   | Flash, radio OK, needs battery holder, antenna
-TEAc | r3    | THPSX   | Flash, radio OK, needs battery holder, antenna
-TEAd | r3    | THPSX   | Flash, radio OK, needs battery holder, antenna
-TEAe | r3    | THPSX   | Flash, radio OK, needs battery holder, antenna
+TEA6 | r3    | THPS    | Flash, radio OK
+TEA7 | r3    | THPS    | Flash, radio OK
+TEA8 | r3    | THPS    | Flash, radio OK
+TEA9 | r3    | THPS    | Flash, radio OK
+TEAa | r3    | THPSX   | Sensor is checkerboard-y?
+TEAb | r3    | THPSX   | Transmits high-rate off-frequency
+TEAc | r3    | THPSX   | Transmits ukhn frame every 30s
+TEAd | r3    | THPSX   | Flash, radio OK
+TEAe | r3    | THPSX   | Flash, radio OK
