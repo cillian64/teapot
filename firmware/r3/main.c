@@ -83,7 +83,7 @@ int main(void)
         ukhasnet_radio_init();
 
 //        // Send sensor packet:
-//        packet_len = makepacket(packetbuf, 64, &seq, (char*)nodename,
+//        packet_len = makepacket(packetbuf, 64, &seq, (char*)nodename, 3,
 //                                false, 0, // battery
 //                                true, temperature,
 //                                true, humidity,
@@ -102,7 +102,7 @@ int main(void)
         b64encode(packed_pixels, 36, b64_pixels);
         b64_pixels[48] = '\0';
 
-        packet_len = makepacket(packetbuf, 64, &seq, (char*)nodename,
+        packet_len = makepacket(packetbuf, 64, &seq, (char*)nodename, 1,
                                 false, 0, false, 0, false, 0,
                                 false, 0, false, 0,
                                 b64_pixels);
@@ -113,6 +113,6 @@ int main(void)
         palClearLine(LINE_LED_GREEN);
 
         // Sleep 5s
-        chThdSleepMilliseconds(5000);
+        chThdSleepMilliseconds(20000);
     }
 }

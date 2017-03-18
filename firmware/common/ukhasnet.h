@@ -11,6 +11,7 @@ void ukhasnet_radio_init(void);
  * Return the length of the packet generated */
 uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
                    char *seq, char *label, /* Seq count, node label */
+                   uint8_t hops,
                    bool has_battery, uint16_t voltage,   /* battery voltage */
                    bool has_temp, int16_t temp,         /* temperature, C*10 */
                    bool has_hum, uint8_t hum,           /* rel humidity, % */

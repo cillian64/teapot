@@ -6,8 +6,6 @@
 #include "util.h"
 #include "rfm69.h"
 
-const uint8_t number_hops = 3;
-
 /* Setup the RFM69 for UKHASnet operation */
 void ukhasnet_radio_init(void)
 {
@@ -35,6 +33,7 @@ void ukhasnet_radio_init(void)
  * Return the length of the packet generated */
 uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
                    char *seq, char* label, /* Seq count, node label */
+                   uint8_t hops,
                    bool has_battery, uint16_t voltage,  /* voltage V*100 */
                    bool has_temp, int16_t temp,         /* temperature, C*10 */
                    bool has_hum, uint8_t hum,           /* rel humidity, % */
@@ -60,9 +59,9 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
     length = 0;
 
     /* Number of hops */
-    if(number_hops > 9)
+    if(hops > 9)
         panic(); /* Must be single digit number */
-    buf[length++] = '0' + number_hops;
+    buf[length++] = '0' + hops;
 
     /* Sequence counter */
     if((*seq < 'a') || (*seq > 'z'))
