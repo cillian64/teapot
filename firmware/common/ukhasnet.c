@@ -20,9 +20,9 @@ void ukhasnet_radio_init(void)
 
     rfm69_setpower(2); /* Transmit power, in dBm */
 
-    /* Shift: 24kHz.  fdev = 24e3/fstep = 24e3/61 = 393
+    /* Shift: 24kHz.  fdev = 24e3/fstep = 24e3/61/2 = 197
      * 2000-baud: bitrate = fxosc / 2000 = 32e6/2000 = 16000 */
-    rfm69_physetup(393, 16000);
+    rfm69_physetup(197, 16000);
 
     /* 3-byte preamble of 0xAA, 0xAA, 0xAA
      * 2-byte sync of 0x2D, 0xAA */
