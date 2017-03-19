@@ -39,6 +39,7 @@ int main(void)
 {
     halInit();
     chSysInit();
+    analog_init();
 
     // Wait for things to warm up??
     // Get weird i2c errors if not for this.
@@ -57,7 +58,6 @@ int main(void)
     i2cStart(&I2CD1, &i2cconfig);
     pressure_init();
     i2cStop(&I2CD1);
-    ukhasnet_radio_init();
 
     // Buffers
     uint8_t *packetbuf = chHeapAlloc(NULL, 64*sizeof(uint8_t));
@@ -67,17 +67,23 @@ int main(void)
     char *b64_pixels = chHeapAlloc(NULL, 49*sizeof(char));
 #endif
 
-    const char *nodename = "TEA9";
+    const char *nodename = "TEA5";
     char seq = 'a';
     uint8_t packet_len;
     uint32_t pressure;
+    uint8_t battery;
+    uint16_t light;
 
     while(true)
     {
+        // Bring back radio after long sleep
+        ukhasnet_radio_init();
         // Begin activity
         palSetLine(LINE_LED_GREEN);
 
-        // Read sensors. Swap from SPI to I2C
+        // Read analog sensors.
+        analog_read(&battery, &light);
+        // Read I2C sensors. Swap from SPI to I2C
         spiStop(&SPID1);
         i2cStart(&I2CD1, &i2cconfig);
         volatile uint16_t temperature_raw = get_temperature();
@@ -94,11 +100,11 @@ int main(void)
        // Send sensor packet:
 #ifndef GRIDEYE
        packet_len = makepacket(packetbuf, 64, &seq, (char*)nodename, 0,
-                               false, 0, // battery
+                               true, battery,
                                true, temperature,
                                true, humidity,
                                true, pressure,
-                               false, 0, // light
+                               true, light,
                                "");
        rfm69_transmit(packetbuf, packet_len);
 #endif
