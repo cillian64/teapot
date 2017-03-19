@@ -152,7 +152,7 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
 
     /* Finally, node label */
     buf[length++] = '[';
-    memcpy(buf + length, label, strlen(label));
+    strcpy((char*)(buf + length), label);
     length += strlen(label);
     buf[length++] = ']';
 

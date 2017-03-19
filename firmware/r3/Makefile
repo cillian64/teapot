@@ -61,13 +61,13 @@ endif
 # Stack size to be allocated to the Cortex-M process stack. This stack is
 # the stack used by the main() thread.
 ifeq ($(USE_PROCESS_STACKSIZE),)
-  USE_PROCESS_STACKSIZE = 0x200
+  USE_PROCESS_STACKSIZE = 0x400
 endif
 
 # Stack size to the allocated to the Cortex-M main/exceptions stack. This
 # stack is used for processing interrupts and exceptions.
 ifeq ($(USE_EXCEPTIONS_STACKSIZE),)
-  USE_EXCEPTIONS_STACKSIZE = 0x200
+  USE_EXCEPTIONS_STACKSIZE = 0x400
 endif
 
 # Enables the use of FPU (no, softfp, hard).
@@ -102,7 +102,7 @@ include $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC/mk/port_v6m.mk
 include $(CHIBIOS)/test/rt/test.mk
 
 # Define linker script file here
-LDSCRIPT= $(STARTUPLD)/STM32F051x8.ld
+LDSCRIPT= ../common/STM32F051x8.ld
 
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -119,6 +119,7 @@ CSRC = $(STARTUPSRC) \
        grid-eye.c \
        sensors.c \
        base64.c \
+       flash.c \
        ../common/rfm69.c \
        ../common/ukhasnet.c \
        ../common/util.c

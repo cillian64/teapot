@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "ch.h"
 #include "hal.h"
 #include "ch_test.h"
@@ -8,10 +10,10 @@
 #include "grid-eye.h"
 #include "sensors.h"
 #include "base64.h"
+#include "flash.h"
 
 #ifdef SEMIHOSTING
 #include <stdio.h>
-#include <string.h>
 #endif
 
 //#define GRIDEYE
@@ -39,6 +41,20 @@ int main(void)
 {
     halInit();
     chSysInit();
+
+    flash_config_t *config = chHeapAlloc(NULL, sizeof(flash_config_t));
+    // Uncomment below to write config to flash memory.
+    // strcpy(config->nodeid, "TEA5");
+    // config->ttl = 3;
+    // config->interval = 60;
+    // config->has_battery = true;
+    // config->has_temperature = true;
+    // config->has_humidity = true;
+    // config->has_pressure = true;
+    // config->has_light = true;
+    // flash_write_config(config);
+    flash_read_config(config);
+
     analog_init();
     ukhasnet_radio_init();
 
@@ -66,14 +82,16 @@ int main(void)
     uint16_t *pixels = chHeapAlloc(NULL, 64*sizeof(uint16_t));
     uint8_t *packed_pixels = chHeapAlloc(NULL, 36*sizeof(uint8_t));
     char *b64_pixels = chHeapAlloc(NULL, 49*sizeof(char));
+    uint16_t average
 #endif
 
-    const char *nodename = "TEA5";
     char seq = 'a';
     uint8_t packet_len;
     uint32_t pressure;
     uint8_t battery;
     uint16_t light;
+    uint16_t temperature;
+    uint8_t humidity;
 
     while(true)
     {
@@ -85,10 +103,8 @@ int main(void)
         // Read I2C sensors. Swap from SPI to I2C
         spiStop(&SPID1);
         i2cStart(&I2CD1, &i2cconfig);
-        volatile uint16_t temperature_raw = get_temperature();
-        volatile int16_t temperature = convert_temperature(temperature_raw);
-        volatile uint16_t humidity_raw = get_humidity();
-        volatile uint8_t humidity = convert_humidity(humidity_raw);
+        temperature = convert_temperature(get_temperature());
+        humidity = convert_humidity(get_humidity());
         pressure = get_pressure();
 #ifdef GRIDEYE
         grideye_get(pixels);
@@ -98,19 +114,20 @@ int main(void)
 
        // Send sensor packet:
 #ifndef GRIDEYE
-       packet_len = makepacket(packetbuf, 64, &seq, (char*)nodename, 0,
-                               true, battery,
-                               true, temperature,
-                               true, humidity,
-                               true, pressure,
-                               true, light,
+       packet_len = makepacket(packetbuf, 64, &seq, config->nodeid,
+                               config->ttl,
+                               config->has_battery, battery,
+                               config->has_temperature, temperature,
+                               config->has_humidity, humidity,
+                               config->has_pressure, pressure,
+                               config->has_light, light,
                                "");
        rfm69_transmit(packetbuf, packet_len);
 #endif
 
         // For Grid-eye send another packet with pixels:
 #ifdef GRIDEYE
-        uint16_t average = grideye_pack(pixels, packed_pixels);
+        average = grideye_pack(pixels, packed_pixels);
         packed_pixels[32] = average >> 8;
         packed_pixels[33] = average & 0xff;
         packed_pixels[34] = pixels[32] >> 8;
@@ -118,7 +135,7 @@ int main(void)
         b64encode(packed_pixels, 36, b64_pixels);
         b64_pixels[48] = '\0';
 
-        packet_len = makepacket(packetbuf, 64, &seq, (char*)nodename, 1,
+        packet_len = makepacket(packetbuf, 64, &seq, config->nodeid, 1,
                                 false, 0, false, 0, false, 0,
                                 false, 0, false, 0,
                                 b64_pixels);
@@ -133,6 +150,6 @@ int main(void)
         i2cStop(&I2CD1);
         spiStop(&SPID1);
         adcStop(&ADCD1);
-        chThdSleepMilliseconds(60000);
+        chThdSleepMilliseconds(config->interval * 1000);
     }
 }
