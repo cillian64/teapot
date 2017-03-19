@@ -84,7 +84,7 @@ int main(void)
         volatile int16_t temperature = convert_temperature(temperature_raw);
         volatile uint16_t humidity_raw = get_humidity();
         volatile uint8_t humidity = convert_humidity(humidity_raw);
-//        pressure = get_pressure();
+        pressure = get_pressure();
 #ifdef GRIDEYE
         grideye_get(pixels);
 #endif
@@ -97,7 +97,7 @@ int main(void)
                                false, 0, // battery
                                true, temperature,
                                true, humidity,
-                               false, pressure,
+                               true, pressure,
                                false, 0, // light
                                "");
        rfm69_transmit(packetbuf, packet_len);
