@@ -40,6 +40,7 @@ int main(void)
     halInit();
     chSysInit();
     analog_init();
+    ukhasnet_radio_init();
 
     // Wait for things to warm up??
     // Get weird i2c errors if not for this.
@@ -76,8 +77,6 @@ int main(void)
 
     while(true)
     {
-        // Bring back radio after long sleep
-        ukhasnet_radio_init();
         // Begin activity
         palSetLine(LINE_LED_GREEN);
 
@@ -129,6 +128,11 @@ int main(void)
         // End activity
         palClearLine(LINE_LED_GREEN);
 
+        // Clean up for sleep:
+        rfm69_setmode(RFM69_OPMODE_SLEEP);
+        i2cStop(&I2CD1);
+        spiStop(&SPID1);
+        adcStop(&ADCD1);
         chThdSleepMilliseconds(60000);
     }
 }

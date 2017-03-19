@@ -515,6 +515,9 @@
 /* Port-specific settings (override port settings defaulted in chcore.h).    */
 /*===========================================================================*/
 
+/* Enable wait-for-interrupt sleep during idle */
+#define CORTEX_ENABLE_WFI_IDLE TRUE
+
 #endif  /* CHCONF_H */
 
 /** @} */

@@ -25,10 +25,6 @@ static void _rfm69_bulkwrite(uint8_t address, uint8_t *buffer, uint8_t len);
 static void _rfm69_bulkwritewithlen(uint8_t address, uint8_t *buffer, uint8_t len);
 /* Bulk read from registers into a buffer */
 static void _rfm69_bulkread(uint8_t address, uint8_t *buffer, uint8_t len);
-/* Set op mode */
-static void _rfm69_setmode(uint8_t mode);
-/* Get op mode */
-static uint8_t _rfm69_getmode(void);
 
 /************* Internal function definitions ***********/
 static uint8_t _rfm69_spi_xfer8(uint8_t data)
@@ -126,7 +122,7 @@ void rfm69_init(void)
 void rfm69_setfreq(uint32_t frf)
 {
     /* Check we're asleep */
-    _rfm69_setmode(RFM69_OPMODE_SLEEP);
+    rfm69_setmode(RFM69_OPMODE_SLEEP);
 
     /* Program 3 FRF registers */
     _rfm69_writereg(RFM69_REGFRFMSB, (frf >> 16) & 0xff);
@@ -135,7 +131,7 @@ void rfm69_setfreq(uint32_t frf)
 }
 
 /* Get rfm69 mode */
-static uint8_t _rfm69_getmode(void)
+uint8_t rfm69_getmode(void)
 {
     uint8_t RegOpMode;
     RegOpMode = _rfm69_readreg(RFM69_REGOPMODE);
@@ -143,7 +139,7 @@ static uint8_t _rfm69_getmode(void)
 }
 
 /* Change rfm69 opmode. Options are found under RegOpMode in rfm69.h */
-static void _rfm69_setmode(uint8_t mode)
+void rfm69_setmode(uint8_t mode)
 {
     uint8_t RegOpMode;
 
@@ -159,10 +155,10 @@ static void _rfm69_setmode(uint8_t mode)
 /*    volatile uint8_t themode=0xff;
     while(themode != mode)
     {
-        themode = _rfm69_getmode();
+        themode = rfm69_getmode();
         themode = themode & 0b01111111;
     }*/
-    /*while(_rfm69_getmode() != mode);*/
+    /*while(rfm69_getmode() != mode);*/
 }
 
 #ifdef SEMIHOSTING
@@ -208,8 +204,8 @@ void dumpregisters(void)
 void rfm69_transmit(uint8_t *buf, uint8_t len)
 {
     /* Go into transmit mode */
-    _rfm69_setmode(RFM69_OPMODE_TX);
-    while(_rfm69_getmode() != RFM69_OPMODE_TX);
+    rfm69_setmode(RFM69_OPMODE_TX);
+    while(rfm69_getmode() != RFM69_OPMODE_TX);
 
     /* Wait for PA ramp-up */
     while(!(_rfm69_readreg(RFM69_REGIRQFLAGS1) & RFM69_REGIRQFLAGS1_TXREADY));
@@ -221,9 +217,9 @@ void rfm69_transmit(uint8_t *buf, uint8_t len)
     while(!(_rfm69_readreg(RFM69_REGIRQFLAGS2) &
             RFM69_REGIRQFLAGS2_PACKETSENT));
 
-    /* Return to standby */
-    _rfm69_setmode(RFM69_OPMODE_STDBY);
-    while(_rfm69_getmode() != RFM69_OPMODE_STDBY);
+    /* Go to sleep */
+    rfm69_setmode(RFM69_OPMODE_SLEEP);
+    while(rfm69_getmode() != RFM69_OPMODE_SLEEP);
 }
 
 /* Receive bytes into buffer 'buf'.
@@ -236,8 +232,8 @@ uint8_t rfm69_receive(uint8_t *buf, uint8_t max_len)
     uint8_t packet_len;
 
     /* Mode change to RX and wait for effect */
-    _rfm69_setmode(RFM69_OPMODE_RX);
-    while(_rfm69_getmode() != RFM69_OPMODE_RX);
+    rfm69_setmode(RFM69_OPMODE_RX);
+    while(rfm69_getmode() != RFM69_OPMODE_RX);
 
     /* Wait for packet reception */
     while(true)
@@ -249,10 +245,10 @@ uint8_t rfm69_receive(uint8_t *buf, uint8_t max_len)
 
         /* If we have stopped receiving because of a timeout, begin receiving
          * again: */
-        if(_rfm69_getmode() != RFM69_OPMODE_RX)
+        if(rfm69_getmode() != RFM69_OPMODE_RX)
         {
-            _rfm69_setmode(RFM69_OPMODE_RX);
-            while(_rfm69_getmode() != RFM69_OPMODE_RX);
+            rfm69_setmode(RFM69_OPMODE_RX);
+            while(rfm69_getmode() != RFM69_OPMODE_RX);
         }
     }
     /* Packet received okay. Retrieve packet length from first byte

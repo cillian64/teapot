@@ -93,5 +93,7 @@ void rfm69_packetsetup(bool variablelength, uint16_t preamblelength,
                        uint8_t synclength, uint8_t *syncvalue,
                        bool manchester, bool whitening, bool crc);
 void rfm69_spistart(void);
+void rfm69_setmode(uint8_t mode);
+uint8_t rfm69_getmode(void);
 
 #endif
