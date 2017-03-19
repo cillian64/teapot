@@ -110,7 +110,7 @@ uint16_t get_humidity(void)
 //        panic("Humidity result is of type temperature!");
 
     /* Retrieve 14-bit measurement, ignoring 2 LSBits */
-    return ((uint16_t)rx_buf[0] << 6) | (rx_buf[1] >> 2);
+    return ((uint16_t)rx_buf[0] << 8) | (rx_buf[1] & 0b11111100);
 }
 
 /* Initialise MS5637 pressure sensor */
