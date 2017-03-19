@@ -124,6 +124,7 @@ int main(void)
         // For Grid-eye send another packet with pixels:
         if(config->has_grideye)
         {
+            chThdSleepMilliseconds(100);
             grid_average = grideye_pack(pixels, packed_pixels);
             packed_pixels[32] = grid_average >> 8;
             packed_pixels[33] = grid_average & 0xff;
