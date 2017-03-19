@@ -54,18 +54,18 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
     length += strlen(comment);
     length += strlen(label);
     if(length >= buf_len)
-        panic();
+        panic("makepacket: packet will be >64 bytes");
 
     length = 0;
 
     /* Number of hops */
     if(hops > 9)
-        panic(); /* Must be single digit number */
+        panic("makepacket: Number of hops must be 0-9 inclusive");
     buf[length++] = '0' + hops;
 
     /* Sequence counter */
     if((*seq < 'a') || (*seq > 'z'))
-        panic();
+        panic("makepacket: Sequence counter must be a-z inclusive");
     buf[length++] = *seq;
     if(*seq < 'z')
         *seq += 1;
@@ -75,7 +75,7 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
     if(has_battery) /* battery */
     {
         if(voltage > 999)
-            panic();
+            panic("makepacket: Voltage must be <999 (9.99V)");
         buf[length++] = 'V';
         buf[length++] = '0' + voltage/100;
         buf[length++] = '.';
@@ -86,7 +86,7 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
     if(has_temp) /* temperature */
     {
         if((temp < -999) || (temp > 999))
-            panic();
+            panic("makepacket: Temperature must be -99.9C to 99.9C");
 
         uint16_t utemp;
         buf[length++] = 'T';
@@ -106,7 +106,7 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
     if(has_hum)
     {
         if(hum > 99)
-            panic();
+            panic("makepacket: Humidity must be 0-99% inclusive");
         buf[length++] = 'H';
         buf[length++] = '0' + hum / 10;
         buf[length++] = '0' + hum % 10;
@@ -115,7 +115,7 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
     if(has_press)
     {
         if(press > 999999)
-            panic();
+            panic("makepacket: Pressure must be 0-999999 pascal");
         buf[length++] = 'P';
         buf[length++] = '0' + press / 100000;
         buf[length++] = '0' + (press % 100000) / 10000;
@@ -157,7 +157,7 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
     buf[length++] = ']';
 
     if(length > buf_len)
-        panic();
+        panic("makepacket: packet was too long");
 
     return length;
 }
@@ -172,13 +172,13 @@ uint8_t ukhasnet_addhop(uint8_t *buf, uint8_t packet_len, char *node_name,
 {
     uint8_t new_packet_len = packet_len + strlen(node_name);
     if(new_packet_len > buf_len)
-        panic();
+        panic("addhop: new packet will be too long");
 
     /* The end of the packet will look like [node1,node2]
      * We overwrite the final ] with a ',' then append node_name and a ]
      */
     if(buf[packet_len - 1] != ']')
-        panic();
+        panic("Last character of packet is not ]");
     buf[packet_len - 1] = ',';
 
     /* Append the node_name.  Use memcpy not strcpy because the buf is

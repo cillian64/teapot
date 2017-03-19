@@ -11,13 +11,14 @@ const uint8_t ms5637_address = 0b01110110;
 uint16_t ms5637_prom[7];
 const uint8_t htu21d_address = 0x40;
 
-/* Convert raw temperature from HTU21D to signed integer milli-celcius */
+/* Convert raw temperature from HTU21D to signed integer 0.1C */
 int32_t convert_temperature(uint16_t raw)
 {
     int64_t temp = raw;
     temp *= 175720;
     temp /= (1<<16);
     temp -= 46850;
+    temp /= 100;
     return temp;
 }
 
@@ -47,7 +48,10 @@ uint16_t get_temperature(void)
                                       rx_buf, 0,        // rx buffer and length
                                       TIME_INFINITE);   // No timeout
     if(result != MSG_OK)
-        panic();
+    {
+        volatile uint8_t error = i2cGetErrors(&I2CD1);
+        panic("Temperature cmd return != MSG_OK");
+    }
 
     /* Now try to read back -- slave will hold until ready */
     result = i2cMasterReceiveTimeout(&I2CD1,
@@ -55,13 +59,16 @@ uint16_t get_temperature(void)
                                      rx_buf, 3,         // rx buffer and length
                                      TIME_INFINITE);
     if(result != MSG_OK)
-        panic();
+    {
+        volatile uint8_t error = i2cGetErrors(&I2CD1);
+        panic("Temperature read return != MSG_OK");
+    }
 
-//    if(rx_buf[2] & 0x02)
-//        panic(); /* measurement type is incorrect */
+//    if(rx_buf[1] & 0x02)
+//        panic("Temperature result is of type humidity!");
 
     /* Retrieve 14-bit measurement, ignoring 2 LSBits */
-    return ((uint16_t)rx_buf[0] << 6) | (rx_buf[1] >> 2);
+    return ((uint16_t)rx_buf[0] << 8) | (rx_buf[1] & 0b11111100);
 }
 
 /* Get humidity from HTU21D */
@@ -80,7 +87,10 @@ uint16_t get_humidity(void)
                                       rx_buf, 0,        // rx buffer and length
                                       TIME_INFINITE);   // No timeout
     if(result != MSG_OK)
-        panic();
+    {
+        volatile uint8_t error = i2cGetErrors(&I2CD1);
+        panic("Humidity cmd return != MSG_OK");
+    }
 
     /* Now try to read back -- slave will hold until ready */
     result = i2cMasterReceiveTimeout(&I2CD1,
@@ -88,10 +98,13 @@ uint16_t get_humidity(void)
                                      rx_buf, 3,         // rx buffer and length
                                      TIME_INFINITE);
     if(result != MSG_OK)
-        panic();
+    {
+        volatile uint8_t error = i2cGetErrors(&I2CD1);
+        panic("Humidity read return != MSG_OK");
+    }
 
 //    if(!(rx_buf[0] & 0x02))
-//        panic(); /* measurement type is incorrect */
+//        panic("Humidity result is of type temperature!");
 
     /* Retrieve 14-bit measurement, ignoring 2 LSBits */
     return ((uint16_t)rx_buf[0] << 6) | (rx_buf[1] >> 2);
@@ -110,7 +123,10 @@ void pressure_init(void)
                                       rx_buf, 0,
                                       TIME_INFINITE);
     if(result != MSG_OK)
-        panic();
+    {
+        volatile uint8_t error = i2cGetErrors(&I2CD1);
+        panic("Pressure cmd return != MSG_OK");
+    }
 
     /* Read 7 calibration values from PROM */
     for(uint8_t prom_addr=0; prom_addr<7; prom_addr++)
@@ -172,7 +188,7 @@ uint32_t get_pressure(void)
     int32_t p = (d1 * sens / 2097152 - off) / 32768;
 
     if(p<0)
-        panic();
+        panic("Pressure result <0");
     return (uint32_t)p;
 }
 

@@ -26,7 +26,7 @@ void grideye_get(uint16_t *pixels)
                                       rx_buf, 128,      // rx buffer and length
                                       TIME_INFINITE);   // No timeout
     if(result != MSG_OK)
-        panic();
+        panic("Grid-eye command return != MSG_OK");
 
     /* With the teapot mounted radio-side-up (silk correct orientation)
      * the grid-eye is also correctly orientated, window at the top.

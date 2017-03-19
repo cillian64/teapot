@@ -113,7 +113,7 @@ void rfm69_init(void)
     chThdSleepMilliseconds(10);
 
     if(_rfm69_readreg(RFM69_REGVERSION) != 0x24)
-        panic();
+        panic("RFM69 version is incorrect");
 
     /* Set tx to start as soon as we start filling the FIFO */
     uint8_t RegFifoThresh = 0x00;
@@ -148,7 +148,7 @@ static void _rfm69_setmode(uint8_t mode)
     uint8_t RegOpMode;
 
     if(mode > RFM69_OPMODE_RX)
-        panic();
+        panic("RFM69 mode is invalid");
 
     RegOpMode = _rfm69_readreg(RFM69_REGOPMODE);
     RegOpMode &= 0b11100011;
@@ -174,7 +174,7 @@ char dtoh(uint8_t digit)
     else if(digit<=15)
         return 'a'+digit-10;
     else
-        panic();
+        panic("dtoh: digit is >15");
     return ' ';  /* Otherwise it appears we may not return */
 }
 
@@ -259,7 +259,7 @@ uint8_t rfm69_receive(uint8_t *buf, uint8_t max_len)
      * of packet */
     packet_len = _rfm69_readreg(RFM69_REGFIFO);
     if(packet_len > max_len)
-        panic();
+        panic("Packet to receive is too long");
 
     /* Now read the packet back into the buffer, except the length byte */
     _rfm69_bulkread(RFM69_REGFIFO, buf, packet_len);
@@ -273,7 +273,7 @@ void rfm69_setpower(int8_t power)
     uint8_t RegPaLevel = 0x00;
 
     if((power < 2) || (power > 17))
-        panic();
+        panic("setpower: Invalid power level");
     
     RegPaLevel &= RFM69_PALEVEL_PA0ON;
     RegPaLevel |= RFM69_PALEVEL_PA1ON;
@@ -321,9 +321,9 @@ void rfm69_packetsetup(bool variablelength, uint16_t preamblelength,
 
     /* Validate parameters */
     if(whitening && manchester)
-        panic(); /* Can't do both */
+        panic("Can't do both whitening and manchester encoding");
     if(synclength > 8)
-        panic(); /* Can only do 8 sync bytes */
+        panic("Number of sync bytes must be <=8");
 
 
     if(variablelength)

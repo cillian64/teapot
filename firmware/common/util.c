@@ -4,13 +4,10 @@
 #include "util.h"
 
 
-/* If something goes wrong, turn on the ERR (error) LED and hang here.  In
- * debugging this makes it clear that something went wrong.  In production the
- * watchdog will catch us and reset (eventually).
- */
-void panic(void)
+/* If something goes wrong, turn on the ERR (error) LED and call chSysHalt */
+void panic(const char *reason)
 {
     palSetLine(LINE_LED_YELLOW);
-    while(true);
+    chSysHalt(reason);
 }
 
