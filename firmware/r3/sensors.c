@@ -64,6 +64,9 @@ uint16_t get_temperature(void)
         panic("Temperature read return != MSG_OK");
     }
 
+    // Sometimes MSbit of MSB sometimes gets improbably set
+    rx_buf[0] &= 0x7f;
+
 //    if(rx_buf[1] & 0x02)
 //        panic("Temperature result is of type humidity!");
 
