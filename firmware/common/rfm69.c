@@ -217,9 +217,9 @@ void rfm69_transmit(uint8_t *buf, uint8_t len)
     while(!(_rfm69_readreg(RFM69_REGIRQFLAGS2) &
             RFM69_REGIRQFLAGS2_PACKETSENT));
 
-    /* Go to sleep */
-    rfm69_setmode(RFM69_OPMODE_SLEEP);
-    while(rfm69_getmode() != RFM69_OPMODE_SLEEP);
+    /* Go to standby */
+    rfm69_setmode(RFM69_OPMODE_STDBY);
+    while(rfm69_getmode() != RFM69_OPMODE_STDBY);
 }
 
 /* Receive bytes into buffer 'buf'.

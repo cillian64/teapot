@@ -13,6 +13,7 @@ typedef struct flash_config_t {
     bool has_humidity;
     bool has_pressure;
     bool has_light;
+    bool has_grideye;
 } flash_config_t;
 
 void flash_write_config(flash_config_t *config);
