@@ -120,6 +120,7 @@ CSRC = $(STARTUPSRC) \
        sensors.c \
        base64.c \
        flash.c \
+       lowpower.c \
        ../common/rfm69.c \
        ../common/ukhasnet.c \
        ../common/util.c

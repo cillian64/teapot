@@ -11,6 +11,7 @@
 #include "sensors.h"
 #include "base64.h"
 #include "flash.h"
+#include "lowpower.h"
 
 #ifdef SEMIHOSTING
 #include <stdio.h>
@@ -54,12 +55,18 @@ int main(void)
     // flash_write_config(config);
     flash_read_config(config);
 
+    char seq;
+    if(lowpower_woken_from_standby())
+        seq = lowpower_get_sequence();
+    else
+        seq = 'a';
+
     analog_init();
     ukhasnet_radio_init();
 
-    // Wait for things to warm up??
-    // Get weird i2c errors if not for this.
-    chThdSleepMilliseconds(1000);
+    // On first boot wait for things to warm up to avoid weird i2c issues
+    if(seq == 'a')
+        chThdSleepMilliseconds(1000);
 
     palClearLine(LINE_LED_YELLOW);
     palClearLine(LINE_LED_GREEN);
@@ -84,7 +91,6 @@ int main(void)
     char *b64_pixels = chHeapAlloc(NULL, 49*sizeof(char));
     uint16_t grid_average;
 
-    char seq = 'a';
     uint8_t packet_len;
     uint32_t pressure;
     uint8_t battery;
@@ -142,12 +148,15 @@ int main(void)
             rfm69_transmit(packetbuf, packet_len);
         }
 
-        // End activity and clean up for sleep
+        // End activity and clean up for standby mode
         palClearLine(LINE_LED_GREEN);
         rfm69_setmode(RFM69_OPMODE_SLEEP);
         i2cStop(&I2CD1);
         spiStop(&SPID1);
         adcStop(&ADCD1);
-        chThdSleepMilliseconds(config->interval * 1000);
+
+        lowpower_set_sequence(seq);
+        lowpower_set_wakeup_timer(config->interval);
+        lowpower_do_standby();
     }
 }
