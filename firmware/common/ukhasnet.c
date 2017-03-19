@@ -106,7 +106,10 @@ uint8_t makepacket(uint8_t *buf, uint8_t buf_len,
     if(has_hum)
     {
         if(hum > 99)
-            panic("makepacket: Humidity must be 0-99% inclusive");
+        {
+            hum = 0;
+//            panic("makepacket: Humidity must be 0-99% inclusive");
+        }
         buf[length++] = 'H';
         buf[length++] = '0' + hum / 10;
         buf[length++] = '0' + hum % 10;
