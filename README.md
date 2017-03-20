@@ -3,6 +3,8 @@ TEApot: Tiny Environment Analyser.  A
 [ukhasnet](https://www.ukhas.net) node with various sensors.
 ukhasnet node IDs `TEA0` through `TEAe`.
 
+![Photo of TEA5](tea5.png)
+
 # Structure
 * [board](board/) contains schematics and board layouts for KiCAD EDA 4
 * [case](case/) contains plans for laser-cut cases for the nodes
