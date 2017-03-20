@@ -31,18 +31,18 @@ ukhasnet node IDs `TEA0` through `TEAe`.
 
 Node | Board | Sensors | Status
 ---- | ----- | ------- | ------
-TEA0 | r2 F0 |         | USB Gateway
+TEA0 | r2 F0 |         | USB Gateway (off frequency)
 TEA1 | r2 L0 |         | Repeater (needs firmware)
 TEA2 | r2 L0 |         | Repeater (needs firmware)
 TEA3 | r2 L0 |         | Repeater (needs antenna and firmware)
 TEA4 | r2 L0 |         | Repeater (needs antenna and firmware)
-TEA5 | r3    | THPS    | Mostly working
-TEA6 | r3    | THPS    | Flash, radio OK
-TEA7 | r3    | THPS    | Flash, radio OK
-TEA8 | r3    | THPS    | Flash, radio OK
-TEA9 | r3    | THPS    | Flash, radio OK
+TEA5 | r3    | THPS    | Working, humidity drops a lot
+TEA6 | r3    | THPS    | Micro and radio okay, sensors untested, needs TEPT4400
+TEA7 | r3    | THPS    | Micro and radio okay, sensors untested, needs TEPT4400
+TEA8 | r3    | THPS    | Working, needs TEPT4400
+TEA9 | r3    | THPS    | Working, needs TEPT4400
 TEAa | r3    | THPSX   | Sensor is checkerboard-y?
-TEAb | r3    | THPSX   | Transmits high-rate off-frequency
-TEAc | r3    | THPSX   | Transmits ukhn frame every 30s
-TEAd | r3    | THPSX   | Flash, radio OK
-TEAe | r3    | THPSX   | Flash, radio OK
+TEAb | r3    | THPSX   | Working, needs TEPT4400
+TEAc | r3    | THPSX   | Micro and radio okay, sensors untested, needs TEPT4400
+TEAd | r3    | THPSX   | Micro and radio okay, sensors untested, needs TEPT4400
+TEAe | r3    | THPSX   | Micro and radio okay, sensors untested, needs TEPT4400
