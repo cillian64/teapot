@@ -33,18 +33,18 @@ ukhasnet node IDs `TEA0` through `TEAe`.
 
 Node | Board | Sensors | Status
 ---- | ----- | ------- | ------
-TEA0 | r2 F0 |         | USB Gateway (off frequency)
+TEA0 | r2 F0 |         | USB Gateway, working
 TEA1 | r2 L0 |         | Repeater (needs firmware)
 TEA2 | r2 L0 |         | Repeater (needs firmware)
 TEA3 | r2 L0 |         | Repeater (needs antenna and firmware)
 TEA4 | r2 L0 |         | Repeater (needs antenna and firmware)
-TEA5 | r3    | THPS    | Working, humidity drops a lot
-TEA6 | r3    | THPS    | Micro and radio okay, sensors untested, needs TEPT4400
-TEA7 | r3    | THPS    | Micro and radio okay, sensors untested, needs TEPT4400
-TEA8 | r3    | THPS    | Working, needs TEPT4400
-TEA9 | r3    | THPS    | Working, needs TEPT4400
-TEAa | r3    | THPSX   | Sensor is checkerboard-y?
-TEAb | r3    | THPSX   | Working, needs TEPT4400
-TEAc | r3    | THPSX   | Micro and radio okay, sensors untested, needs TEPT4400
-TEAd | r3    | THPSX   | Micro and radio okay, sensors untested, needs TEPT4400
-TEAe | r3    | THPSX   | Micro and radio okay, sensors untested, needs TEPT4400
+TEA5 | r3    | THPS    | Working
+TEA6 | r3    | THPS    | Working
+TEA7 | r3    | THPS    | Working
+TEA8 | r3    | THPS    | Working
+TEA9 | r3    | THPS    | Working
+TEAa | r3    | THPSX   | Grid-eye has checkerboard problem, otherwise ok
+TEAb | r3    | THPSX   | Working
+TEAc | r3    | THPSX   | Working
+TEAd | r3    | THPSX   | Working
+TEAe | r3    | THPSX   | Working
