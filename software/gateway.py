@@ -4,7 +4,7 @@ import serial
 import sys
 import requests
 
-default_serial = "/dev/cu.usbmodem401"
+default_serial = "/dev/ttyACM0"
 
 if len(sys.argv) == 2:
     default_serial = sys.argv[1]
