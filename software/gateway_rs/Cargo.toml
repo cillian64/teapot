@@ -1,0 +1,9 @@
+[package]
+name = "gateway_rs"
+version = "0.1.0"
+authors = ["dwt"]
+edition = "2018"
+
+[dependencies]
+serialport = "4.0.1"
+ureq = "2.1.1"
