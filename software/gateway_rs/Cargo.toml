@@ -2,8 +2,10 @@
 name = "gateway_rs"
 version = "0.1.0"
 authors = ["dwt"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 serialport = "4.0.1"
 ureq = "2.1.1"
+ukhasnet-parser = "0.4"
+anyhow = "1.0.62"
